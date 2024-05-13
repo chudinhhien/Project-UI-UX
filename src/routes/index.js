@@ -3,7 +3,6 @@ import Dashboard from "../pages/Dashboard";
 import ManageKPI from "../pages/ManageKPI";
 import Setting from "../pages/Setting";
 import Tracking from "../pages/Tracking";
-import Index from "../pages/Index";
 
 export const routes = [
   {
