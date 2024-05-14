@@ -17,7 +17,7 @@ const HeroIndex = () => {
                     companion on the path to academic excellence
                 </p>
                 <div className="index-hero__group-btn">
-                    <Link to="/register">
+                    <Link to="/login?mode=signup">
                         <button className="btn">Sign Up</button>
                     </Link>
                     <Link to="/login">

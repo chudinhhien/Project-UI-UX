@@ -12,7 +12,7 @@ function Index() {
                     <Logo />
                 </Link>
                 <div className="top-act">
-                    <Link to="/register">
+                    <Link to="/login?mode=signup">
                         <button className="btn">Sign Up</button>
                     </Link>
                     <Link to="/login">
