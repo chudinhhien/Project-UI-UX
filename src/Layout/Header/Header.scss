@@ -1,0 +1,24 @@
+.header {
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__search {
+    margin-right: 16px;
+  }
+
+  &__notification {
+    margin-right: 16px;
+  }
+}
