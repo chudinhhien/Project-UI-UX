@@ -12,10 +12,10 @@ function Index() {
                     <Logo />
                 </Link>
                 <div className="top-act">
-                    <Link to="/signup">
+                    <Link to="/register">
                         <button className="btn">Sign Up</button>
                     </Link>
-                    <Link to="/signin">
+                    <Link to="/login">
                         <button className="btn">Sign In</button>
                     </Link>
                 </div>
