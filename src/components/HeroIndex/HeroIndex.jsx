@@ -17,7 +17,7 @@ const HeroIndex = () => {
                     companion on the path to academic excellence
                 </p>
                 <div className="index-hero__group-btn">
-                    <Link to="/login?mode=signup">
+                <Link to="/login?mode=signup">
                         <button className="btn">Sign Up</button>
                     </Link>
                     <Link to="/login">
@@ -26,7 +26,7 @@ const HeroIndex = () => {
                 </div>
             </div>
             <div className="index-hero-right">
-                <img src={all_imgs.index_1} alt="Index Image" />
+                <img src={all_imgs.index_1} alt="" />
             </div>
             <img src={all_imgs.index_2} alt="" className="background-index-img-1"/>
             <img src={all_imgs.index_3} alt="" className="background-index-img-2"/>
