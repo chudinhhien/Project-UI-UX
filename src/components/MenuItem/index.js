@@ -4,29 +4,30 @@ import {
   VideoCameraOutlined,
   SettingFilled
 } from '@ant-design/icons';
+const url = '';
 export const item = [
   {
     key: '1',
     icon: <HomeFilled />,
     label: 'Dashboard',
-    url: '/dashboard'
+    url: url + '/dashboard'
   },
   {
     key: '2',
     icon: <VideoCameraOutlined />,
     label: 'Manage KPI',
-    url: '/manage-kpi'
+    url: url + '/manage-kpi'
   },
   {
     key: '3',
     icon: <UploadOutlined />,
     label: 'Tracking',
-    url: 'tracking'
+    url: url + '/tracking'
   },
   {
     key: '4',
     icon: <SettingFilled />,
     label: 'Setting',
-    url: 'setting'
+    url: url + '/setting'
   }
 ]
