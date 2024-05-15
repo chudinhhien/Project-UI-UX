@@ -1,0 +1,12 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  &__name{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  &__role{
+    font-size: 12px;
+  }
+}

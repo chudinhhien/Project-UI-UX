@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import HeroIndex from "../../components/HeroIndex/HeroIndex";
 import all_icons from "../../assets/icon/all_icon";
-import all_imgs from "./../../assets/img/all_img";
 
 function Index() {
     return (
