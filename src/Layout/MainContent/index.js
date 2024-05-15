@@ -10,7 +10,7 @@ function MainContent() {
   return (
     <>
       <Content style={{
-        margin: '24px 16px 0 16px',
+        // margin: '24px 16px 0 16px',
         minHeight: 400,
         background: colorBgContainer,
         borderRadius: borderRadiusLG,
