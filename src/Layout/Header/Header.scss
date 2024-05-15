@@ -1,0 +1,13 @@
+.actions {
+  display: flex;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the content vertically */
+}
+
+.custom-dropdown-menu {
+  margin-top: 100px !important; /* Điều chỉnh giá trị margin-top theo nhu cầu của bạn */
+}
