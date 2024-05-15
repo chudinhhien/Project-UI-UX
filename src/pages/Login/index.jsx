@@ -53,12 +53,12 @@ const LoginForm = () => {
                         </Link>
                         <p className="social-text">Or Sign in with social platforms</p>
                         <div className="social-media">
-                            <a href="#" className="social-icon">
+                            <button href="#" className="social-icon">
                                 <FontAwesomeIcon icon={faFacebook} />
-                            </a>
-                            <a href="#" className="social-icon">
+                            </button>
+                            <button href="#" className="social-icon">
                                 <FontAwesomeIcon icon={faGoogle} />
-                            </a>
+                            </button>
                         </div>
                     </form>
                     <form action="#" className="sign-up-form">
@@ -88,12 +88,12 @@ const LoginForm = () => {
                         </Link>
                         <p className="social-text">Or Sign up with social platforms</p>
                         <div className="social-media">
-                            <a href="#" className="social-icon">
+                            <button href="#" className="social-icon">
                                 <FontAwesomeIcon icon={faFacebook} />
-                            </a>
-                            <a href="#" className="social-icon">
+                            </button>
+                            <button href="#" className="social-icon">
                                 <FontAwesomeIcon icon={faGoogle} />
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>
