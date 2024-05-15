@@ -1,4 +1,3 @@
-import Logo from "../../components/Logo/Logo";
 import all_icons from './../../assets/icon/all_icon';
 import all_imgs from './../../assets/img/all_img';
 
