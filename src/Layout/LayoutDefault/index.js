@@ -12,7 +12,7 @@ function LayoutDefault() {
         <Layout>
           <Header />
           <MainContent />
-          <Footer />
+          {/* <Footer /> */}
         </Layout>
       </Layout>
     </>
