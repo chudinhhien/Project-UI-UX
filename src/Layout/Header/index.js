@@ -34,7 +34,7 @@ function Header() {
     },
     {
       label: (
-        <a href='/login'>
+        <a href='/'>
           <Space>
             <PoweroffOutlined />
             <div>Đăng xuất</div>
