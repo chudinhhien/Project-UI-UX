@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Flex, Progress } from "antd";
-import { Carousel } from "antd";
-import { Calendar, theme } from "antd";
+import { Flex, Progress, Carousel, Calendar, theme } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -64,7 +64,6 @@ const options = {
 const contentStyle = {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
     alignItems: "center",
     height: "320px",
     color: "#000",
@@ -75,15 +74,23 @@ const contentStyle = {
 };
 
 const Dashboard = () => {
+    const [completedKpis, setCompletedKpis] = useState({});
+
+    const handleCompleteKpi = (index) => {
+        setCompletedKpis((prev) => ({ ...prev, [index]: !prev[index] }));
+    };
+
     const onChange = (currentSlide) => {
         console.log(currentSlide);
     };
+
     const { token } = theme.useToken();
     const wrapperStyle = {
         width: 375,
         border: `1px solid ${token.colorBorderSecondary}`,
         borderRadius: token.borderRadiusLG,
     };
+
     return (
         <div className="dashboard">
             <div className="inner">
@@ -216,7 +223,114 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="inner-right">
-                    <p>Upcoming Deadline</p>
+                    <p className="title">KPI of the week</p>
+                    <div className="list-kpi">
+                        {[
+                            {
+                                title: "Tiếng Nhật",
+                                type: "Học tập",
+                                details: "Học được 100/250 từ vựng",
+                                complete: "40%",
+                                deadline: "Week",
+                            },
+                            {
+                                title: "Giải tích",
+                                type: "Học tập",
+                                details: "Số giờ học 3/9",
+                                complete: "33%",
+                                deadline: "Week",
+                            },
+                        ].map((kpi, index) => (
+                            <div
+                                key={index}
+                                className={`item-kpi ${
+                                    completedKpis[index] ? "completed" : ""
+                                }`}
+                            >
+                                <div className="item-kpi-top">
+                                    <p className="item-kpi-order">
+                                        {index + 1}
+                                    </p>
+                                    <p className="item-kpi-deadline">
+                                        {kpi.deadline}
+                                    </p>
+                                </div>
+                                <div className="item-kpi-info">
+                                    <div className="item-kpi-info-row">
+                                        <h5 className="item-kpi-title">
+                                            {kpi.title}
+                                        </h5>
+                                        <p className="item-kpi-type">
+                                            {kpi.type}
+                                        </p>
+                                    </div>
+                                    <div className="item-kpi-info-row">
+                                        <p className="item-kpi-ders">
+                                            {kpi.details}
+                                        </p>
+                                        <p className="item-kpi-complete">
+                                            {kpi.complete}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="title kpi-day">KPI of the day</p>
+                    <div className="list-kpi">
+                        {[
+                            {
+                                title: "Nhật 5",
+                                type: "Học tập",
+                                details: "Tham gia lớp học tiếng Nhật",
+                                deadline: "8:15 am",
+                            },
+                            {
+                                title: "Giải tích",
+                                type: "Học tập",
+                                details: "Tham gia lớp học giải tích",
+                                deadline: "10:30 am",
+                            },
+                        ].map((kpi, index) => (
+                            <div
+                                key={index + 2}
+                                className={`item-kpi ${
+                                    completedKpis[index + 2] ? "completed" : ""
+                                }`}
+                            >
+                                <div className="item-kpi-top">
+                                    <p className="item-kpi-order">
+                                        {index + 1}
+                                    </p>
+                                    <p className="item-kpi-deadline">
+                                        {kpi.deadline}
+                                    </p>
+                                </div>
+                                <div className="item-kpi-info">
+                                    <div className="item-kpi-info-row">
+                                        <h5 className="item-kpi-title">
+                                            {kpi.title}
+                                        </h5>
+                                        <p className="item-kpi-type">
+                                            {kpi.type}
+                                        </p>
+                                    </div>
+                                    <div className="item-kpi-info-row">
+                                        <p className="item-kpi-ders">
+                                            {kpi.details}
+                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                handleCompleteKpi(index + 2)
+                                            }
+                                        >
+                                            <FontAwesomeIcon icon={faCheck} />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

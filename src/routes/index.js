@@ -4,8 +4,8 @@ import ManageKPI from "../pages/ManageKPI";
 import Setting from "../pages/Setting";
 import Tracking from "../pages/Tracking";
 import Index from "../pages/Index";
-import Login from "../pages/Login";
 import Register from "../pages/Register";
+import LoginForm from "../pages/Login";
 
 export const routes = [
   {
@@ -36,7 +36,7 @@ export const routes = [
   },
   {
     path: "/login",
-    element: <Login />
+    element: <LoginForm />
   },
   {
     path: "/register",
