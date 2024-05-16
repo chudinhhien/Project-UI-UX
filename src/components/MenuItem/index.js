@@ -26,15 +26,15 @@ export const item = [
     url: url + '/tracking'
   },
   {
-    key: '4',
-    icon: <SettingFilled />,
-    label: 'Setting',
-    url: url + '/setting'
-  },
-  {
     key: '5',
     icon: <CalendarOutlined />,
     label: 'Canlendar',
     url: url + '/canlendar'
+  },
+  {
+    key: '4',
+    icon: <SettingFilled />,
+    label: 'Setting',
+    url: url + '/setting'
   }
 ]
