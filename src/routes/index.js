@@ -6,6 +6,7 @@ import Tracking from "../pages/Tracking";
 import Info from "../pages/Info";
 import Register from "../pages/Register";
 import LoginForm from "../pages/Login";
+import Canlendar from "../pages/Canlendar";
 
 export const routes = [
   {
@@ -31,6 +32,10 @@ export const routes = [
       {
         path: "setting",
         element: <Setting />
+      },
+      {
+        path: "canlendar",
+        element: <Canlendar />
       }
     ]
   },

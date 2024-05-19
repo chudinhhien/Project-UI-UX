@@ -2,7 +2,8 @@ import {
   UploadOutlined,
   HomeFilled,
   VideoCameraOutlined,
-  SettingFilled
+  SettingFilled,
+  CalendarOutlined
 } from '@ant-design/icons';
 const url = '';
 export const item = [
@@ -23,6 +24,12 @@ export const item = [
     icon: <UploadOutlined />,
     label: 'Tracking',
     url: url + '/tracking'
+  },
+  {
+    key: '5',
+    icon: <CalendarOutlined />,
+    label: 'Canlendar',
+    url: url + '/canlendar'
   },
   {
     key: '4',
