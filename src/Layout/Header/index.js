@@ -54,7 +54,7 @@ function Header() {
       <div className="actions" style={{ height: "100%", display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '31px' }}>
         <Space size="large">
           <div className="actions__help" style={{display: 'flex',alignItems:'center'}}>
-            <QuestionCircleOutlined style={{fontSize: "30px",marginTop: "5px"}}/>
+            <QuestionCircleOutlined style={{fontSize: "30px"}}/>
           </div>
           <div className="actions__notification">
             <NotificationButton />

@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .logo {
     display: flex;
     align-items: center;
@@ -6,6 +8,8 @@
 
     &__img {
         height: 3.6rem;
-        // width: 3.6rem;
+        @include abstracts.screen(md) {
+            height: 3rem;
+        }
     }
 }

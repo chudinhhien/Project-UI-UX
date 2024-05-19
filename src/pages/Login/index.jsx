@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./LoginForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import all_icons from "./../../assets/icon/all_icon";
 import Logo from "./../../components/Logo/Logo";
 import { Link, useLocation } from "react-router-dom";
 
@@ -35,108 +35,125 @@ const LoginForm = () => {
     }, [location.search]);
 
     return (
-        <div className="container">
-            <div className="forms-container">
-                <div className="signin-signup">
-                    <form action="#" className="sign-in-form">
-                        <h2 className="title">Sign in</h2>
-                        <div className="input-field">
-                            <input type="text" required autoComplete="off" />
-                            <label htmlFor="username">Username</label>
-                        </div>
-                        <div className="input-field">
-                            <input type="password" required autoComplete="off" />
-                            <label htmlFor="password">Password</label>
-                        </div>
-                        <Link to="/dashboard">
-                            <button className="btn solid">Login</button>
-                        </Link>
-                        <p className="social-text">Or Sign in with social platforms</p>
-                        <div className="social-media">
-                            <button href="#" className="social-icon">
-                                <FontAwesomeIcon icon={faFacebook} />
-                            </button>
-                            <button href="#" className="social-icon">
-                                <FontAwesomeIcon icon={faGoogle} />
-                            </button>
-                        </div>
-                    </form>
-                    <form action="#" className="sign-up-form">
-                        <h2 className="title">Sign up</h2>
-                        <div className="input-field">
-                            <input type="text" required autoComplete="off" />
-                            <label htmlFor="name">Name</label>
-                        </div>
-                        <div className="input-field">
-                            <input type="text" required autoComplete="off" />
-                            <label htmlFor="username">Username</label>
-                        </div>
-                        <div className="input-field">
-                            <input type="text" required autoComplete="off" />
-                            <label htmlFor="email">Email</label>
-                        </div>
-                        <div className="input-field">
-                            <input type="password" required autoComplete="off" />
-                            <label htmlFor="password">Password</label>
-                        </div>
-                        <div className="input-field">
-                            <input type="password" required autoComplete="off" />
-                            <label htmlFor="confirmPassword">Confirm Password</label>
-                        </div>
-                        <Link to="/dashboard">
-                            <button className="btn solid">Sign up</button>
-                        </Link>
-                        <p className="social-text">Or Sign up with social platforms</p>
-                        <div className="social-media">
-                            <button href="#" className="social-icon">
-                                <FontAwesomeIcon icon={faFacebook} />
-                            </button>
-                            <button href="#" className="social-icon">
-                                <FontAwesomeIcon icon={faGoogle} />
-                            </button>
-                        </div>
-                    </form>
+        <div className="login">
+            <div className="container">
+                <div className="forms-container">
+                    <div className="signin-signup">
+                        <form action="#" className="sign-in-form">
+                            <Logo />
+                            <h2 className="title">Sign in</h2>
+                            <div className="input-field">
+                                <input
+                                    type="text"
+                                    required
+                                    autoComplete="off"
+                                />
+                                <label htmlFor="username">Username</label>
+                            </div>
+                            <div className="input-field">
+                                <input
+                                    type="password"
+                                    required
+                                    autoComplete="off"
+                                />
+                                <label htmlFor="password">Password</label>
+                            </div>
+                            <Link to="/dashboard">
+                                <button className="btn solid">Login</button>
+                            </Link>
+                            <p className="social-text">
+                                Or Sign in with social platforms
+                            </p>
+                            <div className="social-media">
+                                <button type="button" className="social-icon">
+                                    <FontAwesomeIcon icon={faFacebookF} />
+                                </button>
+                                <button type="button" className="social-icon">
+                                    <FontAwesomeIcon icon={faGoogle} />
+                                </button>
+                            </div>
+                        </form>
+                        <form action="#" className="sign-up-form">
+                            <Logo />
+                            <h2 className="title">Sign up</h2>
+                            <div className="input-field">
+                                <input
+                                    type="text"
+                                    required
+                                    autoComplete="off"
+                                />
+                                <label htmlFor="username">Username</label>
+                            </div>
+                            <div className="input-field">
+                                <input
+                                    type="text"
+                                    required
+                                    autoComplete="off"
+                                />
+                                <label htmlFor="email">Email</label>
+                            </div>
+                            <div className="input-field">
+                                <input
+                                    type="password"
+                                    required
+                                    autoComplete="off"
+                                />
+                                <label htmlFor="password">Password</label>
+                            </div>
+                            <input
+                                type="submit"
+                                className="btn"
+                                value="Sign up"
+                            />
+                            <p className="social-text">
+                                Or Sign up with social platforms
+                            </p>
+                            <div className="social-media">
+                                <button type="button" className="social-icon">
+                                    <FontAwesomeIcon icon={faFacebookF} />
+                                </button>
+                                <button type="button" className="social-icon">
+                                    <FontAwesomeIcon icon={faGoogle} />
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
-            <div className="panels-container">
-                <div className="panel left-panel">
-                    <div className="content">
-                        <div className="logo">
-                            <Logo />
+                <div className="panels-container">
+                    <div className="panel left-panel">
+                        <div className="content">
+                            <h3>New here ?</h3>
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur
+                                adipisicing elit. Debitis, ex ratione. Aliquid!
+                            </p>
+                            <button
+                                className="btn transparent"
+                                id="sign-up-btn"
+                            >
+                                Sign up
+                            </button>
                         </div>
-                        <h3>New here ?</h3>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Debitis, ex ratione. Aliquid!
-                        </p>
-                        <button
-                            className="btn-sign-in transparent"
-                            id="sign-up-btn"
-                        >
-                            Sign up
-                        </button>
+                        <img src={all_icons.login} className="image" alt="" />
                     </div>
-                    {/* <img src="img/log.svg" className="image" alt="hihi" /> */}
-                </div>
-                <div className="panel right-panel">
-                    <div className="content">
-                        <div className="logo">
-                            <Logo />
+                    <div className="panel right-panel">
+                        <div className="content">
+                            <h3>One of us ?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Nostrum laboriosam ad
+                                deleniti.
+                            </p>
+                            <button
+                                className="btn transparent"
+                                id="sign-in-btn"
+                            >
+                                Sign in
+                            </button>
                         </div>
-                        <h3>One of us ?</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Nostrum laboriosam ad deleniti.
-                        </p>
-                        <button
-                            className="btn-sign-in transparent"
-                            id="sign-in-btn"
-                        >
-                            Sign in
-                        </button>
+                        <img src={all_icons.reg} className="image" alt="" />
                     </div>
-                    <img src="img/register.svg" className="image" alt="" />
                 </div>
             </div>
         </div>
