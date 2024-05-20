@@ -7,7 +7,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
-import { Avatar, Button, Dropdown, Layout, Space, theme } from 'antd';
+import { Avatar, Button, Dropdown, Layout, Space, theme, Grid } from 'antd';
 import { Link } from 'react-router-dom';
 import NotificationButton from '../../components/NotificationButton';
 import './Header.scss';
@@ -15,11 +15,21 @@ import all_imgs from '../../assets/img/all_img';
 import Language from '../../components/Language';
 
 const { Header: AntHeader } = Layout;
+const { useBreakpoint } = Grid;
 
-function Header({ collapsed, toggleCollapsed }) {
+function Header(props) {
+  const screen = useBreakpoint();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const handleClick = () => {
+    if (screen.sm) {
+      props.toggleCollapsed();
+    } else {
+      props.showDrawer();
+    }
+  };
 
   const items = [
     {
@@ -63,8 +73,8 @@ function Header({ collapsed, toggleCollapsed }) {
     >
       <Button
         type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={toggleCollapsed}
+        icon={props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={handleClick}
         style={{
           fontSize: '16px',
           width: 64,
@@ -79,9 +89,9 @@ function Header({ collapsed, toggleCollapsed }) {
           <div className="actions__notification">
             <NotificationButton />
           </div>
-          <div className="actions__language">
+          {screen.sm && <div className="actions__language">
             <img src={all_imgs.england} alt="england" />
-          </div>
+          </div>}
           <Language />
           <Dropdown menu={{ items }} trigger={['click']}>
             <button
@@ -90,10 +100,10 @@ function Header({ collapsed, toggleCollapsed }) {
             >
               <Space>
                 <Avatar size={40} />
-                <div className="info">
+                {screen.sm && <div className="info">
                   <div className="info__name">Chu Đình Hiển</div>
                   <div className="info__role">Sinh viên</div>
-                </div>
+                </div>}
                 <DownOutlined />
               </Space>
             </button>
