@@ -32,3 +32,9 @@ button, input, select, textarea {
   font-family: inherit;
   color: inherit;
 }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

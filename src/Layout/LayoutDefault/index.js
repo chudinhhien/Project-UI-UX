@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import Header from '../Header';
 import Sider from "../Sider";
-import Footer from "../Footer"
+// import Footer from "../Footer"
 import MainContent from "../MainContent";
 
 function LayoutDefault() {
