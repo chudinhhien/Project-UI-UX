@@ -1,18 +1,22 @@
+import React from 'react';
 import {
   UserOutlined,
   DownOutlined,
   PoweroffOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
 } from '@ant-design/icons';
-import { Avatar, Dropdown, Layout, Space, theme } from 'antd';
-import { Link } from 'react-router-dom'; 
-import NotificationButton from '../../components/NotificationButton'
+import { Avatar, Button, Dropdown, Layout, Space, theme } from 'antd';
+import { Link } from 'react-router-dom';
+import NotificationButton from '../../components/NotificationButton';
 import './Header.scss';
 import all_imgs from '../../assets/img/all_img';
 import Language from '../../components/Language';
+
 const { Header: AntHeader } = Layout;
 
-function Header() {
+function Header({ collapsed, toggleCollapsed }) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -34,39 +38,58 @@ function Header() {
     },
     {
       label: (
-        <a href='/'>
+        <a href="/">
           <Space>
             <PoweroffOutlined />
             <div>Đăng xuất</div>
           </Space>
         </a>
-
       ),
       key: '3',
     },
   ];
+
   return (
-    <AntHeader style={{
-      padding: 0,
-      background: colorBgContainer,
-      height: "70px"
-    }}>
-      <div className="actions" style={{ height: "100%", display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '31px' }}>
+    <AntHeader
+      style={{
+        paddingRight: '0px',
+        paddingLeft: '0px',
+        background: colorBgContainer,
+        height: '70px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Button
+        type="text"
+        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={toggleCollapsed}
+        style={{
+          fontSize: '16px',
+          width: 64,
+          height: 64,
+        }}
+      />
+      <div className="actions">
         <Space size="large">
-          <div className="actions__help" style={{display: 'flex',alignItems:'center'}}>
-            <QuestionCircleOutlined style={{fontSize: "30px"}}/>
+          <div className="actions__help">
+            <QuestionCircleOutlined style={{ fontSize: '24px' }} />
           </div>
           <div className="actions__notification">
             <NotificationButton />
           </div>
-          <div className="actions__language" style={{paddingTop: '17px',marginRight: '-13px'}}>
-              <img src={all_imgs.england} alt='england'/>
+          <div className="actions__language">
+            <img src={all_imgs.england} alt="england" />
           </div>
           <Language />
-          <Dropdown menu={{items}} trigger={['click']}>
-            <button onClick={(e) => e.preventDefault()}>
+          <Dropdown menu={{ items }} trigger={['click']}>
+            <button
+              onClick={(e) => e.preventDefault()}
+              className="dropdown-button"
+            >
               <Space>
-                <Avatar size={50}/>
+                <Avatar size={40} />
                 <div className="info">
                   <div className="info__name">Chu Đình Hiển</div>
                   <div className="info__role">Sinh viên</div>

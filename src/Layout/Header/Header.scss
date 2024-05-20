@@ -1,12 +1,48 @@
-.info {
+.actions {
   display: flex;
-  flex-direction: column;
-  &__name{
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-right: 31px;
+
+  &__help,
+  &__notification,
+  &__language {
+    display: flex;
+    align-items: center;
+  }
+
+  &__help {
+    font-size: 24px;
+  }
+
+  &__language {
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.info {
+  text-align: left;
+
+  &__name {
     font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 4px;
   }
-  &__role{
+
+  &__role {
     font-size: 12px;
+    color: rgba(0, 0, 0, 0.45);
   }
+}
+
+button.dropdown-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
 }

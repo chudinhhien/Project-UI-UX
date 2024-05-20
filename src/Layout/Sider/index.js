@@ -4,10 +4,10 @@ import { item } from "../../components/MenuItem";
 import Logo from "../../components/Logo/Logo";
 const { Sider: AntSider } = Layout;
 
-function Sider() {
+function Sider(props) {
     return (
         <>
-            <AntSider width={250}>
+            <AntSider width={250} trigger={null} collapsed={props.collapsed}>
                 <Logo />
                 <Menu mode="inline" theme="dark" defaultSelectedKeys={["1"]}>
                     {item.map((menuItem) => (
