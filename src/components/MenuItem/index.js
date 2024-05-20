@@ -28,8 +28,8 @@ export const item = [
   {
     key: '5',
     icon: <CalendarOutlined />,
-    label: 'Canlendar',
-    url: url + '/canlendar'
+    label: 'Calendar',
+    url: url + '/calendar'
   },
   {
     key: '4',

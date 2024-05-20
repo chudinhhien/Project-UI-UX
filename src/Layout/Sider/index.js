@@ -19,7 +19,7 @@ function Sider(props) {
                         </Menu.Item>
                     ))}
                 </Menu>
-            </AntSider> : <Drawer title={<Logo />} onClose={props.onClose} open={props.open} placement="left" width={200}><Menu mode="inline" defaultSelectedKeys={["1"]}>
+            </AntSider> : <Drawer title={<Logo />} open={props.open} placement="left" width={200} closable={false} onClose={props.onClose}><Menu mode="inline" defaultSelectedKeys={["1"]}>
                     {item.map((menuItem) => (
                         <Menu.Item key={menuItem.key} icon={menuItem.icon}>
                             <Link to={menuItem.url} onClick={props.onClose}>{menuItem.label}</Link>

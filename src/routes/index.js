@@ -34,7 +34,7 @@ export const routes = [
         element: <Setting />
       },
       {
-        path: "canlendar",
+        path: "calendar",
         element: <Canlendar />
       }
     ]
