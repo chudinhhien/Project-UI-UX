@@ -8,7 +8,7 @@ function Sider(props) {
     return (
         <>
             <AntSider width={250} trigger={null} collapsed={props.collapsed}>
-                <Logo />
+                <Logo collapsed={props.collapsed}/>
                 <Menu mode="inline" theme="dark" defaultSelectedKeys={["1"]}>
                     {item.map((menuItem) => (
                         <Menu.Item key={menuItem.key} icon={menuItem.icon}>
