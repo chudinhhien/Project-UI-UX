@@ -1,6 +1,9 @@
+.dashboard {
+    background-color: #f5f6fa;
+}
+
 .dashboard .grid {
     padding: 0 20px;
-    background-color: #f5f6fa;
 
     h1 {
         margin-top: 20px;
@@ -15,12 +18,25 @@
         flex-direction: column;
         gap: 20px;
 
-        canvas {
+        .kpi-diagram {
             margin-top: 19px;
             background-color: #fff;
             border-radius: 16.893px;
-            padding: 10px;
+            padding: 20px;
+
+            &-title {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
         }
+
+        // canvas {
+        //     margin-top: 19px;
+        //     background-color: #fff;
+        //     border-radius: 16.893px;
+        //     padding: 10px;
+        // }
 
         .slick-slide {
             width: 300px;

@@ -34,10 +34,16 @@ const data = {
     labels,
     datasets: [
         {
-            label: "Dataset 1",
+            label: "Học tập",
             data: [0, 10, 20, 40, 50, 60, 70],
             borderColor: "#7549FF",
             backgroundColor: "#7549FF",
+        },
+        {
+            label: "Nghiên cứu",
+            data: [0, 20, 10, 50, 60, 65, 75],
+            borderColor: "red",
+            backgroundColor: "red",
         },
     ],
 };
@@ -46,20 +52,31 @@ const options = {
     responsive: true,
     plugins: {
         legend: {
-            position: "top",
-        },
-        title: {
-            display: true,
-            text: "Weekly KPI Progress",
+            position: "bottom",
+            labels: {
+                color: "#000",
+                font: {
+                    size: 16 // Kích thước font chữ của nhãn
+                }
+            }
         },
     },
     scales: {
         y: {
             min: 0,
             max: 100,
+            // ticks: {
+            //     color: "#000", // Màu của nhãn trục y
+            // }
         },
-    },
+        // x: {
+        //     ticks: {
+        //         color: "#000", // Màu của nhãn trục x
+        //     }
+        // }
+    }
 };
+
 
 const contentStyle = {
     color: "#000",
@@ -92,9 +109,17 @@ const Dashboard = () => {
                 <div className="row">
                     <div className="col l-8 m-12 c-12 left">
                         <h1 className="dashboard-title">Dashboard</h1>
-                        <Line options={options} data={data} height={110} />
+                        <div className="kpi-diagram">
+                            <h2 className="kpi-diagram-title">Weekly KPI Progress</h2>
+                            <Line
+                                options={options}
+                                data={data}
+                                height={110}
+                                minWidth="100px"
+                            />
+                        </div>
                         <div className="row">
-                            <div className="dashboard-kpi col l-4 m-4 c-12">
+                            <div className="dashboard-kpi col l-4 m-12 c-12">
                                 <Carousel afterChange={onChange}>
                                     <div>
                                         <h3 style={contentStyle}>
@@ -218,7 +243,7 @@ const Dashboard = () => {
                                     </div>
                                 </Carousel>
                             </div>
-                            <div className="dashboard-calendar col l-4 m-4 c-12">
+                            <div className="dashboard-calendar col l-4 m-12 c-12">
                                 <div style={wrapperStyle}>
                                     <Calendar
                                         fullscreen={false}
