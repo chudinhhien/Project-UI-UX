@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Flex, Progress, Carousel, Calendar, theme, Breadcrumb } from "antd";
+import { Flex, Progress, Carousel, Calendar, theme } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -13,10 +13,6 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-
-const onPanelChange = (value, mode) => {
-    console.log(value.format("YYYY-MM-DD"), mode);
-};
 
 ChartJS.register(
     CategoryScale,
@@ -56,9 +52,9 @@ const options = {
             labels: {
                 color: "#000",
                 font: {
-                    size: 16 // Kích thước font chữ của nhãn
-                }
-            }
+                    size: 16, // Kích thước font chữ của nhãn
+                },
+            },
         },
     },
     scales: {
@@ -74,48 +70,18 @@ const options = {
         //         color: "#000", // Màu của nhãn trục x
         //     }
         // }
-    }
-};
-
-
-const contentStyle = {
-    color: "#000",
-    textAlign: "center",
-    background: "#FFF",
-    borderRadius: "16.893px",
+    },
 };
 
 const Dashboard = () => {
-    const [completedKpis, setCompletedKpis] = useState({});
-
-    const handleCompleteKpi = (index) => {
-        setCompletedKpis((prev) => ({ ...prev, [index]: !prev[index] }));
-    };
-
-    const onChange = (currentSlide) => {
-        console.log(currentSlide);
-    };
-
-    const { token } = theme.useToken();
-    const wrapperStyle = {
-        width: 375,
-        border: `1px solid ${token.colorBorderSecondary}`,
-        borderRadius: token.borderRadiusLG,
-    };
+    const [date, setDate] = useState(new Date());
 
     return (
         <div className="dashboard">
             <div className="grid wide">
                 <div className="row">
                     <div className="col l-8 m-12 c-12 left">
-                        <Breadcrumb
-                            style={{
-                                marginTop: '16px',
-                            }}
-                        >
-                            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-                            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-                        </Breadcrumb>
+                        <h1 className="dashboard-title">Dashboard</h1>
                         <div className="kpi-diagram">
                             <h2 className="kpi-diagram-title">Weekly KPI Progress</h2>
                             <Line
@@ -281,8 +247,9 @@ const Dashboard = () => {
                             ].map((kpi, index) => (
                                 <div
                                     key={index}
-                                    className={`item-kpi ${completedKpis[index] ? "completed" : ""
-                                        }`}
+                                    className={`item-kpi ${
+                                        completedKpis[index] ? "completed" : ""
+                                    }`}
                                 >
                                     <div className="item-kpi-top">
                                         <p className="item-kpi-order">
@@ -331,10 +298,11 @@ const Dashboard = () => {
                             ].map((kpi, index) => (
                                 <div
                                     key={index + 2}
-                                    className={`item-kpi ${completedKpis[index + 2]
+                                    className={`item-kpi ${
+                                        completedKpis[index + 2]
                                             ? "completed"
                                             : ""
-                                        }`}
+                                    }`}
                                 >
                                     <div className="item-kpi-top">
                                         <p className="item-kpi-order">
