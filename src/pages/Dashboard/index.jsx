@@ -82,8 +82,8 @@ const Dashboard = () => {
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
             </Row>
-            <Row gutter={40} style={{marginBottom: '40px'}}>
-                <Col className="gutter-row" xs={24} md={12}>
+            <Row gutter={40}>
+                <Col className="gutter-row" xs={24} md={12} style={{marginBottom: '20px'}}>
                     <div className="kpi-diagram">
                         <h2 className="kpi-diagram-title">
                             Weekly KPI Progress
@@ -96,7 +96,7 @@ const Dashboard = () => {
                         />
                     </div>
                 </Col>
-                <Col className="gutter-row" xs={24} md={12}>
+                <Col className="gutter-row" xs={24} md={12} style={{marginBottom: '20px'}}>
                     <Progress
                         type="circle"
                         trailColor="#9B9AF9"
@@ -120,12 +120,12 @@ const Dashboard = () => {
                 </Col>
             </Row>
             <Row gutter={40}>
-                <Col className="gutter-row" xs={24} md={12}>
+                <Col className="gutter-row" xs={24} md={12} style={{marginBottom: '20px'}}>
                     <div className="calendar-container">
                         <Calendar onChange={setDate} value={date} />
                     </div>
                 </Col>
-                <Col className="gutter-row" xs={24} md={12}></Col>
+                <Col className="gutter-row" xs={24} md={12} style={{marginBottom: '20px'}}></Col>
             </Row>
         </div>
     );
