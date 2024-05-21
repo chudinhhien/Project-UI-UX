@@ -131,18 +131,18 @@ abbr[title] {
 }
 
 .react-calendar__tile--now {
-    background: var(--calendar-color-1) 33;
+    background: var(--calendar-color-2);
     border-radius: 6px;
     font-weight: bold;
-    color: var(--calendar-color-1);
+    color: #FFF;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-    background: var(--calendar-color-1) 33;
+    background: var(--calendar-color-1);
     border-radius: 6px;
     font-weight: bold;
-    color: var(--calendar-color-1);
+    color: #FFF;
 }
 
 .react-calendar__tile--hasActive {
