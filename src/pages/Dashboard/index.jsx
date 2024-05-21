@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Progress, Row, Col } from "antd";
 import Calendar from "react-calendar";
+// import 'react-calendar/dist/Calendar.css';
 
 import {
     Chart as ChartJS,
