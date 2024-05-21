@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Flex, Progress, Carousel, Calendar, theme } from "antd";
+import { Flex, Progress, Carousel, Calendar, theme, Breadcrumb } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -108,7 +108,14 @@ const Dashboard = () => {
             <div className="grid wide">
                 <div className="row">
                     <div className="col l-8 m-12 c-12 left">
-                        <h1 className="dashboard-title">Dashboard</h1>
+                        <Breadcrumb
+                            style={{
+                                marginTop: '16px',
+                            }}
+                        >
+                            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                        </Breadcrumb>
                         <div className="kpi-diagram">
                             <h2 className="kpi-diagram-title">Weekly KPI Progress</h2>
                             <Line
@@ -274,9 +281,8 @@ const Dashboard = () => {
                             ].map((kpi, index) => (
                                 <div
                                     key={index}
-                                    className={`item-kpi ${
-                                        completedKpis[index] ? "completed" : ""
-                                    }`}
+                                    className={`item-kpi ${completedKpis[index] ? "completed" : ""
+                                        }`}
                                 >
                                     <div className="item-kpi-top">
                                         <p className="item-kpi-order">
@@ -325,11 +331,10 @@ const Dashboard = () => {
                             ].map((kpi, index) => (
                                 <div
                                     key={index + 2}
-                                    className={`item-kpi ${
-                                        completedKpis[index + 2]
+                                    className={`item-kpi ${completedKpis[index + 2]
                                             ? "completed"
                                             : ""
-                                    }`}
+                                        }`}
                                 >
                                     <div className="item-kpi-top">
                                         <p className="item-kpi-order">

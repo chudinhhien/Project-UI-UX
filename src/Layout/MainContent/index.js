@@ -1,21 +1,17 @@
-import { Layout, theme } from "antd";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 
 const { Content } = Layout;
 
 function MainContent() {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   return (
     <>
       <Content style={{
         // margin: '24px 16px 0 16px',
         minHeight: 400,
-        background: colorBgContainer,
-        borderRadius: borderRadiusLG,
+        background: '#E6E5FE',
       }}>
-        <Outlet />
+        <Outlet/>
       </Content>
     </>
   )

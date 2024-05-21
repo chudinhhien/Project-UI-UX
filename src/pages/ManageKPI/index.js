@@ -1,37 +1,55 @@
-import { Button, Modal } from 'antd'
+import { Breadcrumb, Button, Col, Modal, Row } from 'antd';
 import { useState } from 'react';
 import FormAddKPI from '../../components/FormAddKPI';
-import './ManageKPI.css'
+import ItemKpiType from '../../components/ItemKpiType';
+import './ManageKPI.css';
+
+const MODAL_WIDTH = 1230;
+
 function ManageKPI() {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const showModal = () => {
-    setIsOpenModal(true);
-  }
-  const handleOk = () => {
-    setIsOpenModal(false);
-  }
-  const handleCancel = () => {
-    setIsOpenModal(false);
-  }
+
+  const showModal = () => setIsOpenModal(true);
+  const handleOk = () => setIsOpenModal(false);
+  const handleCancel = () => setIsOpenModal(false);
+
   return (
-    <>
-      <h1>Manage KPI</h1>
-      <Button type='primary' onClick={showModal}>
-        Add KPI
-      </Button>
+    <div className="custom-container" style={{ backgroundColor: '#E6E5FE' }}>
+      <Row justify="space-between" align="middle" style={{ marginTop: '16px', marginBottom: '34px' }}>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item>Manage KPI</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+        <Col>
+          <Button type="primary" onClick={showModal}>
+            Add KPI
+          </Button>
+        </Col>
+      </Row>
+      <Row gutter={30}>
+        {[...Array(3)].map((_, index) => (
+          <Col key={index} xs={24} sm={8}>
+            <ItemKpiType />
+          </Col>
+        ))}
+      </Row>
       <Modal
-        title='ADD KPI'
-        open={isOpenModal} onOk={handleOk} onCancel={handleCancel}
+        title="ADD KPI"
+        open={isOpenModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
         footer={[
           <Button key="submit" type="primary" onClick={handleOk}>
             Save KPI
-          </Button>
+          </Button>,
         ]}
-        width={1230}>
+        width={MODAL_WIDTH}
+      >
         <FormAddKPI />
-      </Modal >
-    </>
-  )
+      </Modal>
+    </div>
+  );
 }
 
 export default ManageKPI;
