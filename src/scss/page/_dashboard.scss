@@ -1,200 +1,25 @@
 .dashboard {
+    min-height: calc(100vh - 70px);
     background-color: #f5f6fa;
-}
 
-.dashboard .grid {
-    padding: 0 20px;
-
-    h1 {
+    &-title {
         margin-top: 20px;
         color: #202224;
         font-size: 3.2rem;
         font-weight: 700;
         letter-spacing: -0.114px;
     }
+    
+    .kpi-diagram {
+        background-color: #fff;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 20px;
 
-    .left {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        .kpi-diagram {
-            margin-top: 19px;
-            background-color: #fff;
-            border-radius: 16.893px;
-            padding: 20px;
-
-            &-title {
-                font-size: 2rem;
-                font-weight: 700;
-                margin-bottom: 20px;
-            }
-        }
-
-        // canvas {
-        //     margin-top: 19px;
-        //     background-color: #fff;
-        //     border-radius: 16.893px;
-        //     padding: 10px;
-        // }
-
-        .slick-slide {
-            width: 300px;
-        }
-    }
-
-    .right {
-        background: #d6d7f2;
-        .title {
-            color: #333;
-            font-size: 1.6rem;
+        &-title {
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .kpi-day {
-            margin-top: 20px;
-        }
-    }
-}
-.item-kpi.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-
-.item-kpi button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    background-color: #eee;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.item-kpi button:hover {
-    background-color: #1814f2;
-    color: white;
-}
-
-// .dashboard .inner-left-bottom {
-//     margin-top: 20px;
-//     display: flex;
-//     gap: 20px;
-// }
-
-// .dashboard .inner-left-bottom 
-.ant-flex {
-        flex-direction: column;
-        height: 320px;
-        width: 100%;
-        gap: 10px;
-        p {
-            display: inline;
-            line-height: normal;
-            margin: 20px 0;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        circle {
-            margin: 20px 0px;
-        }
-    }
-
-// .dashboard .inner-left-bottom .dashboard-kpi {
-//     max-width: 45%;
-//     border-radius: 16.893px;
-// }
-
-// .dashboard .inner-left-bottom .dashboard-calendar {
-//     max-width: 45%;
-//     max-height: 80%;
-// }
-
-.list-kpi {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.item-kpi {
-    background: #fff;
-    padding: 10px 15px;
-    border-radius: 15px;
-}
-
-.item-kpi-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.item-kpi-order {
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    background-color: #72c8cc;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: #fff;
-}
-
-.item-kpi-info-row {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.item-kpi-title {
-    color: var(--text-color);
-    font-size: 1.4rem;
-    font-weight: 600;
-}
-
-.item-kpi-deadline {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: red;
-}
-
-.item-kpi-type {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #BDBDBD;
-}
-
-.item-kpi-ders {
-    font-size: 1.3rem;
-    font-weight: 500;
-}
-
-.item-kpi-complete {
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: green;
-}
-
-[class~="ant-carousel"] {
-    [class~="slick-slider"] {
-        li button {
-            background-color: #1814f2;
-            width: 15px;
-            height: 4px;
-            border-radius: 2px;
-        }
-        li.slick-active button {
-            background-color: #1814f2;
-            width: 20px;
-            height: 4px;
-            border-radius: 2px;
+            margin-bottom: 20px;
         }
     }
 }

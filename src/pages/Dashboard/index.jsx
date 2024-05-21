@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Progress, theme } from "antd";
+import { Progress, Row, Col } from "antd";
 import Calendar from "react-calendar";
 
 import {
@@ -78,58 +78,54 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <div className="grid wide">
-                <div className="row">
-                    <h1 className="dashboard-title">Dashboard</h1>
-                </div>
-                <div className="row">
-                    <div className="col l-6 m-6 c-12">
-                        <div className="kpi-diagram">
-                            <h2 className="kpi-diagram-title">
-                                Weekly KPI Progress
-                            </h2>
-                            <Line
-                                options={options}
-                                data={data}
-                                height={110}
-                                minWidth="100px"
-                            />
-                        </div>
+            <Row>
+                <h1 className="dashboard-title">Dashboard</h1>
+            </Row>
+            <Row gutter={16}>
+                <Col className="gutter-row" span={12}>
+                    <div className="kpi-diagram">
+                        <h2 className="kpi-diagram-title">
+                            Weekly KPI Progress
+                        </h2>
+                        <Line
+                            options={options}
+                            data={data}
+                            height={110}
+                            minWidth="100px"
+                        />
                     </div>
-                    <div className="col l-6 m-6 c-12">
-                        <div className="dashboard-kpi col l-4 m-12 c-12">
-                            <Progress
-                                type="circle"
-                                trailColor="#9B9AF9"
-                                strokeColor="#1814F2"
-                                percent={75}
-                                strokeWidth={12}
-                                size={180}
-                                format={(percent) => (
-                                    <span
-                                        style={{
-                                            fontSize: "18px",
-                                            fontWeight: "bold",
-                                            color: "#1814F2",
-                                            textAlign: "center",
-                                        }}
-                                    >
-                                        {percent}%
-                                    </span>
-                                )}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col l-6 m-6 c-12">
-                        <div className="calendar-container">
+                </Col>
+                <Col className="gutter-row" span={12}>
+                    <Progress
+                        type="circle"
+                        trailColor="#9B9AF9"
+                        strokeColor="#1814F2"
+                        percent={75}
+                        strokeWidth={12}
+                        size={180}
+                        format={(percent) => (
+                            <span
+                                style={{
+                                    fontSize: "18px",
+                                    fontWeight: "bold",
+                                    color: "#1814F2",
+                                    textAlign: "center",
+                                }}
+                            >
+                                {percent}%
+                            </span>
+                        )}
+                    />
+                </Col>
+            </Row>
+            <Row gutter={16}>
+                <Col className="gutter-row" span={12}>
+                <div className="calendar-container">
                             <Calendar onChange={setDate} value={date} />
                         </div>
-                    </div>
-                    <div className="col l-6 m-6 c-12"></div>
-                </div>
-            </div>
+                </Col>
+                <Col className="gutter-row" span={12}></Col>
+            </Row>
         </div>
     );
 };
