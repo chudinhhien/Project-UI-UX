@@ -121,7 +121,7 @@ const Dashboard = () => {
             </Row>
             <Row gutter={40}>
                 <Col className="gutter-row" xs={24} md={12} style={{marginBottom: '20px'}}>
-                    <div className="calendar-container">
+                    <div className="dashboard-calendar">
                         <Calendar onChange={setDate} value={date} />
                     </div>
                 </Col>

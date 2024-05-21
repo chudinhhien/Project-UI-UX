@@ -15,7 +15,7 @@ function ManageKPI() {
 
   return (
     <div className="custom-container" style={{ backgroundColor: '#E6E5FE' }}>
-      <Row justify="space-between" align="middle" style={{ marginTop: '16px', marginBottom: '34px' }}>
+      <Row justify="space-between" align="middle" style={{ marginTop: '20px', marginBottom: '20px' }}>
         <Col>
           <Breadcrumb>
             <Breadcrumb.Item>Manage KPI</Breadcrumb.Item>
