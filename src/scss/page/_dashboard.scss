@@ -1,6 +1,7 @@
 .dashboard {
     min-height: calc(100vh - 70px);
     background-color: #f5f6fa;
+    padding: 20px;
 
     &-title {
         margin-top: 20px;
@@ -9,7 +10,7 @@
         font-weight: 700;
         letter-spacing: -0.114px;
     }
-    
+
     .kpi-diagram {
         background-color: #fff;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
