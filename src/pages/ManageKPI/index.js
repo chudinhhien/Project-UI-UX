@@ -1,17 +1,28 @@
 import { Breadcrumb, Button, Col, Modal, Row } from 'antd';
-import { useState } from 'react';
-import FormAddKPI from '../../components/FormAddKPI';
+import { useEffect, useState } from 'react';
 import ItemKpiType from '../../components/ItemKpiType';
 import './ManageKPI.css';
+import { getKpiTypes } from '../../services/kpiTypesService';
 
 const MODAL_WIDTH = 1230;
 
 function ManageKPI() {
   const [isOpenModal, setIsOpenModal] = useState(false);
-
+  const [kpiTypes, setKpiTypes] = useState([]);
   const showModal = () => setIsOpenModal(true);
   const handleOk = () => setIsOpenModal(false);
   const handleCancel = () => setIsOpenModal(false);
+  
+  useEffect(() => {
+    // Fetch data khi component được mount
+    async function fetchKpiTypes() {
+      const data = await getKpiTypes();
+      setKpiTypes(data);
+    }
+    fetchKpiTypes();
+  }, []);
+
+  console.log(kpiTypes);
 
   return (
     <div className="custom-container" style={{ backgroundColor: '#E6E5FE' }}>
@@ -28,9 +39,9 @@ function ManageKPI() {
         </Col>
       </Row>
       <Row gutter={30}>
-        {[...Array(3)].map((_, index) => (
+        {kpiTypes.map((item,index) => (
           <Col key={index} xs={24} sm={8}>
-            <ItemKpiType />
+            <ItemKpiType item = {item}/>
           </Col>
         ))}
       </Row>
@@ -46,7 +57,6 @@ function ManageKPI() {
         ]}
         width={MODAL_WIDTH}
       >
-        <FormAddKPI />
       </Modal>
     </div>
   );
