@@ -27,7 +27,7 @@ function Kpi() {
 
   const breadcrumbStyle = {
     marginBottom: '20px',
-    marginTop: '20px',
+    marginTop: '25px',
     cursor: 'pointer', // Thiết lập kiểu con trỏ
   };
 
