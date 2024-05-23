@@ -4,6 +4,7 @@ import { Progress, Row, Col, Checkbox } from "antd";
 import Calendar from "react-calendar";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import moment from 'moment';
 // import 'react-calendar/dist/Calendar.css';
 
 import {
@@ -123,6 +124,7 @@ const Dashboard = () => {
     });
 
     const handleTaskChange = (dateString, index) => {
+        console.log(dateString);
         setTasks((prevTasks) => {
             const newTasks = { ...prevTasks };
             newTasks[dateString][index].completed =
@@ -131,12 +133,13 @@ const Dashboard = () => {
         });
     };
 
-    const selectedDateString = date.toISOString().split("T")[0];
+    const selectedDateString = moment.utc(date).format("YYYY-MM-DD");
+
     const selectedTasks = tasks[selectedDateString] || [];
 
     const tileClassName = ({ date, view }) => {
         if (view === "month") {
-            const dateString = date.toISOString().split("T")[0];
+            const dateString = moment.utc(date).format("YYYY-MM-DD");
             const dayTasks = tasks[dateString] || [];
             const currentDate = new Date();
             const isPastDate =
@@ -181,12 +184,6 @@ const Dashboard = () => {
                             height="130.5px"
                             minWidth="100px"
                         />
-                        {/* <Line
-                            options={options}
-                            data={data}
-                            height={300} // Điều chỉnh chiều cao của đồ thị
-                            width={400} // Điều chỉnh chiều rộng của đồ thị
-                        /> */}
                     </div>
                 </Col>
                 <Col
@@ -255,7 +252,8 @@ const Dashboard = () => {
                     style={{ marginBottom: "20px" }}
                 >
                     <div className="dashboard-daytask">
-                        <h3>Recent tasks for {selectedDateString}</h3>
+                        <h3>Recent tasks for {moment.utc(selectedDateString).add(1, 'day').format("YYYY-MM-DD")}</h3>
+                        {console.log(selectedDateString)}
                         <div className="dashboard-list">
                             {selectedTasks.length === 0 ? (
                                 <p>No tasks for this day.</p>
