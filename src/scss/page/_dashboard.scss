@@ -22,4 +22,68 @@
             margin-bottom: 20px;
         }
     }
+    .react-slideshow-wrapper.slide {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    }
+    .react-slideshow-container .default-nav {
+        background: #eee !important;
+    }
+
+    .dashboard-daytask {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dashboard-daytask h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .dashboard-list {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    
+    .dashboard-task {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .dashboard-task:last-child {
+        border-bottom: none;
+    }
+    
+    .dashboard-task .ant-checkbox-wrapper {
+        font-size: 16px;
+    }
+
+    .react-calendar__tile--hasTasks, .react-calendar__tile--hasIncompletePrevTasks {
+        position: relative;
+    }
+
+    .react-calendar__tile--hasTasks::after, .react-calendar__tile--hasIncompletePrevTasks::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 4px;
+        background-color: #7549FF;
+        border-radius: 10px;
+    }
+
+    .react-calendar__tile--hasIncompletePrevTasks::after {
+        background-color: red;
+    }
+
+    .dashboard-task.completed {
+        opacity: 0.5;
+    }
 }
