@@ -5,7 +5,7 @@ import TextArea from 'antd/es/input/TextArea';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Name target',
     dataIndex: 'name',
     key: 'name'
   },
@@ -19,7 +19,7 @@ const columns = [
 const ModalContent = ({ form, handleAddTarget, targets }) => {
   return (
     <Form layout='vertical' form={form}>
-      <h1>Thông tin chung:</h1>
+      <h1>General:</h1>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
           <Form.Item name="name" label="Name:" style={{ marginBottom: 0 }}>
@@ -32,21 +32,21 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
           </Form.Item>
         </Col>
         <Col xs={24}>
-          <Form.Item name="description" label="Mô tả:" style={{ marginBottom: 0 }}>
+          <Form.Item name="description" label="Description:" style={{ marginBottom: 0 }}>
             <TextArea />
           </Form.Item>
         </Col>
       </Row>
 
-      <h1>Danh sách mục tiêu:</h1>
+      <h1>List target:</h1>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="nameTarget" label="Tên mục tiêu:" style={{ marginBottom: 0 }}>
+          <Form.Item name="nameTarget" label="Name target:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="unit" label="Đơn vị:" style={{ marginBottom: 0 }}>
+          <Form.Item name="unit" label="Unit:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
