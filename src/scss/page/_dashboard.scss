@@ -96,3 +96,21 @@
         opacity: 0.5;
     }
 }
+
+.kpi-box-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    strong {
+        color: green;
+        font-weight: 600;
+    }
+}

@@ -88,6 +88,8 @@ const divStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexWrap:"wrap",
+    gap:"20px",
     height: "300px",
     backgroundSize: "cover",
 };
@@ -201,9 +203,6 @@ const Dashboard = () => {
                                         backgroundImage: `url(${slideImage.url})`,
                                     }}
                                 >
-                                    <span style={spanStyle}>
-                                        {slideImage.caption}
-                                    </span>
                                     <Progress
                                         type="circle"
                                         trailColor="#9B9AF9"
@@ -224,6 +223,11 @@ const Dashboard = () => {
                                             </span>
                                         )}
                                     />
+                                    <div className="kpi-box-info">
+                                        <h3 className="kpi-box-info-title">Học tập</h3>
+                                        <p>Tăng <strong>10%</strong> so với tháng trước</p>
+                                        <p></p>
+                                    </div>
                                 </div>
                             </div>
                         ))}
