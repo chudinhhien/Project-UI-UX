@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .dashboard {
     min-height: calc(100vh - 70px);
     background-color: #f5f6fa;
@@ -11,15 +13,22 @@
     }
 
     .kpi-diagram {
+        height: 300px;
         background-color: #fff;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
         padding: 20px;
 
+        padding-bottom: 50px;
         &-title {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 20px;
+        }
+
+        canvas {
+            width: 100%; // Thay đổi từ minWidth thành width và sử dụng phần trăm hoặc vw
+            height: 300px; // Hoặc sử dụng kích thước cố định, hoặc có thể cân nhắc sử dụng phần trăm hoặc vw
         }
     }
     .react-slideshow-wrapper.slide {

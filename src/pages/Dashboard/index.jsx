@@ -173,11 +173,20 @@ const Dashboard = () => {
                             Weekly KPI Progress
                         </h2>
                         <Line
-                            options={options}
+                            options={{
+                                ...options,
+                                maintainAspectRatio: false // Tắt tỷ lệ khung hình
+                            }}
                             data={data}
                             height="130.5px"
                             minWidth="100px"
                         />
+                        {/* <Line
+                            options={options}
+                            data={data}
+                            height={300} // Điều chỉnh chiều cao của đồ thị
+                            width={400} // Điều chỉnh chiều rộng của đồ thị
+                        /> */}
                     </div>
                 </Col>
                 <Col
