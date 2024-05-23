@@ -62,4 +62,28 @@
     .dashboard-task .ant-checkbox-wrapper {
         font-size: 16px;
     }
+
+    .react-calendar__tile--hasTasks, .react-calendar__tile--hasIncompletePrevTasks {
+        position: relative;
+    }
+
+    .react-calendar__tile--hasTasks::after, .react-calendar__tile--hasIncompletePrevTasks::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 4px;
+        background-color: #7549FF;
+        border-radius: 10px;
+    }
+
+    .react-calendar__tile--hasIncompletePrevTasks::after {
+        background-color: red;
+    }
+
+    .dashboard-task.completed {
+        opacity: 0.5;
+    }
 }

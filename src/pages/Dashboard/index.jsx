@@ -100,20 +100,33 @@ const spanStyle = {
 const Dashboard = () => {
     const [date, setDate] = useState(new Date());
     const [tasks, setTasks] = useState({
-        "2024-05-22": [
+        "2024-05-20": [
             { task: "Task 1", completed: false },
             { task: "Task 2", completed: false },
         ],
-        "2024-05-23": [
-            { task: "Task 3", completed: false },
+        "2024-05-21": [
+            { task: "Task 3", completed: true },
             { task: "Task 4", completed: false },
+        ],
+        "2024-05-22": [
+            { task: "Task 5", completed: false },
+            { task: "Task 6", completed: false },
+        ],
+        "2024-05-23": [
+            { task: "Task 7", completed: false },
+            { task: "Task 8", completed: false },
+        ],
+        "2024-05-24": [
+            { task: "Task 9", completed: false },
+            { task: "Task 10", completed: false },
         ],
     });
 
     const handleTaskChange = (dateString, index) => {
         setTasks((prevTasks) => {
             const newTasks = { ...prevTasks };
-            newTasks[dateString][index].completed = !newTasks[dateString][index].completed;
+            newTasks[dateString][index].completed =
+                !newTasks[dateString][index].completed;
             return newTasks;
         });
     };
@@ -121,24 +134,70 @@ const Dashboard = () => {
     const selectedDateString = date.toISOString().split("T")[0];
     const selectedTasks = tasks[selectedDateString] || [];
 
+    const tileClassName = ({ date, view }) => {
+        if (view === "month") {
+            const dateString = date.toISOString().split("T")[0];
+            const dayTasks = tasks[dateString] || [];
+            const currentDate = new Date();
+            const isPastDate =
+                date < currentDate &&
+                date.toDateString() !== currentDate.toDateString();
+            if (isPastDate && dayTasks.some((task) => !task.completed)) {
+                return "react-calendar__tile--hasIncompletePrevTasks";
+            }
+            if (
+                !isPastDate &&
+                dayTasks.length > 0 &&
+                !dayTasks.every((task) => task.completed)
+            ) {
+                return "react-calendar__tile--hasTasks";
+            }
+        }
+        return null;
+    };
+
     return (
         <div className="dashboard">
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
             </Row>
             <Row gutter={40}>
-                <Col className="gutter-row" xs={24} md={12} style={{ marginBottom: "20px" }}>
+                <Col
+                    className="gutter-row"
+                    xs={24}
+                    md={12}
+                    style={{ marginBottom: "20px" }}
+                >
                     <div className="kpi-diagram">
-                        <h2 className="kpi-diagram-title">Weekly KPI Progress</h2>
-                        <Line options={options} data={data} height="130.5px" minWidth="100px" />
+                        <h2 className="kpi-diagram-title">
+                            Weekly KPI Progress
+                        </h2>
+                        <Line
+                            options={options}
+                            data={data}
+                            height="130.5px"
+                            minWidth="100px"
+                        />
                     </div>
                 </Col>
-                <Col className="gutter-row" xs={24} md={12} style={{ marginBottom: "20px" }}>
+                <Col
+                    className="gutter-row"
+                    xs={24}
+                    md={12}
+                    style={{ marginBottom: "20px" }}
+                >
                     <Slide>
                         {slideImages.map((slideImage, index) => (
                             <div key={index}>
-                                <div style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}>
-                                    <span style={spanStyle}>{slideImage.caption}</span>
+                                <div
+                                    style={{
+                                        ...divStyle,
+                                        backgroundImage: `url(${slideImage.url})`,
+                                    }}
+                                >
+                                    <span style={spanStyle}>
+                                        {slideImage.caption}
+                                    </span>
                                     <Progress
                                         type="circle"
                                         trailColor="#9B9AF9"
@@ -166,12 +225,26 @@ const Dashboard = () => {
                 </Col>
             </Row>
             <Row gutter={40}>
-                <Col className="gutter-row" xs={24} md={12} style={{ marginBottom: "20px" }}>
+                <Col
+                    className="gutter-row"
+                    xs={24}
+                    md={12}
+                    style={{ marginBottom: "20px" }}
+                >
                     <div className="dashboard-calendar">
-                        <Calendar onChange={setDate} value={date} />
+                        <Calendar
+                            onChange={setDate}
+                            value={date}
+                            tileClassName={tileClassName}
+                        />
                     </div>
                 </Col>
-                <Col className="gutter-row" xs={24} md={12} style={{ marginBottom: "20px" }}>
+                <Col
+                    className="gutter-row"
+                    xs={24}
+                    md={12}
+                    style={{ marginBottom: "20px" }}
+                >
                     <div className="dashboard-daytask">
                         <h3>Recent tasks for {selectedDateString}</h3>
                         <div className="dashboard-list">
@@ -179,10 +252,20 @@ const Dashboard = () => {
                                 <p>No tasks for this day.</p>
                             ) : (
                                 selectedTasks.map((task, index) => (
-                                    <div key={index} className="dashboard-task">
+                                    <div
+                                        key={index}
+                                        className={`dashboard-task ${
+                                            task.completed ? "completed" : ""
+                                        }`}
+                                    >
                                         <Checkbox
                                             checked={task.completed}
-                                            onChange={() => handleTaskChange(selectedDateString, index)}
+                                            onChange={() =>
+                                                handleTaskChange(
+                                                    selectedDateString,
+                                                    index
+                                                )
+                                            }
                                         >
                                             {task.task}
                                         </Checkbox>
