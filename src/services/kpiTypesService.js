@@ -1,4 +1,4 @@
-import { get } from '../utils/request'
+import { get, post } from '../utils/request'
 
 export const getKpiTypes = async () => {
   let result = await get("kpiTypes");
@@ -8,4 +8,9 @@ export const getKpiTypes = async () => {
 export const getKpiType = async (id) => {
   let result = await get("kpiTypes?id="+id);
   return result;
+}
+
+export const addKpiType = async(data) => {
+  let result = await post("kpiTypes",data);
+  return result; 
 }

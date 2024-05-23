@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getKpis } from '../../services/kpiService';
 import { Breadcrumb } from 'antd';
 import { getKpiType } from '../../services/kpiTypesService';
 
 function Kpi() {
   let { id } = useParams();
-  const navigate = useNavigate();
   const [kpis, setKpis] = useState([]);
   const [kpiType, setKpiType] = useState([]);
+  
   useEffect(() => {
     const fetchKpis = async () => {
       try {
@@ -34,8 +34,10 @@ function Kpi() {
   return (
     <>
       <div className="custom-container" style={{ backgroundColor: '#E6E5FE' }}>
-        <Breadcrumb style={breadcrumbStyle}>
-          <Breadcrumb.Item onClick={() => navigate('/manage-kpi')}>Manage KPI</Breadcrumb.Item>
+        <Breadcrumb separator=">" style={breadcrumbStyle}>
+          <Breadcrumb.Item>
+            <Link to="/manage-kpi">Manage KPI</Link>
+          </Breadcrumb.Item>
           <Breadcrumb.Item>{typeName}</Breadcrumb.Item>
         </Breadcrumb>
       </div>
