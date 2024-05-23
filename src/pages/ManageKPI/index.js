@@ -39,11 +39,11 @@ const ManageKPI = () => {
         target: tableData,
       };
 
-      await addKpiType(newKpiTypeData);
+      //await addKpiType(newKpiTypeData);
       setIsOpenModal(false);
       showMessage('success', 'KPI added successfully!');
-      const updatedKpiTypes = await getKpiTypes();
-      setKpiTypes(updatedKpiTypes);
+      //const updatedKpiTypes = await getKpiTypes();
+      //setKpiTypes(updatedKpiTypes);
       form.resetFields();
       setTargets([]);
     } catch (error) {

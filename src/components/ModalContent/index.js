@@ -22,17 +22,17 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
       <h1>Thông tin chung:</h1>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="name" label="Name:">
+          <Form.Item name="name" label="Name:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="thumbnail" label="Link avatar:">
+          <Form.Item name="thumbnail" label="Link avatar:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
         <Col xs={24}>
-          <Form.Item name="description" label="Mô tả:">
+          <Form.Item name="description" label="Mô tả:" style={{ marginBottom: 0 }}>
             <TextArea />
           </Form.Item>
         </Col>
@@ -41,12 +41,12 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
       <h1>Danh sách mục tiêu:</h1>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="nameTarget" label="Tên mục tiêu:">
+          <Form.Item name="nameTarget" label="Tên mục tiêu:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="unit" label="Đơn vị:">
+          <Form.Item name="unit" label="Đơn vị:" style={{ marginBottom: 0 }}>
             <Input />
           </Form.Item>
         </Col>
