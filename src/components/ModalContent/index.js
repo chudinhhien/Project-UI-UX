@@ -19,35 +19,34 @@ const columns = [
 const ModalContent = ({ form, handleAddTarget, targets }) => {
   return (
     <Form layout='vertical' form={form}>
-      <h1>General:</h1>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="name" label="Name:" style={{ marginBottom: 0 }}>
-            <Input />
+          <Form.Item name="name" label="KPI Name:" style={{ marginBottom: 0 }}>
+            <Input placeholder="Enter KPI name" />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
           <Form.Item name="thumbnail" label="Link avatar:" style={{ marginBottom: 0 }}>
-            <Input />
+            <Input placeholder="Enter link to avatar" />
           </Form.Item>
         </Col>
         <Col xs={24}>
           <Form.Item name="description" label="Description:" style={{ marginBottom: 0 }}>
-            <TextArea />
+            <TextArea placeholder="Enter description" />
           </Form.Item>
         </Col>
       </Row>
 
-      <h1>List target:</h1>
+      <span className='form-row-title'>Add target</span>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
           <Form.Item name="nameTarget" label="Name target:" style={{ marginBottom: 0 }}>
-            <Input />
+            <Input placeholder="Enter target name" />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
           <Form.Item name="unit" label="Unit:" style={{ marginBottom: 0 }}>
-            <Input />
+            <Input placeholder="Enter unit" />
           </Form.Item>
         </Col>
         <Col xs={24} sm={8}>
