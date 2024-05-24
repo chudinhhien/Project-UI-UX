@@ -41,7 +41,7 @@ function Kpi() {
           <Breadcrumb.Item>{typeName}</Breadcrumb.Item>
         </Breadcrumb>
         {kpis.map((item, index) => (
-          <Link to={`/manage-kpi/${id}/${item.id}`} key={index}>
+          <Link to={`/manage-kpi/${id}/${item.id}`} state={{...item,"typeKpi": typeName}} key={index}>
             <div>
               {item.name}
             </div>
