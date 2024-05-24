@@ -11,6 +11,7 @@ const ModalComponent = ({ isOpenModal, handleOk, handleCancel, form, handleAddTa
       onOk={handleOk}
       onCancel={handleCancel}
       width={600}
+      style={{ top: 60 }}
       footer={[
         <Button key="submit" type="primary" onClick={handleOk}>
           Save KPI Type
