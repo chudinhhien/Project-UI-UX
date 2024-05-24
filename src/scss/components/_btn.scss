@@ -14,3 +14,14 @@
         background: #210EBC;
     }
 }
+
+.ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 178.571%;
+    }
+}
