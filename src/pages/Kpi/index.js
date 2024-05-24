@@ -8,7 +8,7 @@ function Kpi() {
   let { id } = useParams();
   const [kpis, setKpis] = useState([]);
   const [kpiType, setKpiType] = useState([]);
-  
+
   useEffect(() => {
     const fetchKpis = async () => {
       try {
@@ -40,6 +40,13 @@ function Kpi() {
           </Breadcrumb.Item>
           <Breadcrumb.Item>{typeName}</Breadcrumb.Item>
         </Breadcrumb>
+        {kpis.map((item, index) => (
+          <Link to={`/manage-kpi/${id}/${item.id}`} key={index}>
+            <div>
+              {item.name}
+            </div>
+          </Link>
+        ))}
       </div>
     </>
   )

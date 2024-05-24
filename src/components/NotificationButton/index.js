@@ -48,7 +48,7 @@ const items = notifications.map(notification => ({
 items.push({
   key: 'view-all',
   label: (
-    <div style={{ textAlign: 'center', marginTop: 8 }}>
+    <div style={{ textAlign: 'center', marginTop: 8}}>
       <a href="/notifications" style={{ color: 'blue' }}>View All</a>
     </div>
   ),
@@ -62,7 +62,7 @@ function NotificationButton(props) {
         placement="bottomLeft"
         arrow
       >
-        <Badge count={notifications.filter(notification => !notification.read).length} className={props.className}>
+        <Badge count={notifications.filter(notification => !notification.read).length} className={props.className} style={{cursor:'pointer'}}>
           <Avatar size={32} style={{ backgroundColor: "#F5F7FA" }}>
             <BellOutlined style={{ color: "red" }} />
           </Avatar>

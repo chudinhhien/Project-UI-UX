@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import LoginForm from "../pages/Login";
 import Canlendar from "../pages/Canlendar";
 import Kpi from "../pages/Kpi";
+import KpiDetail from "../pages/KpiDetail";
 
 export const routes = [
   {
@@ -42,6 +43,10 @@ export const routes = [
         path: "manage-kpi/:id",
         element: <Kpi />
       },
+      {
+        path: "manage-kpi/:id/:kpiId",
+        element: <KpiDetail />
+      }
     ]
   },
   {
