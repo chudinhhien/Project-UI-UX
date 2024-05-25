@@ -20,7 +20,7 @@ function KpiDetail() {
 
     return (
         <>
-            <div className="custom-container">
+            <div className="custom-container" style={{padding: "0 20px"}}>
                 <Breadcrumb separator=">" style={breadcrumbStyle}>
                     <Breadcrumb.Item>
                         <Link to="/manage-kpi">Manage KPI</Link>
@@ -36,7 +36,6 @@ function KpiDetail() {
                             className="gutter-row kpi-detail-info"
                             xs={24}
                             md={12}
-                            style={{ marginBottom: "20px" }}
                         >
                             <h1 className="kpi-detail-title">{name}</h1>
                             <div className="kpi-detail-complete">
@@ -58,7 +57,6 @@ function KpiDetail() {
                             className="gutter-row kpi-detail-progress"
                             xs={24}
                             md={12}
-                            style={{ marginBottom: "20px" }}
                         >
                             <Progress
                                 type="circle"
