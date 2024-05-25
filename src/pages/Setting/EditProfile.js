@@ -48,7 +48,7 @@ function EditProfile() {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex',marginRight: '30px'}}>
         <Upload
           action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
           listType="picture-circle"
