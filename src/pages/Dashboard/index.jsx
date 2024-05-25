@@ -94,11 +94,11 @@ const divStyle = {
     backgroundSize: "cover",
 };
 
-const spanStyle = {
-    padding: "20px",
-    background: "#efefef",
-    color: "#000000",
-};
+// const spanStyle = {
+//     padding: "20px",
+//     background: "#efefef",
+//     color: "#000000",
+// };
 
 const Dashboard = () => {
     const [date, setDate] = useState(new Date());

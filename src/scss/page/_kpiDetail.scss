@@ -1,0 +1,71 @@
+@use "../abstracts";
+
+.kpi-detail-header {
+    padding: 30px 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    // display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    @include abstracts.screen(md) {
+        padding: 30px 20px;
+    }
+}
+
+.kpi-detail-title {
+    color: #1814f3;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 110%;
+    margin-bottom: 20px;
+}
+
+.kpi-detail-progress {
+    display: flex;
+    justify-content: flex-end;
+    @include abstracts.screen(md) {
+        margin-top: 20px;
+        justify-content: center;
+    }
+}
+
+.kpi-detail-complete {
+    font-size: 1.6rem;
+    strong {
+        color: #52c41a;
+        font-weight: 500;
+    }
+    margin-bottom: 10px;
+}
+
+.kpi-detail-deadline {
+    font-size: 1.6rem;
+    strong {
+        color: #ff4d4f;
+        font-weight: 500;
+    }
+    margin-bottom: 20px;
+}
+
+.kpi-detail-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #1814f3;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    .icon {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        background-color: #1814f3da;
+        .icon {
+            transform: translateX(5px);
+        }
+    }
+}
