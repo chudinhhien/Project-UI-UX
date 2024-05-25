@@ -12,7 +12,6 @@ function KpiDetail() {
   // Check if location.state exists before accessing its properties
   const kpiTypeId = location.state ? location.state.kpiTypeId : '';
   const typeKpi = location.state ? location.state.typeKpi : '';
-  const id = location.state ? location.state.id : '';
   const name = location.state ? location.state.name : '';
 
   return (
