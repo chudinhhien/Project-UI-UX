@@ -1,14 +1,18 @@
 @use "../abstracts";
 
+.kpi-detail {
+    padding: 0 20px;
+}
+
 .kpi-detail-header {
-    padding: 30px 40px;
+    padding: 20px 40px;
     border-radius: 10px;
     background-color: #fff;
     // display: flex;
     align-items: center;
     // justify-content: space-between;
     @include abstracts.screen(md) {
-        padding: 30px 20px;
+        padding: 30px 10px;
     }
 }
 
@@ -23,6 +27,7 @@
 .kpi-detail-progress {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     @include abstracts.screen(md) {
         margin-top: 20px;
         justify-content: center;
@@ -63,7 +68,7 @@
     }
 
     &:hover {
-        background-color: #1814f3da;
+        background-color: #1814f3;
         .icon {
             transform: translateX(5px);
         }
