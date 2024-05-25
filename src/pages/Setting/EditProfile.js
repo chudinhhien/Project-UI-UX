@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Col, DatePicker, Form, Image, Input, Row, Upload } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
-import './EditProfile.scss'
 import dayjs from "dayjs";
 
 // Hàm chuyển đổi file sang URL base64
@@ -48,7 +47,7 @@ function EditProfile() {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div className="edit-profile">
         <Upload
           action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
           listType="picture-circle"

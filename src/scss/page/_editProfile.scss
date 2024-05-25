@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .customSizedUpload .ant-upload {
   width: 150px !important;
   height: 150px !important;
@@ -10,4 +12,12 @@
 
 .ant-upload-wrapper {
   margin-right: 20px;
+}
+
+.edit-profile {
+  display: flex;
+
+  @include abstracts.screen(md) {
+    flex-direction: column;
+}
 }
