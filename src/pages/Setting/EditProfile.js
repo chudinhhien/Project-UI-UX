@@ -62,7 +62,7 @@ function EditProfile() {
         </Upload>
         {previewImage && (
           <Image
-            width={200}
+            // width={200}
             style={{
               display: 'none'
             }}
