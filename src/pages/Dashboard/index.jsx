@@ -162,7 +162,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="dashboard">
+        <div className="dashboard custom-container">
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
             </Row>
