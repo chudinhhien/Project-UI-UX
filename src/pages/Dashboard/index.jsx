@@ -174,8 +174,8 @@ const Dashboard = () => {
 
     const steps = [
         {
-            title: 'Upload File',
-            description: 'Put your files here.',
+            title: 'Biểu đồ theo dõi tiến độ KPI.',
+            description: 'Bạn có thể xem tiến độ hoàn thành KPI ở đây nè!.',
             cover: (
                 <img
                     alt="tour.png"
@@ -185,13 +185,13 @@ const Dashboard = () => {
             target: () => ref1.current,
         },
         {
-            title: 'Save',
-            description: 'Save your changes.',
+            title: 'Biểu đồ tròn',
+            description: 'Biểu đồ tròn giúp bạn theo dõi phần trăm hoàn thành KPI đó, đông thời bạn cũng thấy được phần trăm tăng trưởng.',
             target: () => ref2.current,
         },
         {
-            title: 'Other Actions',
-            description: 'Click to see other actions.',
+            title: 'Trang lịch',
+            description: 'Bạn có thể xem công việc của ngày hôm nay cũng như công việc bị lỡ của ngày hôm trước.',
             target: () => ref3.current,
         },
     ];
