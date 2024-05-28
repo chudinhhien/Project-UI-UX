@@ -2,7 +2,7 @@
 
 .dashboard {
     min-height: calc(100vh - 70px);
-    background-color: #E6E5FE;
+    background-color: #e6e5fe;
     padding: 20px;
 
     &-title {
@@ -45,17 +45,17 @@
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
+
     .dashboard-daytask h3 {
         font-size: 18px;
         margin-bottom: 20px;
     }
-    
+
     .dashboard-list {
         max-height: 200px;
         overflow-y: auto;
     }
-    
+
     .dashboard-task {
         display: flex;
         align-items: center;
@@ -63,28 +63,30 @@
         padding: 10px;
         border-bottom: 1px solid #f0f0f0;
     }
-    
+
     .dashboard-task:last-child {
         border-bottom: none;
     }
-    
+
     .dashboard-task .ant-checkbox-wrapper {
         font-size: 16px;
     }
 
-    .react-calendar__tile--hasTasks, .react-calendar__tile--hasIncompletePrevTasks {
+    .react-calendar__tile--hasTasks,
+    .react-calendar__tile--hasIncompletePrevTasks {
         position: relative;
     }
 
-    .react-calendar__tile--hasTasks::after, .react-calendar__tile--hasIncompletePrevTasks::after {
-        content: '';
+    .react-calendar__tile--hasTasks::after,
+    .react-calendar__tile--hasIncompletePrevTasks::after {
+        content: "";
         position: absolute;
         bottom: 5px;
         left: 50%;
         transform: translateX(-50%);
         width: 10px;
         height: 4px;
-        background-color: #7549FF;
+        background-color: #7549ff;
         border-radius: 10px;
     }
 
@@ -112,5 +114,11 @@
     strong {
         color: green;
         font-weight: 600;
+    }
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-tour {
+    @include abstracts.screen(md) {
+        width: 300px !important;
     }
 }
