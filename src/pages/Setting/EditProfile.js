@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Col, DatePicker, Form, Image, Input, Row, Upload, Grid } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
-import './EditProfile.scss'
 import dayjs from "dayjs";
 
 const { useBreakpoint } = Grid;

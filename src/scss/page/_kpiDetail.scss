@@ -5,7 +5,7 @@
 }
 
 .kpi-detail-header {
-    padding: 20px 40px;
+    padding: 20px 0;
     border-radius: 10px;
     background-color: #fff;
     // display: flex;
@@ -73,4 +73,40 @@
             transform: translateX(5px);
         }
     }
+}
+
+// Additional CSS for kpi-detail-info
+.kpi-detail-criterion {
+    margin-left: -40px !important;
+    margin-right: -40px !important;
+    // padding: 20px 40px;
+    // background-color: red;
+    // width: 100%;
+    &-title {
+        margin-top: 20px;
+        margin-left: 16px;
+        color: #242731;
+font-size: 2.4rem;
+font-weight: 600;
+    }
+    .ant-collapse {
+        width: 100%;
+    }
+    .ant-collapse-item {
+        width: 100%;
+    }
+    .ant-collapse-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .ant-collapse-content {
+        width: 100%;
+    }
+}
+
+.kpi-detail-table-name {
+    color: #242731;
+// font-size: 2rem;
+font-weight: 500;
 }
