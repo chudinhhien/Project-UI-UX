@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Progress, Row, Col, Checkbox } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { Progress, Row, Col, Checkbox, Tour } from "antd";
 import Calendar from "react-calendar";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
@@ -17,6 +18,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+import { helpClose } from "../../actions/Help";
 
 ChartJS.register(
     CategoryScale,
@@ -88,8 +90,8 @@ const divStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexWrap:"wrap",
-    gap:"20px",
+    flexWrap: "wrap",
+    gap: "20px",
     height: "300px",
     backgroundSize: "cover",
 };
@@ -100,8 +102,13 @@ const divStyle = {
 //     color: "#000000",
 // };
 
+
+
 const Dashboard = () => {
+    const dispatch = useDispatch();
+    const open = useSelector(state => state.helpReducer);
     const [date, setDate] = useState(new Date());
+
     const [tasks, setTasks] = useState({
         "2024-05-20": [
             { task: "Task 1", completed: false },
@@ -161,7 +168,36 @@ const Dashboard = () => {
         return null;
     };
 
+    const ref1 = useRef(null);
+    const ref2 = useRef(null);
+    const ref3 = useRef(null);
+
+    const steps = [
+        {
+            title: 'Upload File',
+            description: 'Put your files here.',
+            cover: (
+                <img
+                    alt="tour.png"
+                    src="https://user-images.githubusercontent.com/5378891/197385811-55df84..."
+                />
+            ),
+            target: () => ref1.current,
+        },
+        {
+            title: 'Save',
+            description: 'Save your changes.',
+            target: () => ref2.current,
+        },
+        {
+            title: 'Other Actions',
+            description: 'Click to see other actions.',
+            target: () => ref3.current,
+        },
+    ];
+
     return (
+
         <div className="dashboard">
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
@@ -173,7 +209,7 @@ const Dashboard = () => {
                     md={12}
                     style={{ marginBottom: "20px" }}
                 >
-                    <div className="kpi-diagram">
+                    <div className="kpi-diagram" ref={ref1}>
                         <h2 className="kpi-diagram-title">
                             Weekly KPI Progress
                         </h2>
@@ -194,44 +230,47 @@ const Dashboard = () => {
                     md={12}
                     style={{ marginBottom: "20px" }}
                 >
-                    <Slide>
-                        {slideImages.map((slideImage, index) => (
-                            <div key={index}>
-                                <div
-                                    style={{
-                                        ...divStyle,
-                                        backgroundImage: `url(${slideImage.url})`,
-                                    }}
-                                >
-                                    <Progress
-                                        type="circle"
-                                        trailColor="#9B9AF9"
-                                        strokeColor="#1814F2"
-                                        percent={75}
-                                        strokeWidth={12}
-                                        size={180}
-                                        format={(percent) => (
-                                            <span
-                                                style={{
-                                                    fontSize: "18px",
-                                                    fontWeight: "bold",
-                                                    color: "#1814F2",
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                {percent}%
-                                            </span>
-                                        )}
-                                    />
-                                    <div className="kpi-box-info">
-                                        <h3 className="kpi-box-info-title">Học tập</h3>
-                                        <p>Tăng <strong>10%</strong> so với tháng trước</p>
-                                        <p></p>
+                    <div ref={ref2}>
+                        <Slide>
+                            {slideImages.map((slideImage, index) => (
+                                <div key={index}>
+                                    <div
+                                        style={{
+                                            ...divStyle,
+                                            backgroundImage: `url(${slideImage.url})`,
+                                        }}
+                                    >
+                                        <Progress
+                                            type="circle"
+                                            trailColor="#9B9AF9"
+                                            strokeColor="#1814F2"
+                                            percent={75}
+                                            strokeWidth={12}
+                                            size={180}
+                                            format={(percent) => (
+                                                <span
+                                                    style={{
+                                                        fontSize: "18px",
+                                                        fontWeight: "bold",
+                                                        color: "#1814F2",
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {percent}%
+                                                </span>
+                                            )}
+                                        />
+                                        <div className="kpi-box-info">
+                                            <h3 className="kpi-box-info-title">Học tập</h3>
+                                            <p>Tăng <strong>10%</strong> so với tháng trước</p>
+                                            <p></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </Slide>
+                            ))}
+                        </Slide>
+                    </div>
+
                 </Col>
             </Row>
             <Row gutter={40}>
@@ -241,7 +280,7 @@ const Dashboard = () => {
                     md={12}
                     style={{ marginBottom: "20px" }}
                 >
-                    <div className="dashboard-calendar">
+                    <div className="dashboard-calendar" ref={ref3}>
                         <Calendar
                             onChange={setDate}
                             value={date}
@@ -265,9 +304,8 @@ const Dashboard = () => {
                                 selectedTasks.map((task, index) => (
                                     <div
                                         key={index}
-                                        className={`dashboard-task ${
-                                            task.completed ? "completed" : ""
-                                        }`}
+                                        className={`dashboard-task ${task.completed ? "completed" : ""
+                                            }`}
                                     >
                                         <Checkbox
                                             checked={task.completed}
@@ -287,6 +325,7 @@ const Dashboard = () => {
                     </div>
                 </Col>
             </Row>
+            <Tour open={open} steps={steps} onClose={() => dispatch(helpClose())} />
         </div>
     );
 };

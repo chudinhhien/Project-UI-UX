@@ -62,9 +62,9 @@ function NotificationButton(props) {
         placement="bottomLeft"
         arrow
       >
-        <Badge count={notifications.filter(notification => !notification.read).length} className={props.className} style={{cursor:'pointer'}}>
+        <Badge count={notifications.filter(notification => !notification.read).length}>
           <Avatar size={32} style={{ backgroundColor: "#F5F7FA" }}>
-            <BellOutlined style={{ color: "red" }} />
+            <BellOutlined style={{ color: "red",cursor: 'pointer' }} />
           </Avatar>
         </Badge>
       </Dropdown>

@@ -3,7 +3,6 @@ import {
   UserOutlined,
   DownOutlined,
   PoweroffOutlined,
-  QuestionCircleOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
@@ -13,6 +12,7 @@ import NotificationButton from '../../components/NotificationButton';
 import './Header.scss';
 import all_imgs from '../../assets/img/all_img';
 import Language from '../../components/Language';
+import Help from '../../components/Help';
 
 const { Header: AntHeader } = Layout;
 const { useBreakpoint } = Grid;
@@ -84,7 +84,7 @@ function Header(props) {
       <div className="actions">
         <Space size="large">
           <div className="actions__help">
-            <QuestionCircleOutlined style={{ fontSize: '24px' }} />
+            <Help />
           </div>
           <div className="actions__notification">
             <NotificationButton />
