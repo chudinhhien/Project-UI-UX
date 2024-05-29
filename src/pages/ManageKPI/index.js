@@ -1,9 +1,36 @@
 // ManageKPI.js
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Button, Col, Form, Row, message } from 'antd';
-import { getKpiTypes, addKpiType } from '../../services/kpiTypesService';
+import { getKpiTypes } from '../../services/kpiTypesService';
 import ModalComponent from '../../components/ModalComponent';
-import ItemKpiType from '../../components/ItemKpiType';
+import { DndContext, PointerSensor, useSensor } from '@dnd-kit/core';
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { Tabs } from 'antd';
+import TableCustom from '../../components/TableCustom';
+
+const DraggableTabNode = ({ className, ...props }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: props['data-node-key'],
+  });
+  const style = {
+    ...props.style,
+    transform: CSS.Translate.toString(transform),
+    transition,
+    cursor: 'move',
+  };
+  return React.cloneElement(props.children, {
+    ref: setNodeRef,
+    style,
+    ...attributes,
+    ...listeners,
+  });
+};
 
 const ManageKPI = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -11,6 +38,38 @@ const ManageKPI = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
   const [targets, setTargets] = useState([]);
+
+  const [items, setItems] = useState([
+    {
+      key: '1',
+      label: 'Tất cả',
+      children: <TableCustom />,
+    },
+    {
+      key: '2',
+      label: 'Hoàn thành',
+      children: 'Content of Tab Pane 2',
+    },
+    {
+      key: '3',
+      label: 'Chưa hoàn thành',
+      children: 'Content of Tab Pane 3',
+    },
+  ]);
+  const sensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+  const onDragEnd = ({ active, over }) => {
+    if (active.id !== over?.id) {
+      setItems((prev) => {
+        const activeIndex = prev.findIndex((i) => i.key === active.id);
+        const overIndex = prev.findIndex((i) => i.key === over?.id);
+        return arrayMove(prev, activeIndex, overIndex);
+      });
+    }
+  };
 
   const showMessage = (type, content) => {
     messageApi.open({
@@ -82,13 +141,25 @@ const ManageKPI = () => {
             </Button>
           </Col>
         </Row>
-        <Row gutter={30}>
-          {kpiTypes.map((item, index) => (
-            <Col key={index} xs={24} sm={8}>
-              <ItemKpiType item={item} />
-            </Col>
-          ))}
-        </Row>
+
+        <Tabs
+          items={items}
+          renderTabBar={(tabBarProps, DefaultTabBar) => (
+            <DndContext sensors={[sensor]} onDragEnd={onDragEnd}>
+              <SortableContext items={items.map((i) => i.key)} strategy={horizontalListSortingStrategy}>
+                <DefaultTabBar {...tabBarProps}>
+                  {(node) => (
+                    <DraggableTabNode {...node.props} key={node.key}>
+                      {node}
+                    </DraggableTabNode>
+                  )}
+                </DefaultTabBar>
+              </SortableContext>
+            </DndContext>
+          )}
+        />
+
+
         <ModalComponent
           isOpenModal={isOpenModal}
           handleOk={handleOk}
