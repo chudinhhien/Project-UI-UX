@@ -40,7 +40,7 @@ function Sider(props) {
                 <Menu mode="inline" theme="dark" defaultSelectedKeys={["1"]}>
                     {item.map((menuItem) => (
                         <Menu.Item key={menuItem.key} icon={menuItem.icon}>
-                                <Link to={menuItem.url} ref={menuItem.label === 'Dashboard' ? ref1 : menuItem.label === 'Manage KPI' ? ref2 : ref3}>{menuItem.label}</Link>
+                            <Link to={menuItem.url} ref={menuItem.label === 'Dashboard' ? ref1 : menuItem.label === 'Manage KPI' ? ref2 : ref3}>{menuItem.label}</Link>
                         </Menu.Item>
                     ))}
                 </Menu>

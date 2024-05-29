@@ -11,7 +11,7 @@
 
     &-title {
         // margin-bottom: ;
-        color: #202224;
+        color: #010c80;
         font-size: 3.2rem;
         font-weight: 700;
     }
@@ -22,7 +22,7 @@
         justify-content: space-between;
         width: 100%;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: 15px;
         background-color: #fff;
         box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
 
@@ -37,6 +37,7 @@
                 }
             }
             p:first-child {
+        color: #010c80;
                 font-size: 2rem;
                 font-weight: 700;
                 line-height: normal;
@@ -52,11 +53,12 @@
         height: 300px;
         background-color: #fff;
         box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
+        border-radius: 15px;
         padding: 20px;
 
         padding-bottom: 50px;
         &-title {
+        color: #010c80;
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 20px;
@@ -80,7 +82,7 @@
         width: 100%;
         background-color: #ffffff;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 15px;
         box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
         @include abstracts.screen(md) {
             height: auto;
