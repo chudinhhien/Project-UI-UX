@@ -213,12 +213,11 @@ const Dashboard = () => {
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
             </Row>
-            <Row gutter={40}>
+            <Row gutter={40} style={{marginBottom:"0"}}>
                 <Col
                     className="gutter-row"
                     xs={24}
                     md={12}
-                    style={{ marginBottom: "20px" }}
                 >
                     <Row>
                         <div className="dashboard-hello">
@@ -301,7 +300,6 @@ const Dashboard = () => {
                     className="gutter-row"
                     xs={24}
                     md={12}
-                    style={{ marginBottom: "20px" }}
                 >
                     <Row>
                         <div className="dashboard-calendar" ref={ref3}>
