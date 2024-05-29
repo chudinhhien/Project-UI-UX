@@ -29,7 +29,7 @@
         div {
             width: 60%;
             p {
-                margin-bottom: 7px;
+                margin-bottom: 10px;
                 font-size: 1.6rem;
                 strong {
                     font-weight: 600;
@@ -162,4 +162,9 @@
     @include abstracts.screen(md) {
         width: 300px !important;
     }
+}
+
+.ant-layout-sider-children .ant-menu-item {
+    display: flex;
+    align-items: center;
 }
