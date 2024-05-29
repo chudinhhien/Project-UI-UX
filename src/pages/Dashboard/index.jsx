@@ -5,7 +5,8 @@ import { Progress, Row, Col, Checkbox, Tour } from "antd";
 import Calendar from "react-calendar";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import moment from 'moment';
+import moment from "moment";
+import all_imgs from "../../assets/img/all_img";
 // import 'react-calendar/dist/Calendar.css';
 
 import {
@@ -30,7 +31,20 @@ ChartJS.register(
     Legend
 );
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
 
 const data = {
     labels,
@@ -91,8 +105,8 @@ const divStyle = {
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
-    gap: "20px",
-    height: "300px",
+    gap: "40px",
+    height: "200px",
     backgroundSize: "cover",
 };
 
@@ -102,11 +116,9 @@ const divStyle = {
 //     color: "#000000",
 // };
 
-
-
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const open = useSelector(state => state.helpReducer);
+    const open = useSelector((state) => state.helpReducer);
     const [date, setDate] = useState(new Date());
 
     const [tasks, setTasks] = useState({
@@ -174,8 +186,8 @@ const Dashboard = () => {
 
     const steps = [
         {
-            title: 'Upload File',
-            description: 'Put your files here.',
+            title: "Upload File",
+            description: "Put your files here.",
             cover: (
                 <img
                     alt="tour.png"
@@ -185,13 +197,13 @@ const Dashboard = () => {
             target: () => ref1.current,
         },
         {
-            title: 'Save',
-            description: 'Save your changes.',
+            title: "Save",
+            description: "Save your changes.",
             target: () => ref2.current,
         },
         {
-            title: 'Other Actions',
-            description: 'Click to see other actions.',
+            title: "Other Actions",
+            description: "Click to see other actions.",
             target: () => ref3.current,
         },
     ];
@@ -208,123 +220,145 @@ const Dashboard = () => {
                     md={12}
                     style={{ marginBottom: "20px" }}
                 >
-                    <div className="kpi-diagram" ref={ref1}>
-                        <h2 className="kpi-diagram-title">
-                            Weekly KPI Progress
-                        </h2>
-                        <Line
-                            options={{
-                                ...options,
-                                maintainAspectRatio: false // Tắt tỷ lệ khung hình
-                            }}
-                            data={data}
-                            height="130.5px"
-                            minWidth="100px"
-                        />
-                    </div>
-                </Col>
-                <Col
-                    className="gutter-row"
-                    xs={24}
-                    md={12}
-                    style={{ marginBottom: "20px" }}
-                >
-                    <div ref={ref2}>
-                        <Slide>
-                            {slideImages.map((slideImage, index) => (
-                                <div key={index}>
-                                    <div
-                                        style={{
-                                            ...divStyle,
-                                            backgroundImage: `url(${slideImage.url})`,
-                                        }}
-                                    >
-                                        <Progress
-                                            type="circle"
-                                            trailColor="#9B9AF9"
-                                            strokeColor="#1814F2"
-                                            percent={75}
-                                            strokeWidth={12}
-                                            size={180}
-                                            format={(percent) => (
-                                                <span
-                                                    style={{
-                                                        fontSize: "18px",
-                                                        fontWeight: "bold",
-                                                        color: "#1814F2",
-                                                        textAlign: "center",
-                                                    }}
-                                                >
-                                                    {percent}%
-                                                </span>
-                                            )}
-                                        />
-                                        <div className="kpi-box-info">
-                                            <h3 className="kpi-box-info-title">Học tập</h3>
-                                            <p>Tăng <strong>10%</strong> so với tháng trước</p>
-                                            <p></p>
+                    <Row>
+                        <div className="dashboard-hello">
+                            <div>
+                                <p>Xin chào, Hiển!</p>
+                                <p>
+                                    Tuần này bạn đã tăng được{" "}
+                                    <strong>5%</strong> KPI
+                                </p>
+                                <p>Hãy tiếp tục cố gắng nào !!!</p>
+                            </div>
+                            <img src={all_imgs.hello} alt="" />
+                        </div>
+                    </Row>
+                    <Row>
+                        <div className="kpi-diagram" ref={ref1}>
+                            <h2 className="kpi-diagram-title">
+                                Weekly KPI Progress
+                            </h2>
+                            <Line
+                                options={{
+                                    ...options,
+                                    maintainAspectRatio: false,
+                                }}
+                                data={data}
+                                height="130.5px"
+                                minWidth="100px"
+                            />
+                        </div>
+                    </Row>
+                    <Row>
+                        <div ref={ref2} style={{ width: "100%" }}>
+                            <Slide>
+                                {slideImages.map((slideImage, index) => (
+                                    <div key={index}>
+                                        <div
+                                            style={{
+                                                ...divStyle,
+                                                backgroundImage: `url(${slideImage.url})`,
+                                            }}
+                                        >
+                                            <Progress
+                                                type="circle"
+                                                trailColor="#9B9AF9"
+                                                strokeColor="#1814F2"
+                                                percent={75}
+                                                strokeWidth={12}
+                                                size={150}
+                                                format={(percent) => (
+                                                    <span
+                                                        style={{
+                                                            fontSize: "18px",
+                                                            fontWeight: "bold",
+                                                            color: "#1814F2",
+                                                            textAlign: "center",
+                                                        }}
+                                                    >
+                                                        {percent}%
+                                                    </span>
+                                                )}
+                                            />
+                                            <div className="kpi-box-info">
+                                                <h3 className="kpi-box-info-title">
+                                                    Học tập
+                                                </h3>
+                                                <p>
+                                                    Tăng <strong>10%</strong> so
+                                                    với tháng trước
+                                                </p>
+                                                <p></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </Slide>
-                    </div>
-
-                </Col>
-            </Row>
-            <Row gutter={40}>
-                <Col
-                    className="gutter-row"
-                    xs={24}
-                    md={12}
-                    style={{ marginBottom: "20px" }}
-                >
-                    <div className="dashboard-calendar" ref={ref3}>
-                        <Calendar
-                            onChange={setDate}
-                            value={date}
-                            tileClassName={tileClassName}
-                        />
-                    </div>
-                </Col>
-                <Col
-                    className="gutter-row"
-                    xs={24}
-                    md={12}
-                    style={{ marginBottom: "20px" }}
-                >
-                    <div className="dashboard-daytask">
-                        <h3>Recent tasks for {moment.utc(selectedDateString).add(1, 'day').format("YYYY-MM-DD")}</h3>
-                        {console.log(selectedDateString)}
-                        <div className="dashboard-list">
-                            {selectedTasks.length === 0 ? (
-                                <p>No tasks for this day.</p>
-                            ) : (
-                                selectedTasks.map((task, index) => (
-                                    <div
-                                        key={index}
-                                        className={`dashboard-task ${task.completed ? "completed" : ""
-                                            }`}
-                                    >
-                                        <Checkbox
-                                            checked={task.completed}
-                                            onChange={() =>
-                                                handleTaskChange(
-                                                    selectedDateString,
-                                                    index
-                                                )
-                                            }
-                                        >
-                                            {task.task}
-                                        </Checkbox>
-                                    </div>
-                                ))
-                            )}
+                                ))}
+                            </Slide>
                         </div>
-                    </div>
+                    </Row>
+                </Col>
+                <Col
+                    className="gutter-row"
+                    xs={24}
+                    md={12}
+                    style={{ marginBottom: "20px" }}
+                >
+                    <Row>
+                        <div className="dashboard-calendar" ref={ref3}>
+                            <Calendar
+                                onChange={setDate}
+                                value={date}
+                                tileClassName={tileClassName}
+                            />
+                        </div>
+                    </Row>
+                    <Row style={{width:"100%"}}>
+                        <div className="dashboard-daytask">
+                            <h3>
+                                Recent tasks for{" "}
+                                {moment
+                                    .utc(selectedDateString)
+                                    .add(1, "day")
+                                    .format("YYYY-MM-DD")}
+                            </h3>
+                            {console.log(selectedDateString)}
+                            <div className="dashboard-list">
+                                {selectedTasks.length === 0 ? (
+                                    <p>No tasks for this day.</p>
+                                ) : (
+                                    selectedTasks.map((task, index) => (
+                                        <div
+                                            key={index}
+                                            className={`dashboard-task ${
+                                                task.completed
+                                                    ? "completed"
+                                                    : ""
+                                            }`}
+                                        >
+                                            <Checkbox
+                                                checked={task.completed}
+                                                onChange={() =>
+                                                    handleTaskChange(
+                                                        selectedDateString,
+                                                        index
+                                                    )
+                                                }
+                                            >
+                                                {task.task}
+                                            </Checkbox>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    </Row>
                 </Col>
             </Row>
-            <Tour open={open} steps={steps} onClose={() => dispatch(helpClose())} />
+            <Tour
+                open={open}
+                steps={steps}
+                onClose={() => dispatch(helpClose())}
+            />
         </div>
     );
 };
