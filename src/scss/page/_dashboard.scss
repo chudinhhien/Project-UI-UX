@@ -3,19 +3,55 @@
 .dashboard {
     min-height: calc(100vh - 70px);
     background-color: #e6e5fe;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
+
+    .ant-row {
+        margin-bottom: 20px;
+    }
 
     &-title {
-        margin-bottom: 20px;
+        // margin-bottom: ;
         color: #202224;
         font-size: 3.2rem;
         font-weight: 700;
     }
 
+    &-hello {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+
+        div {
+            width: 60%;
+            p {
+                margin-bottom: 10px;
+                font-size: 1.6rem;
+                strong {
+                    font-weight: 600;
+                    color: green;
+                }
+            }
+            p:first-child {
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
     .kpi-diagram {
         height: 300px;
         background-color: #fff;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
         padding: 20px;
 
@@ -32,7 +68,7 @@
         }
     }
     .react-slideshow-wrapper.slide {
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
     }
     .react-slideshow-container .default-nav {
@@ -40,10 +76,15 @@
     }
 
     .dashboard-daytask {
+        height: 360px;
+        width: 100%;
         background-color: #ffffff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+        @include abstracts.screen(md) {
+            height: auto;
+        }
     }
 
     .dashboard-daytask h3 {
@@ -121,4 +162,9 @@
     @include abstracts.screen(md) {
         width: 300px !important;
     }
+}
+
+.ant-layout-sider-children .ant-menu-item {
+    display: flex;
+    align-items: center;
 }
