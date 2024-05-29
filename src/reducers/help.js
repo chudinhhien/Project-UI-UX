@@ -1,4 +1,4 @@
-const helpReducer = (state = false, action) => {
+const helpSider = (state = false, action) => {
   switch (action.type) {
     case "HELP_INFO_DASHBOARD":
       return action.open;
@@ -9,4 +9,4 @@ const helpReducer = (state = false, action) => {
   }
 }
 
-export default helpReducer;
+export default helpSider;

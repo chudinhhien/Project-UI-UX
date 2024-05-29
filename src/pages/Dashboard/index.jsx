@@ -108,6 +108,7 @@ const divStyle = {
     gap: "40px",
     height: "200px",
     backgroundSize: "cover",
+    borderRadius: "15px"
 };
 
 // const spanStyle = {
@@ -186,14 +187,8 @@ const Dashboard = () => {
 
     const steps = [
         {
-            title: "Upload File",
-            description: "Put your files here.",
-            cover: (
-                <img
-                    alt="tour.png"
-                    src="https://user-images.githubusercontent.com/5378891/197385811-55df84..."
-                />
-            ),
+            title: 'Biểu đồ theo dõi tiến độ KPI.',
+            description: 'Bạn có thể xem tiến độ hoàn thành KPI ở đây nè!.',
             target: () => ref1.current,
         },
         {
