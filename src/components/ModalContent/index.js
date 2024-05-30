@@ -20,16 +20,12 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
   return (
     <Form layout='vertical' form={form}>
       <Row gutter={[20, 10]}>
-        <Col xs={24} sm={12}>
+        <Col xs={24}>
           <Form.Item name="name" label="KPI Name:" style={{ marginBottom: 0 }}>
             <Input placeholder="Enter KPI name" />
           </Form.Item>
         </Col>
-        <Col xs={24} sm={12}>
-          <Form.Item name="thumbnail" label="Link avatar:" style={{ marginBottom: 0 }}>
-            <Input placeholder="Enter link to avatar" />
-          </Form.Item>
-        </Col>
+
         <Col xs={24}>
           <Form.Item name="description" label="Description:" style={{ marginBottom: 0 }}>
             <TextArea placeholder="Enter description" />
@@ -57,7 +53,7 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
       </Row>
       <Row justify="end" gutter={[20, 20]}>
         <Col>
-          <Button type='primary' onClick={handleAddTarget} style={{ marginBottom: '20px' }}>Add Target</Button>
+          <Button onClick={handleAddTarget} style={{ marginBottom: '20px',backgroundColor: '#1814f2',color: '#ffff' }}>Add Target</Button>
         </Col>
       </Row>
       <Table columns={columns} dataSource={targets} />
