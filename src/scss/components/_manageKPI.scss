@@ -54,16 +54,36 @@
             align-items: flex-end;
             gap: 10px;
             width: 100%;
-            button {
-                cursor: pointer;
-                padding: 5px 16px;
-                background-color: #1814f2;
-                color: #fff;
-                font-weight: 600;
-                border-radius: 6px;
+            // button {
+            //     cursor: pointer;
+            //     padding: 5px 16px;
+            //     background-color: #1814f2;
+            //     color: #fff;
+            //     font-weight: 600;
+            //     border-radius: 6px;
+            //     transition: 0.3s ease;
+            //     &:hover {
+            //         background-color: #3532e8;
+            //     }
+            // }
+        }
+        &-act {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .kpi-item-edit {
                 transition: 0.3s ease;
+                cursor: pointer;
                 &:hover {
-                    background-color: #3532e8;
+                    filter: brightness(0) saturate(100%) invert(9%) sepia(97%) saturate(7498%) hue-rotate(247deg) brightness(91%) contrast(110%);
+                }
+            }
+            .kpi-item-delete {
+                transition: 0.3s ease;
+                cursor: pointer;
+                &:hover {
+                    filter: brightness(0) saturate(100%) invert(28%) sepia(86%) saturate(6936%) hue-rotate(355deg) brightness(99%) contrast(123%);
                 }
             }
         }

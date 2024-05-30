@@ -216,8 +216,10 @@ const ManageKPI = () => {
                                         strokeColor={item.percentage >= 90 ? "#14F396": item.percentage > 50 ? "#1814f3" : "#f31414"}
                                     />
                                 </Flex>
-                                <button className="kpi-item-edit"><EditOutlined /></button>
-                                <button className="kpi-"><DeleteOutlined /></button>
+                                <div className="kpi-item-act">
+                                    <button className="kpi-item-delete"><DeleteOutlined /></button>
+                                    <button className="kpi-item-edit"><EditOutlined /></button>
+                                </div>
                             </div>
                         </div>
                     ))}
