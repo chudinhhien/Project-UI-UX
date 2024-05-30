@@ -9,7 +9,9 @@ import {
     message,
     Flex,
     Progress,
+    Modal,
 } from "antd";
+import { getKpiTypes } from "../../services/kpiTypesService";
 import ModalComponent from "../../components/ModalComponent";
 import { DndContext, PointerSensor, useSensor } from "@dnd-kit/core";
 import {
@@ -22,7 +24,6 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
-import { getKpis } from "../../services/kpiService";
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -45,6 +46,7 @@ const DraggableTabNode = ({ className, ...props }) => {
 
 const ManageKPI = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [kpiTypes, setKpiTypes] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
     const [targets, setTargets] = useState([]);
@@ -130,17 +132,13 @@ const ManageKPI = () => {
         setTargets([]);
     };
 
-    const [kpis, setKpis] = useState([]);
-
     useEffect(() => {
-        async function fetchKpis() {
-            const data = await getKpis();
-            setKpis(data);
+        async function fetchKpiTypes() {
+            const data = await getKpiTypes();
+            setKpiTypes(data);
         }
-        fetchKpis();
+        fetchKpiTypes();
     }, []);
-
-    console.log(kpis);
 
     return (
         <div className="manage-kpi">
@@ -172,37 +170,80 @@ const ManageKPI = () => {
                     </Col>
                 </Row>
                 <div className="kpi-list">
-                    {kpis.map((kpi, index) => (
-                        <div className="kpi-item" key={index}>
-                            <div className="kpi-item-top">
-                                <Link className="kpi-item-title"  to={`/manage-kpi/${kpi.link}`}
-                            state={ {...kpi} } >{kpi.category}</Link>
-                                <p className="kpi-item-target">10 mục tiêu</p>
-                            </div>
-                            <hr />
-                            <div className="kpi-item-bottom">
-                                <Flex
-                                    vertical
-                                    gap="small"
-                                    style={{
-                                        width: "100%",
-                                    }}
-                                >
-                                    <Progress
-                                        percent={30}
-                                        size="small"
-                                        status="active"
-                                    />
-                                    {/* <Progress
+                    <div className="kpi-item">
+                        <div className="kpi-item-top">
+                            <Link to="/manage-kpi/1">
+                                <h2 className="kpi-item-title">Giảng dạy</h2>
+                            </Link>
+                            <p className="kpi-item-target">10 mục tiêu</p>
+                        </div>
+                        <hr />
+                        <div className="kpi-item-bottom">
+                            <Flex
+                                vertical
+                                gap="small"
+                                style={{
+                                    width: "100%",
+                                }}
+                            >
+                                <Progress
+                                    percent={30}
+                                    size="small"
+                                    status="active"
+                                    strokeColor="#1814f3"
+                                />
+                            </Flex>
+                            <button className="kpi-item-edit">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                    <div className="kpi-item">
+                        <div className="kpi-item-top">
+                            <h2 className="kpi-item-title">Sinh hoạt</h2>
+                            <p className="kpi-item-target">10 mục tiêu</p>
+                        </div>
+                        <hr />
+                        <div className="kpi-item-bottom">
+                            <Flex
+                                vertical
+                                gap="small"
+                                style={{
+                                    width: "100%",
+                                }}
+                            >
+                                <Progress
+                                    percent={30}
+                                    size="small"
+                                    status="active"
+                                    strokeColor="#1814f3"
+                                />
+                            </Flex>
+                            <button className="kpi-item-edit">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                    <div className="kpi-item">
+                        <div className="kpi-item-top">
+                            <h2 className="kpi-item-title">Nghiên cứu</h2>
+                            <p className="kpi-item-target">10 mục tiêu</p>
+                        </div>
+                        <hr />
+                        <div className="kpi-item-bottom">
+                            <Flex
+                                vertical
+                                gap="small"
+                                style={{
+                                    width: "100%",
+                                }}
+                            >
+                                <Progress
                                     percent={50}
                                     size="small"
                                     status="active"
-                                /> */}
-                                </Flex>
-                                <button className="kpi-item-edit">Chỉnh sửa</button>
-                            </div>
+                                    strokeColor="#1814f3"
+                                />
+                            </Flex>
+                            <button className="kpi-item-edit">Chỉnh sửa</button>
                         </div>
-                    ))}
+                    </div>
                 </div>
                 <Tabs
                     items={items}
