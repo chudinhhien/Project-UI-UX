@@ -23,6 +23,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
+import { Link } from "react-router-dom";
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -166,7 +167,7 @@ const ManageKPI = () => {
                     </Col>
                 </Row>
                 <div className="kpi-list">
-                    <div className="kpi-item">
+                    <Link className="kpi-item" to="/manage-kpi/1">
                         <div className="kpi-item-top">
                             <h2 className="kpi-item-title">Giảng dạy</h2>
                             <p className="kpi-item-target">10 mục tiêu</p>
@@ -193,7 +194,7 @@ const ManageKPI = () => {
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
                         </div>
-                    </div>
+                    </Link>
                     <div className="kpi-item">
                         <div className="kpi-item-top">
                             <h2 className="kpi-item-title">Sinh hoạt</h2>
@@ -244,7 +245,7 @@ const ManageKPI = () => {
                                 />
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
-                            
+
                         </div>
                     </div>
                 </div>
