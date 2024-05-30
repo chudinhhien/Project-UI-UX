@@ -33,11 +33,11 @@
                 font-size: 1.6rem;
                 strong {
                     font-weight: 600;
-                    color: green;
+                    color: #1713f2;
                 }
             }
             p:first-child {
-        color: #1814f2;
+                color: #1814f2;
                 font-size: 2rem;
                 font-weight: 700;
                 line-height: normal;
@@ -49,6 +49,21 @@
         }
     }
 
+    .slide-name {
+        margin-bottom: 10px;
+        color: #1814f2;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: normal;
+        // margin-left: -20px;
+    }
+
+    .slide-container {
+        display: flex;
+
+        gap: 40px;
+    }
+
     .kpi-diagram {
         height: 300px;
         background-color: #fff;
@@ -58,7 +73,7 @@
 
         padding-bottom: 50px;
         &-title {
-        color: #1814f2;
+            color: #1814f2;
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 20px;
@@ -78,7 +93,7 @@
     // }
 
     .dashboard-daytask {
-        height: 360px;
+        height: 350px;
         width: 100%;
         background-color: #ffffff;
         padding: 20px;
@@ -145,18 +160,25 @@
 .kpi-box-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: center;
 
     &-title {
         font-size: 2rem;
         margin-bottom: 10px;
         font-weight: 600;
+        margin-bottom: 20px;
     }
 
     strong {
-        color: green;
+        color: #1713f2;
         font-weight: 600;
+    }
+    span {
+        color: #718ebf;
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin-bottom: 5px;
     }
 }
 

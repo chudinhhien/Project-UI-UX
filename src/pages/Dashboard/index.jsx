@@ -52,14 +52,20 @@ const data = {
         {
             label: "Học tập",
             data: [0, 10, 20, 40, 50, 60, 70],
-            borderColor: "#7549FF",
-            backgroundColor: "#7549FF",
+            borderColor: "#1356f2",
+            backgroundColor: "#1356f2",
+        },
+        {
+            label: "Sinh hoạt",
+            data: [0, 15, 15, 30, 45, 50, 60],
+            borderColor: "#6013f2",
+            backgroundColor: "#6013f2",
         },
         {
             label: "Nghiên cứu",
-            data: [0, 20, 10, 50, 60, 65, 75],
-            borderColor: "red",
-            backgroundColor: "red",
+            data: [0, 20, 10, 50, 60, 70, 75],
+            borderColor: "#a913f2",
+            backgroundColor: "#a913f2",
         },
     ],
 };
@@ -68,14 +74,23 @@ const slideImages = [
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 1",
+        title: "Học tập",
+        currentKPI:"70",
+        lastKPI: "60"
     },
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 2",
+        title: "Sinh hoạt",
+        currentKPI:"60",
+        lastKPI: "50"
     },
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 3",
+        title: "Nghiên cứu",
+        currentKPI:"75",
+        lastKPI: "70"
     },
 ];
 
@@ -101,21 +116,15 @@ const options = {
 };
 
 const divStyle = {
-    display: "flex",
+    padding: "20px 40px",
+    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
     gap: "40px",
-    height: "200px",
+    height: "190px",
     backgroundSize: "cover",
-    // borderRadius: "15px"
 };
-
-// const spanStyle = {
-//     padding: "20px",
-//     background: "#efefef",
-//     color: "#000000",
-// };
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -187,8 +196,8 @@ const Dashboard = () => {
 
     const steps = [
         {
-            title: 'Biểu đồ theo dõi tiến độ KPI.',
-            description: 'Bạn có thể xem tiến độ hoàn thành KPI ở đây nè!.',
+            title: "Biểu đồ theo dõi tiến độ KPI.",
+            description: "Bạn có thể xem tiến độ hoàn thành KPI ở đây nè!.",
             target: () => ref1.current,
         },
         {
@@ -208,12 +217,8 @@ const Dashboard = () => {
             <Row>
                 <h1 className="dashboard-title">Dashboard</h1>
             </Row>
-            <Row gutter={40} style={{marginBottom:"0"}}>
-                <Col
-                    className="gutter-row"
-                    xs={24}
-                    md={12}
-                >
+            <Row gutter={40} style={{ marginBottom: "0" }}>
+                <Col className="gutter-row" xs={24} md={12}>
                     <Row>
                         <div className="dashboard-hello">
                             <div>
@@ -254,35 +259,50 @@ const Dashboard = () => {
                                                 backgroundImage: `url(${slideImage.url})`,
                                             }}
                                         >
-                                            <Progress
-                                                type="circle"
-                                                trailColor="#9B9AF9"
-                                                strokeColor="#1814F2"
-                                                percent={75}
-                                                strokeWidth={12}
-                                                size={150}
-                                                format={(percent) => (
-                                                    <span
-                                                        style={{
-                                                            fontSize: "18px",
-                                                            fontWeight: "bold",
-                                                            color: "#1814F2",
-                                                            textAlign: "center",
-                                                        }}
-                                                    >
-                                                        {percent}%
-                                                    </span>
-                                                )}
-                                            />
-                                            <div className="kpi-box-info">
-                                                <h3 className="kpi-box-info-title">
-                                                    Học tập
-                                                </h3>
-                                                <p>
-                                                    Tăng <strong>10%</strong> so
-                                                    với tháng trước
-                                                </p>
-                                                <p></p>
+                                            <h2 className="slide-name">
+                                                Curent KPI
+                                            </h2>
+                                            <div className="slide-container">
+                                                <Progress
+                                                    type="circle"
+                                                    // trailColor="#9B9AF9"
+                                                    strokeColor="#6664f2"
+                                                    percent={slideImage.currentKPI}
+                                                    success={{
+                                                        percent: slideImage.lastKPI,
+                                                        strokeColor: "#1713f2",
+                                                    }}
+                                                    strokeWidth={12}
+                                                    size={100}
+                                                    format={(percent) => (
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "18px",
+                                                                fontWeight:
+                                                                    "bold",
+                                                                color: "#1814F2",
+                                                                textAlign:
+                                                                    "center",
+                                                            }}
+                                                        >
+                                                            {percent}%
+                                                        </span>
+                                                    )}
+                                                />
+                                                <div className="kpi-box-info">
+                                                    <span>KPI:</span>
+                                                    <h3 className="kpi-box-info-title">
+                                                        {slideImage.title}
+                                                    </h3>
+                                                    <span>INFO: </span>
+                                                    <p>
+                                                        Tăng{" "}
+                                                        <strong>10%</strong> so
+                                                        với tháng trước
+                                                    </p>
+                                                    <p></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -291,11 +311,7 @@ const Dashboard = () => {
                         </div>
                     </Row>
                 </Col>
-                <Col
-                    className="gutter-row"
-                    xs={24}
-                    md={12}
-                >
+                <Col className="gutter-row" xs={24} md={12}>
                     <Row>
                         <div className="dashboard-calendar" ref={ref3}>
                             <Calendar
@@ -305,10 +321,10 @@ const Dashboard = () => {
                             />
                         </div>
                     </Row>
-                    <Row style={{width:"100%"}}>
+                    <Row style={{ width: "100%" }}>
                         <div className="dashboard-daytask">
                             <h3>
-                                Recent tasks for{" "}{selectedDateString}
+                                Recent tasks for {selectedDateString}
                                 {/* {moment
                                     .utc(selectedDateString)
                                     .add(1, "day")
