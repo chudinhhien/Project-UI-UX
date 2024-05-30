@@ -86,6 +86,10 @@
                     filter: brightness(0) saturate(100%) invert(28%) sepia(86%) saturate(6936%) hue-rotate(355deg) brightness(99%) contrast(123%);
                 }
             }
+            svg {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
         }
     }
     .ant-btn {
