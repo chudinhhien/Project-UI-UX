@@ -1,7 +1,9 @@
 import {
-    PlusCircleOutlined
+    PlusCircleOutlined,
+    EditOutlined,
+    DeleteOutlined
 } from '@ant-design/icons'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Breadcrumb,
     Button,
@@ -24,6 +26,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
+import { getKpis, postKpis } from '../../services/kpiService';
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -45,29 +48,20 @@ const DraggableTabNode = ({ className, ...props }) => {
 };
 
 
+
 const ManageKPI = () => {
-    const [data, setData] = useState([
-        {
-            id: 1,
-            name: "Giảng dạy",
-            quantity: 5,
-            percentage: 90,
-            targets: [
-            ]
-        },
-        {
-            id: 2,
-            name: "Sinh hoạt",
-            percentage: 70,
-            quantity: 6
-        },
-        {
-            id: 3,
-            name: "Nghiên cứu",
-            percentage: 30,
-            quantity: 10
+    const [data, setData] = useState([]);
+    const fetchData = async () => {
+        try {
+            const data1 = await getKpis();
+            setData(data1);
+        } catch (error) {
+            console.error("Error fetching KPIs:", error);
         }
-    ])
+    }
+    useEffect(() => {
+        fetchData();
+    },[])
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
@@ -135,18 +129,19 @@ const ManageKPI = () => {
                 percentage: 0,
                 target: tableData,
             };
-            console.log(newKpiTypeData);
             if (formData.name === "" || !formData.name) {
                 setIsOpenModal(false);
                 showMessage("error", "Failed to add KPI. Please try again.");
             } else {
-                setData([
-                    {
-                        id: data.length + 1,
-                        ...newKpiTypeData
-                    },
-                    ...data
-                ]);
+                const addKpi = async () => {
+                    try {
+                        await postKpis(newKpiTypeData);
+                        fetchData();
+                    } catch (error) {
+                        console.error("Error fetching KPIs:", error);
+                    }
+                }
+                addKpi();
                 setIsOpenModal(false);
                 showMessage("success", "KPI added successfully!");
             }
@@ -164,7 +159,6 @@ const ManageKPI = () => {
         setTargets([]);
     };
 
-    console.log(data);
     return (
         <div className="manage-kpi">
             {contextHolder}
@@ -201,7 +195,7 @@ const ManageKPI = () => {
                     {data.map((item, index) => (
                         <div className="kpi-item" key={index}>
                             <div className="kpi-item-top">
-                                <Link to={`/manage-kpi/${item.id}`}>
+                                <Link to={`/manage-kpi/${item.id}`} state={item}>
                                     <h2 className="kpi-item-title">{item.name}</h2>
                                 </Link>
                                 <p className="kpi-item-target">{item.quantity} mục tiêu</p>
@@ -219,10 +213,11 @@ const ManageKPI = () => {
                                         percent={item.percentage}
                                         size="small"
                                         status="active"
-                                        strokeColor="#1814f3"
+                                        strokeColor={item.percentage >= 90 ? "#14F396": item.percentage > 50 ? "#1814f3" : "#f31414"}
                                     />
                                 </Flex>
-                                <button className="kpi-item-edit">Chỉnh sửa</button>
+                                <button className="kpi-item-edit"><EditOutlined /></button>
+                                <button className="kpi-"><DeleteOutlined /></button>
                             </div>
                         </div>
                     ))}
