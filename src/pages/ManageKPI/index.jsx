@@ -176,7 +176,7 @@ const ManageKPI = () => {
                                 vertical
                                 gap="small"
                                 style={{
-                                    width: 180,
+                                    width: "100%",
                                 }}
                             >
                                 <Progress
@@ -204,7 +204,7 @@ const ManageKPI = () => {
                                 vertical
                                 gap="small"
                                 style={{
-                                    width: 180,
+                                    width: "100%",
                                 }}
                             >
                                 <Progress
@@ -232,7 +232,7 @@ const ManageKPI = () => {
                                 vertical
                                 gap="small"
                                 style={{
-                                    width: 180,
+                                    width: "100%",
                                 }}
                             >
                                 <Progress
@@ -260,7 +260,7 @@ const ManageKPI = () => {
                                 vertical
                                 gap="small"
                                 style={{
-                                    width: 180,
+                                    width: "100%",
                                 }}
                             >
                                 {/* <Progress percent={30} size="small" /> */}
