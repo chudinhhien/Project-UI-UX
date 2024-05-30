@@ -1,4 +1,4 @@
-const API_DOMAIN = "https://api-kpi-tracker.vercel.app/";
+const API_DOMAIN = "http://localhost:3001/";
 
 export const get = async (path) => {
   const response = await fetch(API_DOMAIN+path);
@@ -19,8 +19,8 @@ export const post = async (path,options) => {
   return result;
 }
 
-export const del = async(path) => {
-  const response = await fetch(API_DOMAIN + path, {
+export const del = async(path,id) => {
+  const response = await fetch(API_DOMAIN + path + "/" + id, {
     method: "DELETE"
   })
   const result = await response.json();

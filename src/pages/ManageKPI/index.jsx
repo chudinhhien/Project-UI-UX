@@ -26,7 +26,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
-import { getKpis, postKpis } from '../../services/kpiService';
+import { deleteKpiById, getKpis, postKpis } from '../../services/kpiService';
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -47,9 +47,6 @@ const DraggableTabNode = ({ className, ...props }) => {
     });
 };
 
-const deleteKpi = (id) => {
-    
-};
  
 const ManageKPI = () => {
     const [data, setData] = useState([]);
@@ -64,6 +61,10 @@ const ManageKPI = () => {
     useEffect(() => {
         fetchData();
     },[])
+    const deleteKpi = async (id) => {
+        await deleteKpiById(id);
+        fetchData();
+    };
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
