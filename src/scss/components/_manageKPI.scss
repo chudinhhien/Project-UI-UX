@@ -17,8 +17,8 @@
         padding: 15px;
         border: 1px solid #eee;
         border-radius: 15px;
-        // flex: 1;
-        width: 25%;
+        flex: 1;
+        // width: 25%;
         @include abstracts.screen(md) {
             width: calc(100vw - 60px);
         }
