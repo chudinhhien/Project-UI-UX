@@ -170,9 +170,11 @@ const ManageKPI = () => {
                     </Col>
                 </Row>
                 <div className="kpi-list">
-                    <Link className="kpi-item" to="/manage-kpi/1">
+                    <div className="kpi-item">
                         <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Giảng dạy</h2>
+                            <Link to="/manage-kpi/1">
+                                <h2 className="kpi-item-title">Giảng dạy</h2>
+                            </Link>
                             <p className="kpi-item-target">10 mục tiêu</p>
                         </div>
                         <hr />
@@ -193,7 +195,7 @@ const ManageKPI = () => {
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
                         </div>
-                    </Link>
+                    </div>
                     <div className="kpi-item">
                         <div className="kpi-item-top">
                             <h2 className="kpi-item-title">Sinh hoạt</h2>
