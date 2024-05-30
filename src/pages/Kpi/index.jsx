@@ -45,16 +45,16 @@ function Kpi() {
                 </Breadcrumb>
                 <h1 className="page-title">Giảng dạy</h1>
                 {kpis.map((item, index) => (
-                    <div className="kpi-item">
-                        <div className="kpi-item-info">
+                    <div className="item-kpi">
+                        <div className="item-kpi-info">
                             <Link
                                 to={`/manage-kpi/${id}/${item.id}`}
                                 state={{ ...item, typeKpi: typeName }}
                                 key={index}
                             >
-                                <h2 className="kpi-item-name">{item.name}</h2>
+                                <h2 className="item-kpi-name">{item.name}</h2>
                             </Link>
-                            <p className="kpi-item-desc">
+                            <p className="item-kpi-desc">
                                 Lorem, ipsum dolor sit amet consectetur
                                 adipisicing elit. Provident nostrum totam amet
                                 minima tenetur unde excepturi. Accusamus tempora
@@ -66,7 +66,7 @@ function Kpi() {
                                 dolorum.
                             </p>
                         </div>
-                        <div className="kpi-item-act">
+                        <div className="item-kpi-act">
                             <Flex
                                 vertical
                                 gap="small"
@@ -81,11 +81,11 @@ function Kpi() {
                                     status="active"
                                 />
                             </Flex>
-                            <div className="kpi-item-btn-act">
-                                <button className="kpi-item-btn">
+                            <div className="item-kpi-btn-act">
+                                <button className="item-kpi-btn">
                                     Cập nhật
                                 </button>
-                                <button className="kpi-item-btn btn-remove">
+                                <button className="item-kpi-btn btn-remove">
                                     Xóa
                                 </button>
                             </div>
