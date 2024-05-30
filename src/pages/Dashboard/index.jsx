@@ -108,7 +108,7 @@ const divStyle = {
     gap: "40px",
     height: "200px",
     backgroundSize: "cover",
-    borderRadius: "15px"
+    // borderRadius: "15px"
 };
 
 // const spanStyle = {

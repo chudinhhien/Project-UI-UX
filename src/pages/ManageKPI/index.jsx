@@ -9,6 +9,7 @@ import {
     message,
     Flex,
     Progress,
+    Modal
 } from "antd";
 import { getKpiTypes } from "../../services/kpiTypesService";
 import ModalComponent from "../../components/ModalComponent";
@@ -195,7 +196,7 @@ const ManageKPI = () => {
                     </div>
                     <div className="kpi-item">
                         <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Giảng dạy</h2>
+                            <h2 className="kpi-item-title">Sinh hoạt</h2>
                             <p className="kpi-item-target">10 mục tiêu</p>
                         </div>
                         <hr />
@@ -223,35 +224,7 @@ const ManageKPI = () => {
                     </div>
                     <div className="kpi-item">
                         <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Giảng dạy</h2>
-                            <p className="kpi-item-target">10 mục tiêu</p>
-                        </div>
-                        <hr />
-                        <div className="kpi-item-bottom">
-                            <Flex
-                                vertical
-                                gap="small"
-                                style={{
-                                    width: "100%",
-                                }}
-                            >
-                                <Progress
-                                    percent={30}
-                                    size="small"
-                                    status="active"
-                                />
-                                {/* <Progress
-                                    percent={50}
-                                    size="small"
-                                    status="active"
-                                /> */}
-                            </Flex>
-                            <button className="kpi-item-edit">Chỉnh sửa</button>
-                        </div>
-                    </div>
-                    <div className="kpi-item">
-                        <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Giảng dạy</h2>
+                            <h2 className="kpi-item-title">Nghiên cứu</h2>
                             <p className="kpi-item-target">10 mục tiêu</p>
                         </div>
                         <hr />
@@ -271,6 +244,7 @@ const ManageKPI = () => {
                                 />
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
+                            
                         </div>
                     </div>
                 </div>
