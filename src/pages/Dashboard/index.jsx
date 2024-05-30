@@ -308,11 +308,11 @@ const Dashboard = () => {
                     <Row style={{width:"100%"}}>
                         <div className="dashboard-daytask">
                             <h3>
-                                Recent tasks for{" "}
-                                {moment
+                                Recent tasks for{" "}{selectedDateString}
+                                {/* {moment
                                     .utc(selectedDateString)
                                     .add(1, "day")
-                                    .format("YYYY-MM-DD")}
+                                    .format("YYYY-MM-DD")} */}
                             </h3>
                             {console.log(selectedDateString)}
                             <div className="dashboard-list">
