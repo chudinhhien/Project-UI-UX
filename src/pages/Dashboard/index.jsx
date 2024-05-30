@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
-import { Progress, Row, Col, Checkbox, Tour } from "antd";
+import { Progress, Row, Col, Button, InputNumber, Tour } from "antd";
 import Calendar from "react-calendar";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import moment from "moment";
 import all_imgs from "../../assets/img/all_img";
-// import 'react-calendar/dist/Calendar.css';
 
 import {
     Chart as ChartJS,
@@ -118,7 +117,6 @@ const options = {
 
 const divStyle = {
     padding: "20px 40px",
-    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -131,38 +129,57 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const open = useSelector((state) => state.helpReducer);
     const [date, setDate] = useState(new Date());
+    const [editingTaskIndex, setEditingTaskIndex] = useState(null);
 
     const [tasks, setTasks] = useState({
         "2024-05-20": [
-            { task: "Task 1", completed: false },
-            { task: "Task 2", completed: false },
-        ],
-        "2024-05-21": [
-            { task: "Task 3", completed: true },
-            { task: "Task 4", completed: false },
-        ],
-        "2024-05-22": [
-            { task: "Task 5", completed: false },
-            { task: "Task 6", completed: false },
-        ],
-        "2024-05-23": [
-            { task: "Task 7", completed: false },
-            { task: "Task 8", completed: false },
-        ],
-        "2024-05-24": [
-            { task: "Task 9", completed: false },
-            { task: "Task 10", completed: false },
-        ],
+            { "task": "Task 1", "current": 50, "desire": 80 },
+            { "task": "Task 2", "current": 30, "desire": 60 }
+          ],
+          "2024-05-21": [
+            { "task": "Task 3", "current": 80, "desire": 90 },
+            { "task": "Task 4", "current": 20, "desire": 40 }
+          ],
+          "2024-05-22": [
+            { "task": "Task 5", "current": 10, "desire": 30 },
+            { "task": "Task 6", "current": 40, "desire": 70 }
+          ],
+          "2024-05-23": [
+            { "task": "Task 7", "current": 25, "desire": 50 },
+            { "task": "Task 8", "current": 60, "desire": 80 },
+            { "task": "Task 7", "current": 25, "desire": 50 },
+            { "task": "Task 8", "current": 60, "desire": 80 },
+            { "task": "Task 7", "current": 25, "desire": 50 },
+            { "task": "Task 8", "current": 60, "desire": 80 },
+            { "task": "Task 7", "current": 25, "desire": 50 },
+            { "task": "Task 8", "current": 60, "desire": 80 },
+            { "task": "Task 7", "current": 25, "desire": 50 },
+            { "task": "Task 8", "current": 60, "desire": 80 },
+          ],
+          "2024-05-24": [
+            { "task": "Task 9", "current": 75, "desire": 90 },
+            { "task": "Task 10", "current": 50, "desire": 80 }
+          ]
     });
 
-    const handleTaskChange = (dateString, index) => {
-        console.log(dateString);
+    const [tempPercentage, setTempPercentage] = useState(null);
+
+    const handleTaskChange = (value) => {
+        setTempPercentage(value);
+    };
+
+    const handleSaveTask = (dateString, index) => {
         setTasks((prevTasks) => {
             const newTasks = { ...prevTasks };
-            newTasks[dateString][index].completed =
-                !newTasks[dateString][index].completed;
+            newTasks[dateString][index].current = tempPercentage;
             return newTasks;
         });
+        setEditingTaskIndex(null);
+    };
+
+    const handleEditTask = (index, currentPercentage) => {
+        setEditingTaskIndex(index);
+        setTempPercentage(currentPercentage);
     };
 
     const selectedDateString = moment.utc(date).format("YYYY-MM-DD");
@@ -177,19 +194,19 @@ const Dashboard = () => {
             const isPastDate =
                 date < currentDate &&
                 date.toDateString() !== currentDate.toDateString();
-            if (isPastDate && dayTasks.some((task) => !task.completed)) {
+    
+            const allTasksCompleted = dayTasks.every((task) => task.current >= task.desire);
+    
+            if (isPastDate && !allTasksCompleted) {
                 return "react-calendar__tile--hasIncompletePrevTasks";
             }
-            if (
-                !isPastDate &&
-                dayTasks.length > 0 &&
-                !dayTasks.every((task) => task.completed)
-            ) {
+            if (!isPastDate && dayTasks.length > 0 && !allTasksCompleted) {
                 return "react-calendar__tile--hasTasks";
             }
         }
         return null;
     };
+    
 
     const ref1 = useRef(null);
     const ref2 = useRef(null);
@@ -236,7 +253,7 @@ const Dashboard = () => {
                     <Row>
                         <div className="kpi-diagram" ref={ref1}>
                             <h2 className="kpi-diagram-title">
-                            Monthly KPI Progress
+                                Monthly KPI Progress
                             </h2>
                             <Line
                                 options={{
@@ -266,7 +283,6 @@ const Dashboard = () => {
                                             <div className="slide-container">
                                                 <Progress
                                                     type="circle"
-                                                    // trailColor="#9B9AF9"
                                                     strokeColor="#6664f2"
                                                     percent={slideImage.currentKPI}
                                                     success={{
@@ -326,12 +342,7 @@ const Dashboard = () => {
                         <div className="dashboard-daytask">
                             <h3>
                                 Recent tasks for {selectedDateString}
-                                {/* {moment
-                                    .utc(selectedDateString)
-                                    .add(1, "day")
-                                    .format("YYYY-MM-DD")} */}
                             </h3>
-                            {console.log(selectedDateString)}
                             <div className="dashboard-list">
                                 {selectedTasks.length === 0 ? (
                                     <p>No tasks for this day.</p>
@@ -340,22 +351,55 @@ const Dashboard = () => {
                                         <div
                                             key={index}
                                             className={`dashboard-task ${
-                                                task.completed
+                                                task.current >= task.desire
                                                     ? "completed"
                                                     : ""
                                             }`}
                                         >
-                                            <Checkbox
-                                                checked={task.completed}
-                                                onChange={() =>
-                                                    handleTaskChange(
-                                                        selectedDateString,
-                                                        index
-                                                    )
-                                                }
-                                            >
-                                                {task.task}
-                                            </Checkbox>
+                                            <div className="task-info">
+                                                <span className="task-info-name">{task.task}</span>
+                                                <span>
+                                                <InputNumber
+                                                    className={`custom-input-number ${
+                                                        editingTaskIndex !== index ? "non-editable" : "editable"
+                                                    }`}
+                                                    min={0}
+                                                    max={100}
+                                                    value={
+                                                        editingTaskIndex === index
+                                                            ? tempPercentage
+                                                            : task.current
+                                                    }
+                                                    disabled={editingTaskIndex !== index}
+                                                    onChange={handleTaskChange}
+                                                />/&nbsp;&nbsp;&nbsp;&nbsp;{task.desire}
+                                                </span>
+                                            </div>
+                                            {editingTaskIndex === index ? (
+                                                <Button
+                                                    type="primary"
+                                                    onClick={() =>
+                                                        handleSaveTask(
+                                                            selectedDateString,
+                                                            index
+                                                        )
+                                                    }
+                                                >
+                                                    Save
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    type="default"
+                                                    onClick={() =>
+                                                        handleEditTask(
+                                                            index,
+                                                            task.current
+                                                        )
+                                                    }
+                                                >
+                                                    Update
+                                                </Button>
+                                            )}
                                         </div>
                                     ))
                                 )}
