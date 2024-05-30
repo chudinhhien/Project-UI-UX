@@ -9,7 +9,6 @@ import {
     message,
     Flex,
     Progress,
-    Modal
 } from "antd";
 import ModalComponent from "../../components/ModalComponent";
 import { DndContext, PointerSensor, useSensor } from "@dnd-kit/core";
@@ -148,12 +147,15 @@ const ManageKPI = () => {
             {contextHolder}
             <div
                 className="custom-container"
-                style={{ backgroundColor: "#E6E5FE" }}
+                style={{ backgroundColor: "#F5F6FA" }}
             >
+                <Row>
+                    <h1>Manage KPI</h1>
+                </Row>
                 <Row
                     justify="space-between"
                     align="middle"
-                    style={{ marginTop: "20px", marginBottom: "20px" }}
+                    style={{ marginTop: "5px", marginBottom: "10px" }}
                 >
                     <Col>
                         <Breadcrumb>
@@ -171,11 +173,10 @@ const ManageKPI = () => {
                 </Row>
                 <div className="kpi-list">
                     {kpis.map((kpi, index) => (
-                        <Link className="kpi-item" 
-                        to={`/manage-kpi/${kpi.link}`}
-                            state={ {...kpi} } key={index}>
+                        <div className="kpi-item" key={index}>
                             <div className="kpi-item-top">
-                                <h2 className="kpi-item-title">{kpi.category}</h2>
+                                <Link className="kpi-item-title"  to={`/manage-kpi/${kpi.link}`}
+                            state={ {...kpi} } >{kpi.category}</Link>
                                 <p className="kpi-item-target">10 mục tiêu</p>
                             </div>
                             <hr />
@@ -200,7 +201,7 @@ const ManageKPI = () => {
                                 </Flex>
                                 <button className="kpi-item-edit">Chỉnh sửa</button>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
                 <Tabs

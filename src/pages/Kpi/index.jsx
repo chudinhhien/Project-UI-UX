@@ -13,7 +13,6 @@
 //         cursor: "pointer", // Thiết lập kiểu con trỏ
 //     };
 //     console.log(kpi);
-
 //     return (
 //         <>
 //             <div
@@ -79,5 +78,4 @@
 //         </>
 //     );
 // }
-
 // export default Kpi;
