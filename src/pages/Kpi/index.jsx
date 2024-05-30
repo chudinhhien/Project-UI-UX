@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { getKpis } from "../../services/kpiService";
+import { Link, useLocation } from "react-router-dom";
 import { Breadcrumb, Flex, Progress } from "antd";
-import { getKpiType } from "../../services/kpiTypesService";
+
 
 function Kpi() {
-    let { id } = useParams();
-    const [kpis, setKpis] = useState([]);
-    const [kpiType, setKpiType] = useState([]);
-
-    useEffect(() => {
-        const fetchKpis = async () => {
-            try {
-                const data1 = await getKpiType(id);
-                const data = await getKpis(id);
-                setKpis(data);
-                setKpiType(data1);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-        fetchKpis();
-    }, [id]);
-
-    let typeName = kpiType.length > 0 ? kpiType[0].name : "";
-
+    const location = useLocation();
+    const { state } = location;
+    console.log(state);
     const breadcrumbStyle = {
         marginBottom: "20px",
         marginTop: "25px",
@@ -40,15 +21,13 @@ function Kpi() {
                     <Breadcrumb.Item>
                         <Link to="/manage-kpi">Manage KPI</Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Giảng dạy</Breadcrumb.Item>
+                    <Breadcrumb.Item>{state.name}</Breadcrumb.Item>
                 </Breadcrumb>
-                <h1 className="page-title">Giảng dạy</h1>
-                {kpis.map((item, index) => (
+                <h1 className="page-title">{state.name}</h1>
+                {state.kpis && state.kpis.map((item, index) => (
                     <div className="item-kpi">
                         <div className="item-kpi-info">
                             <Link
-                                to={`/manage-kpi/${id}/${item.id}`}
-                                state={{ ...item, typeKpi: typeName }}
                                 key={index}
                             >
                                 <h2 className="item-kpi-name">{item.name}</h2>
