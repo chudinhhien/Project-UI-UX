@@ -235,7 +235,7 @@ const Dashboard = () => {
                     <Row>
                         <div className="kpi-diagram" ref={ref1}>
                             <h2 className="kpi-diagram-title">
-                                Weekly KPI Progress
+                            Monthly KPI Progress
                             </h2>
                             <Line
                                 options={{

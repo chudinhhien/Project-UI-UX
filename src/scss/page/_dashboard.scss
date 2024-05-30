@@ -2,7 +2,7 @@
 
 .dashboard {
     min-height: calc(100vh - 70px);
-    background-color: #e6e5fe;
+    background-color: #F5F6FA;
     padding: 20px 20px 0 20px;
 
     .ant-row {
@@ -33,7 +33,7 @@
                 font-size: 1.6rem;
                 strong {
                     font-weight: 600;
-                    color: #1713f2;
+                    color: green;
                 }
             }
             p:first-child {
@@ -171,7 +171,7 @@
     }
 
     strong {
-        color: #1713f2;
+        color: green;
         font-weight: 600;
     }
     span {

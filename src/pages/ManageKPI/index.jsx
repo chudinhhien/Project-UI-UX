@@ -9,7 +9,7 @@ import {
     message,
     Flex,
     Progress,
-    Modal
+    Modal,
 } from "antd";
 import { getKpiTypes } from "../../services/kpiTypesService";
 import ModalComponent from "../../components/ModalComponent";
@@ -145,12 +145,15 @@ const ManageKPI = () => {
             {contextHolder}
             <div
                 className="custom-container"
-                style={{ backgroundColor: "#E6E5FE" }}
+                style={{ backgroundColor: "#F5F6FA" }}
             >
+                <Row>
+                    <h1>Manage KPI</h1>
+                </Row>
                 <Row
                     justify="space-between"
                     align="middle"
-                    style={{ marginTop: "20px", marginBottom: "20px" }}
+                    style={{ marginTop: "5px", marginBottom: "10px" }}
                 >
                     <Col>
                         <Breadcrumb>
@@ -185,12 +188,8 @@ const ManageKPI = () => {
                                     percent={30}
                                     size="small"
                                     status="active"
+                                    strokeColor="#1814f3"
                                 />
-                                {/* <Progress
-                                    percent={50}
-                                    size="small"
-                                    status="active"
-                                /> */}
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
                         </div>
@@ -213,12 +212,8 @@ const ManageKPI = () => {
                                     percent={30}
                                     size="small"
                                     status="active"
+                                    strokeColor="#1814f3"
                                 />
-                                {/* <Progress
-                                    percent={50}
-                                    size="small"
-                                    status="active"
-                                /> */}
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
                         </div>
@@ -237,15 +232,14 @@ const ManageKPI = () => {
                                     width: "100%",
                                 }}
                             >
-                                {/* <Progress percent={30} size="small" /> */}
                                 <Progress
                                     percent={50}
                                     size="small"
                                     status="active"
+                                    strokeColor="#1814f3"
                                 />
                             </Flex>
                             <button className="kpi-item-edit">Chỉnh sửa</button>
-
                         </div>
                     </div>
                 </div>
