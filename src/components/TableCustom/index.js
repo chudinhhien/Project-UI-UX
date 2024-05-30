@@ -1,9 +1,17 @@
 import { RightOutlined, DownOutlined } from '@ant-design/icons';
 import { Progress, Table } from 'antd';
 import React from 'react';
-import './TableCustom.scss'; // Make sure to create and import the CSS file
+import './TableCustom.scss'; // Ensure to create and import the CSS file
 
 function TableCustom() {
+  const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
+
+  const toggleExpand = (key) => {
+    setExpandedRowKeys((prev) =>
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+    );
+  };
+
   const columns = [
     {
       title: 'Name',
@@ -16,10 +24,12 @@ function TableCustom() {
     {
       title: 'Deadline',
       dataIndex: 'deadline',
+      className: 'ant-table-cell-deadline', // Add className for targeting in CSS
     },
     {
       title: 'Ưu tiên',
       dataIndex: 'prioritize',
+      className: 'ant-table-cell-prioritize', // Add className for targeting in CSS
     },
     {
       title: '',
@@ -31,14 +41,6 @@ function TableCustom() {
       ),
     },
   ];
-
-  const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
-
-  const toggleExpand = (key) => {
-    setExpandedRowKeys((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
-  };
 
   const data = [
     {

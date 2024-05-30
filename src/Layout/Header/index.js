@@ -10,14 +10,16 @@ import { Avatar, Button, Dropdown, Layout, Space, theme, Grid } from 'antd';
 import { Link } from 'react-router-dom';
 import NotificationButton from '../../components/NotificationButton';
 import './Header.scss';
-import all_imgs from '../../assets/img/all_img';
 import Language from '../../components/Language';
 import Help from '../../components/Help';
+import { useDispatch } from 'react-redux';
+import { changeSider } from '../../actions/Sider';
 
 const { Header: AntHeader } = Layout;
 const { useBreakpoint } = Grid;
 
 function Header(props) {
+  const dispatch = useDispatch();
   const screen = useBreakpoint();
   const {
     token: { colorBgContainer },
@@ -31,10 +33,14 @@ function Header(props) {
     }
   };
 
+  const handlePersonalInfoClick = () => {
+    dispatch(changeSider("4"));
+  };
+
   const items = [
     {
       label: (
-        <Link to="/setting">
+        <Link to="/setting" onClick={handlePersonalInfoClick}>
           <Space>
             <UserOutlined />
             <div>Thông tin cá nhân</div>
@@ -89,9 +95,6 @@ function Header(props) {
           <div className="actions__notification">
             <NotificationButton />
           </div>
-          {screen.sm && <div className="actions__language">
-            <img src={all_imgs.england} alt="england" />
-          </div>}
           <Language />
           <Dropdown menu={{ items }} trigger={['click']}>
             <button
