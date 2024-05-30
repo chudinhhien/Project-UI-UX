@@ -35,7 +35,6 @@ function Kpi() {
         <>
             <div
                 className="custom-container"
-                style={{ backgroundColor: "#E6E5FE" }}
             >
                 <Breadcrumb separator=">" style={breadcrumbStyle}>
                     <Breadcrumb.Item>
