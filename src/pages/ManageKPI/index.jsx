@@ -47,8 +47,10 @@ const DraggableTabNode = ({ className, ...props }) => {
     });
 };
 
-
-
+const deleteKpi = (id) => {
+    
+};
+ 
 const ManageKPI = () => {
     const [data, setData] = useState([]);
     const fetchData = async () => {
@@ -217,7 +219,7 @@ const ManageKPI = () => {
                                     />
                                 </Flex>
                                 <button className="kpi-item-edit"><EditOutlined /></button>
-                                <button className="kpi-"><DeleteOutlined /></button>
+                                <button className="kpi-" onClick={() => deleteKpi(item.id)}><DeleteOutlined /></button>
                             </div>
                         </div>
                     ))}
