@@ -9,7 +9,7 @@ function MainContent() {
       <Content style={{
         // margin: '24px 16px 0 16px',
         minHeight: 400,
-        background: '#E6E5FE',
+        background: '#F5F6FA',
       }}>
         <Outlet/>
       </Content>

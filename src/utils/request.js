@@ -1,7 +1,7 @@
-const API_DOMAIN = "https://api-kpi-tracker.vercel.app/";
+const API_DOMAIN = "https://api-kpi-tracker.vercel.app/kpi";
 
-export const get = async (path) => {
-  const response = await fetch(API_DOMAIN + path);
+export const get = async () => {
+  const response = await fetch(API_DOMAIN);
   const result = await response.json();
   return result;
 }

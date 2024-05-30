@@ -1,6 +1,6 @@
 import { get } from '../utils/request'
 
-export const getKpis = async (kpiTypesId) => {
-  let result = await get("kpi?kpiTypeId="+kpiTypesId);
+export const getKpis = async () => {
+  let result = await get();
   return result;
 }
