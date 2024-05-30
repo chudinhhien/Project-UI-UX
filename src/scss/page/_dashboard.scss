@@ -152,6 +152,11 @@
         background-color: red;
     }
 
+    .react-calendar__tile--active::after {
+        background-color: #fff !important;
+
+    }
+
     .dashboard-task.completed {
         opacity: 0.5;
     }

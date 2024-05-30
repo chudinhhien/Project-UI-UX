@@ -102,7 +102,8 @@ const options = {
             labels: {
                 color: "#000",
                 font: {
-                    size: 16,
+                    size: 14,
+                    family: "Inter, sans-serif",
                 },
             },
         },
@@ -298,7 +299,7 @@ const Dashboard = () => {
                                                     <span>INFO: </span>
                                                     <p>
                                                         Tăng{" "}
-                                                        <strong>10%</strong> so
+                                                        <strong>{slideImage.currentKPI - slideImage.lastKPI}%</strong> so
                                                         với tháng trước
                                                     </p>
                                                     <p></p>
