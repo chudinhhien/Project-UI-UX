@@ -4,12 +4,14 @@ import { thunk } from 'redux-thunk';
 import helpReducer from './help';
 import helpSider from './helpSider';
 import sider from './sider';
+import modal from './modal';
 
 // Kết hợp các reducers lại
 const rootReducer = combineReducers({
   helpReducer,
   helpSider,
-  sider
+  sider,
+  modal
 });
 
 // Cấu hình middleware và Redux DevTools

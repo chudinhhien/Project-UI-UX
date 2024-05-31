@@ -5,6 +5,11 @@ export const getKpis = async () => {
   return result;
 }
 
+export const getKpi = async (id) => {
+  let result = await get("kpi/"+id);
+  return result;
+}
+
 export const postKpis = async (data) => {
   let result = await post("kpi",data);
   return result;

@@ -2,11 +2,14 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 import ModalContent from '../ModalContent';
+import { useSelector } from 'react-redux';
 
-const ModalComponent = ({ isOpenModal, handleOk, handleCancel, form, handleAddTarget , targets}) => {
+const ModalComponent = ({ isOpenModal, handleOk, handleCancel, form }) => {
+  const sampleKpi = useSelector(state => state.modal);
+  
   return (
     <Modal
-      title="Add Kpi Type"
+      title={ sampleKpi ? "Update" : "Add"}
       visible={isOpenModal}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -14,11 +17,11 @@ const ModalComponent = ({ isOpenModal, handleOk, handleCancel, form, handleAddTa
       style={{ top: 0 }}
       footer={[
         <Button key="submit" type="primary" onClick={handleOk} style={{backgroundColor: '#1814f2',color: '#ffff'}}>
-          Save KPI Type
+          { sampleKpi ? "Update" : "Create" }
         </Button>,
       ]}
     >
-      <ModalContent form={form} handleAddTarget={handleAddTarget} targets={targets}/>
+      <ModalContent form={form}/>
     </Modal>
   );
 };

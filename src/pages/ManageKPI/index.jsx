@@ -13,9 +13,11 @@ import {
     message,
     Flex,
     Progress,
+    Popconfirm,
 } from "antd";
 import ModalComponent from "../../components/ModalComponent";
 import { DndContext, PointerSensor, useSensor } from "@dnd-kit/core";
+import { useDispatch } from 'react-redux'
 import {
     arrayMove,
     horizontalListSortingStrategy,
@@ -26,7 +28,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
-import { deleteKpiById, getKpis, postKpis } from '../../services/kpiService';
+import { deleteKpiById, getKpi, getKpis, postKpis } from '../../services/kpiService';
+import { closeModal, openModal } from '../../actions/Modal';
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -47,8 +50,11 @@ const DraggableTabNode = ({ className, ...props }) => {
     });
 };
 
- 
+
+
+
 const ManageKPI = () => {
+    const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const fetchData = async () => {
         try {
@@ -60,7 +66,7 @@ const ManageKPI = () => {
     }
     useEffect(() => {
         fetchData();
-    },[])
+    }, [])
     const deleteKpi = async (id) => {
         await deleteKpiById(id);
         fetchData();
@@ -109,13 +115,6 @@ const ManageKPI = () => {
         });
     };
 
-    const handleAddTarget = () => {
-        const nameTarget = form.getFieldValue("nameTarget");
-        const unit = form.getFieldValue("unit");
-        const newTarget = { name: nameTarget, unit: unit };
-        setTargets([...targets, newTarget]);
-        form.setFieldsValue({ nameTarget: "", unit: "" });
-    };
 
     const handleOk = async () => {
         try {
@@ -126,8 +125,8 @@ const ManageKPI = () => {
             }));
 
             const newKpiTypeData = {
+                id: formData.id,
                 name: formData.name,
-                thumbnail: formData.thumbnail,
                 description: formData.description,
                 percentage: 0,
                 target: tableData,
@@ -157,11 +156,19 @@ const ManageKPI = () => {
     };
 
     const handleCancel = () => {
-        setIsOpenModal(false);
         form.resetFields();
-        setTargets([]);
+        setIsOpenModal(false);
+        dispatch(closeModal());
     };
 
+
+
+    const updateSampleKpi = async (id) => {
+        if(id === null) form.resetFields();
+        const sampleKpi1 = id && await getKpi(id);
+        dispatch(openModal(sampleKpi1));
+        setIsOpenModal(true);
+    }
     return (
         <div className="manage-kpi">
             {contextHolder}
@@ -185,7 +192,7 @@ const ManageKPI = () => {
                     <Col>
                         <Button
                             type="primary"
-                            onClick={() => setIsOpenModal(true)}
+                            onClick={() => updateSampleKpi(null)}
                         >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <PlusCircleOutlined style={{ marginRight: '5px' }} />
@@ -216,11 +223,21 @@ const ManageKPI = () => {
                                         percent={item.percentage}
                                         size="small"
                                         status="active"
-                                        strokeColor={item.percentage >= 90 ? "#14F396": item.percentage > 50 ? "#1814f3" : "#f31414"}
+                                        strokeColor={item.percentage >= 90 ? "#14F396" : item.percentage > 50 ? "#1814f3" : "#f31414"}
                                     />
                                 </Flex>
-                                <button className="kpi-item-edit"><EditOutlined /></button>
-                                <button className="kpi-" onClick={() => deleteKpi(item.id)}><DeleteOutlined /></button>
+                                <div className="kpi-item-act">
+                                    <Popconfirm
+                                        title="Are you sure to delete this KPI?"
+                                        onConfirm={() => deleteKpi(item.id)}
+                                        okText="Yes"
+                                        cancelText="No"
+                                        placement='bottom'
+                                    >
+                                        <button className="kpi-item-delete"><DeleteOutlined /></button>
+                                    </Popconfirm>
+                                    <button className="kpi-item-edit" onClick={() => updateSampleKpi(item.id)}><EditOutlined /></button>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -253,7 +270,6 @@ const ManageKPI = () => {
                     handleOk={handleOk}
                     handleCancel={handleCancel}
                     form={form}
-                    handleAddTarget={handleAddTarget}
                     targets={targets}
                 />
             </div>
