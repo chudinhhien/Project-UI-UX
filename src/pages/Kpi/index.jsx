@@ -62,7 +62,7 @@ function Kpi() {
                         <div className="item-kpi-act">
                             <Flex vertical gap="small" style={{ width: 180 }}>
                                 <Progress
-                                    percent={item.progress || 0}
+                                    percent={item.percentage}
                                     strokeWidth={8}
                                     strokeColor="#52c41a"
                                     status="active"
