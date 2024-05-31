@@ -5,6 +5,7 @@ import { Breadcrumb, Flex, Progress } from "antd";
 function Kpi() {
     const location = useLocation();
     const { state } = location;
+    const name = state.name;
     console.log(state);
     const breadcrumbStyle = {
         marginBottom: "20px",
@@ -21,14 +22,16 @@ function Kpi() {
                     <Breadcrumb.Item>
                         <Link to="/manage-kpi">Manage KPI</Link>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>{state.name}</Breadcrumb.Item>
+                    <Breadcrumb.Item>{name}</Breadcrumb.Item>
                 </Breadcrumb>
                 <h1 className="page-title">{state.name}</h1>
                 {state.kpis && state.kpis.map((item, index) => (
                     <div className="item-kpi">
                         <div className="item-kpi-info">
                             <Link
+                                to={`/manage-kpi/${state.id}/${item.id}`}
                                 key={index}
+                                state={{...item,typeId: state.id}}
                             >
                                 <h2 className="item-kpi-name">{item.name}</h2>
                             </Link>

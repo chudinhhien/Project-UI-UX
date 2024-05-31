@@ -28,7 +28,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
-import { deleteKpiById, getKpi, getKpis, postKpis } from '../../services/kpiService';
+import { deleteKpiById, getKpi, getKpis, postKpis, updateKpi } from '../../services/kpiService';
 import { closeModal, openModal } from '../../actions/Modal';
 
 const DraggableTabNode = ({ className, ...props }) => {
@@ -70,6 +70,7 @@ const ManageKPI = () => {
     const deleteKpi = async (id) => {
         await deleteKpiById(id);
         fetchData();
+        showMessage("success","Delete Successful!")
     };
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
@@ -119,17 +120,14 @@ const ManageKPI = () => {
     const handleOk = async () => {
         try {
             const formData = form.getFieldsValue();
-            const tableData = targets.map((target, index) => ({
-                ...target,
-                key: index,
-            }));
+            console.log(formData);
 
             const newKpiTypeData = {
                 id: formData.id,
                 name: formData.name,
                 description: formData.description,
                 percentage: 0,
-                target: tableData,
+                target: formData.target,
             };
             if (formData.name === "" || !formData.name) {
                 setIsOpenModal(false);
@@ -137,7 +135,11 @@ const ManageKPI = () => {
             } else {
                 const addKpi = async () => {
                     try {
-                        await postKpis(newKpiTypeData);
+                        if (newKpiTypeData.id) {
+                            await updateKpi(newKpiTypeData);
+                        } else {
+                            await postKpis(newKpiTypeData);
+                        }
                         fetchData();
                     } catch (error) {
                         console.error("Error fetching KPIs:", error);

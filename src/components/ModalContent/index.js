@@ -31,7 +31,14 @@ const ModalContent = ({ form }) => {
   };
 
   useEffect(() => {
-    form.setFieldsValue({ target: targets }); // Cập nhật giá trị của trường 'target' trong form khi có thay đổi trong state
+    if (sampleKpi) {
+      form.setFieldsValue(sampleKpi);
+      setTargets(sampleKpi.target || []);
+    }
+  }, [sampleKpi, form]);
+
+  useEffect(() => {
+    form.setFieldsValue({ target: targets });
   }, [targets, form]);
 
   return (
