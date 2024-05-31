@@ -12,7 +12,7 @@ const { Sider: AntSider } = Layout;
 const { useBreakpoint } = Grid;
 
 function Sider(props) {
-    const [selectedKeys, setSelectedKeys] = useState([]);
+    const [selectedKeys, setSelectedKeys] = useState("1");
     const checked = useSelector(state => state.sider);
     const dispatch = useDispatch();
     const screen = useBreakpoint();
@@ -53,7 +53,7 @@ function Sider(props) {
             {screen.sm ? (
                 <AntSider width={250} trigger={null} collapsed={props.collapsed}>
                     <Logo collapsed={props.collapsed} />
-                    <Menu mode="inline" theme="dark" selectedKeys={selectedKeys}>
+                    <Menu mode="inline" theme="dark" selectedKeys={selectedKeys} defaultSelectedKeys={["1"]}>
                         {item.map((menuItem) => (
                             <Menu.Item key={menuItem.key} icon={menuItem.icon} onClick={() => handleMenuItemClick(menuItem.key)}>
                                 <Link to={menuItem.url} ref={menuItem.label === 'Dashboard' ? ref1 : menuItem.label === 'Manage KPI' ? ref2 : ref3}>
