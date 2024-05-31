@@ -1,6 +1,26 @@
-import { get } from '../utils/request'
+import { del, get, patch, post } from '../utils/request'
 
 export const getKpis = async () => {
-  let result = await get();
+  let result = await get("kpi");
+  return result;
+}
+
+export const getKpi = async (id) => {
+  let result = await get("kpi/"+id);
+  return result;
+}
+
+export const postKpis = async (data) => {
+  let result = await post("kpi",data);
+  return result;
+}
+
+export const deleteKpiById = async (id) => {
+  let result = await del("kpi",id);
+  return result;
+}
+
+export const updateKpi = async (data) => {
+  let result = await patch("kpi/"+ data.id,data);
   return result;
 }

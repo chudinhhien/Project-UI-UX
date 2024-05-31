@@ -6,6 +6,10 @@ import index_icon_3 from './index_icon_3.svg'
 import bell from './bell.svg'
 import login from './login.svg'
 import reg from './reg.svg'
+import quizlet from './quizlet.png'
+import qldt from './qldt.jpg'
+import schooler from './schooler.png'
+import load from './load.png'
 
 const all_icons = {
     logo,
@@ -16,6 +20,10 @@ const all_icons = {
     bell,
     login,
     reg,
+    quizlet,
+    qldt,
+    schooler,
+    load
 };
 
 export default all_icons;

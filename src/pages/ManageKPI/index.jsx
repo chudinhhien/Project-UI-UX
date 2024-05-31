@@ -1,5 +1,9 @@
-// ManageKPI.js
-import React, { useState, useEffect } from "react";
+import {
+    PlusCircleOutlined,
+    EditOutlined,
+    DeleteOutlined
+} from '@ant-design/icons'
+import React, { useEffect, useState } from "react";
 import {
     Breadcrumb,
     Button,
@@ -9,11 +13,11 @@ import {
     message,
     Flex,
     Progress,
-    Modal,
+    Popconfirm,
 } from "antd";
-import { getKpiTypes } from "../../services/kpiTypesService";
 import ModalComponent from "../../components/ModalComponent";
 import { DndContext, PointerSensor, useSensor } from "@dnd-kit/core";
+import { useDispatch } from 'react-redux'
 import {
     arrayMove,
     horizontalListSortingStrategy,
@@ -24,6 +28,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import TableCustom from "../../components/TableCustom";
 import { Link } from "react-router-dom";
+import { deleteKpiById, getKpi, getKpis, postKpis, updateKpi } from '../../services/kpiService';
+import { closeModal, openModal } from '../../actions/Modal';
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -44,9 +50,29 @@ const DraggableTabNode = ({ className, ...props }) => {
     });
 };
 
+
+
+
 const ManageKPI = () => {
+    const dispatch = useDispatch();
+    const [data, setData] = useState([]);
+    const fetchData = async () => {
+        try {
+            const data1 = await getKpis();
+            setData(data1);
+        } catch (error) {
+            console.error("Error fetching KPIs:", error);
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    }, [])
+    const deleteKpi = async (id) => {
+        await deleteKpiById(id);
+        fetchData();
+        showMessage("success","Delete Successful!")
+    };
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [kpiTypes, setKpiTypes] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
     const [targets, setTargets] = useState([]);
@@ -90,34 +116,39 @@ const ManageKPI = () => {
         });
     };
 
-    const handleAddTarget = () => {
-        const nameTarget = form.getFieldValue("nameTarget");
-        const unit = form.getFieldValue("unit");
-        const newTarget = { name: nameTarget, unit: unit };
-        setTargets([...targets, newTarget]);
-        form.setFieldsValue({ nameTarget: "", unit: "" });
-    };
 
     const handleOk = async () => {
         try {
             const formData = form.getFieldsValue();
-            const tableData = targets.map((target, index) => ({
-                ...target,
-                key: index,
-            }));
+            console.log(formData);
 
             const newKpiTypeData = {
+                id: formData.id,
                 name: formData.name,
-                thumbnail: formData.thumbnail,
                 description: formData.description,
-                target: tableData,
+                percentage: 0,
+                target: formData.target,
             };
-
-            //await addKpiType(newKpiTypeData);
-            setIsOpenModal(false);
-            showMessage("success", "KPI added successfully!");
-            //const updatedKpiTypes = await getKpiTypes();
-            //setKpiTypes(updatedKpiTypes);
+            if (formData.name === "" || !formData.name) {
+                setIsOpenModal(false);
+                showMessage("error", "Failed to add KPI. Please try again.");
+            } else {
+                const addKpi = async () => {
+                    try {
+                        if (newKpiTypeData.id) {
+                            await updateKpi(newKpiTypeData);
+                        } else {
+                            await postKpis(newKpiTypeData);
+                        }
+                        fetchData();
+                    } catch (error) {
+                        console.error("Error fetching KPIs:", error);
+                    }
+                }
+                addKpi();
+                setIsOpenModal(false);
+                showMessage("success", "KPI added successfully!");
+            }
             form.resetFields();
             setTargets([]);
         } catch (error) {
@@ -127,19 +158,19 @@ const ManageKPI = () => {
     };
 
     const handleCancel = () => {
-        setIsOpenModal(false);
         form.resetFields();
-        setTargets([]);
+        setIsOpenModal(false);
+        dispatch(closeModal());
     };
 
-    useEffect(() => {
-        async function fetchKpiTypes() {
-            const data = await getKpiTypes();
-            setKpiTypes(data);
-        }
-        fetchKpiTypes();
-    }, []);
 
+
+    const updateSampleKpi = async (id) => {
+        if(id === null) form.resetFields();
+        const sampleKpi1 = id && await getKpi(id);
+        dispatch(openModal(sampleKpi1));
+        setIsOpenModal(true);
+    }
     return (
         <div className="manage-kpi">
             {contextHolder}
@@ -163,87 +194,55 @@ const ManageKPI = () => {
                     <Col>
                         <Button
                             type="primary"
-                            onClick={() => setIsOpenModal(true)}
+                            onClick={() => updateSampleKpi(null)}
                         >
-                            Add KPI
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <PlusCircleOutlined style={{ marginRight: '5px' }} />
+                                <div>Add KPI</div>
+                            </div>
                         </Button>
                     </Col>
                 </Row>
                 <div className="kpi-list">
-                    <div className="kpi-item">
-                        <div className="kpi-item-top">
-                            <Link to="/manage-kpi/1">
-                                <h2 className="kpi-item-title">Giảng dạy</h2>
-                            </Link>
-                            <p className="kpi-item-target">10 mục tiêu</p>
+                    {data.map((item, index) => (
+                        <div className="kpi-item" key={index}>
+                            <div className="kpi-item-top">
+                                <Link to={`/manage-kpi/${item.id}`} state={item}>
+                                    <h2 className="kpi-item-title">{item.name}</h2>
+                                </Link>
+                                <p className="kpi-item-target">{item.quantity} mục tiêu</p>
+                            </div>
+                            <hr />
+                            <div className="kpi-item-bottom">
+                                <Flex
+                                    vertical
+                                    gap="small"
+                                    style={{
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Progress
+                                        percent={item.percentage}
+                                        size="small"
+                                        status="active"
+                                        strokeColor={item.percentage >= 90 ? "#14F396" : item.percentage > 50 ? "#1814f3" : "#f31414"}
+                                    />
+                                </Flex>
+                                <div className="kpi-item-act">
+                                    <Popconfirm
+                                        title="Are you sure to delete this KPI?"
+                                        onConfirm={() => deleteKpi(item.id)}
+                                        okText="Yes"
+                                        cancelText="No"
+                                        placement='bottom'
+                                    >
+                                        <button className="kpi-item-delete"><DeleteOutlined /></button>
+                                    </Popconfirm>
+                                    <button className="kpi-item-edit" onClick={() => updateSampleKpi(item.id)}><EditOutlined /></button>
+                                </div>
+                            </div>
                         </div>
-                        <hr />
-                        <div className="kpi-item-bottom">
-                            <Flex
-                                vertical
-                                gap="small"
-                                style={{
-                                    width: "100%",
-                                }}
-                            >
-                                <Progress
-                                    percent={30}
-                                    size="small"
-                                    status="active"
-                                    strokeColor="#1814f3"
-                                />
-                            </Flex>
-                            <button className="kpi-item-edit">Chỉnh sửa</button>
-                        </div>
-                    </div>
-                    <div className="kpi-item">
-                        <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Sinh hoạt</h2>
-                            <p className="kpi-item-target">10 mục tiêu</p>
-                        </div>
-                        <hr />
-                        <div className="kpi-item-bottom">
-                            <Flex
-                                vertical
-                                gap="small"
-                                style={{
-                                    width: "100%",
-                                }}
-                            >
-                                <Progress
-                                    percent={30}
-                                    size="small"
-                                    status="active"
-                                    strokeColor="#1814f3"
-                                />
-                            </Flex>
-                            <button className="kpi-item-edit">Chỉnh sửa</button>
-                        </div>
-                    </div>
-                    <div className="kpi-item">
-                        <div className="kpi-item-top">
-                            <h2 className="kpi-item-title">Nghiên cứu</h2>
-                            <p className="kpi-item-target">10 mục tiêu</p>
-                        </div>
-                        <hr />
-                        <div className="kpi-item-bottom">
-                            <Flex
-                                vertical
-                                gap="small"
-                                style={{
-                                    width: "100%",
-                                }}
-                            >
-                                <Progress
-                                    percent={50}
-                                    size="small"
-                                    status="active"
-                                    strokeColor="#1814f3"
-                                />
-                            </Flex>
-                            <button className="kpi-item-edit">Chỉnh sửa</button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <Tabs
                     items={items}
@@ -273,7 +272,6 @@ const ManageKPI = () => {
                     handleOk={handleOk}
                     handleCancel={handleCancel}
                     form={form}
-                    handleAddTarget={handleAddTarget}
                     targets={targets}
                 />
             </div>
