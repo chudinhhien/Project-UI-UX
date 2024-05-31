@@ -133,7 +133,7 @@ const Dashboard = () => {
     const [editingTaskIndex, setEditingTaskIndex] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const [tasks, setTasks] = useState({
+   const [tasks, setTasks] = useState({
         "2024-05-20": [
             { task: "Task 1", current: 50, desire: 80 },
             { task: "Task 2", current: 30, desire: 60 },
@@ -154,56 +154,23 @@ const Dashboard = () => {
             { task: "Task 9", current: 75, desire: 90 },
             { task: "Task 10", current: 50, desire: 80 },
         ],
+        "2024-05-31": [
+            { task: "Học từ vựng", current: 0, desire: 30 },
+        ],
     });
 
     const [tasksImport, setTasksImport] = useState({
-        "2024-05-20": [
-            { task: "Task 11", import: "schooler", done: true },
-            { task: "Task 12", import: "quizlet", done: false },
-        ],
-        "2024-05-21": [
-            { task: "Task 13", import: "qldt", done: true },
-            { task: "Task 14", import: "qldt", done: true },
-        ],
-        "2024-05-22": [
-            { task: "Task 15", import: "quizlet", done: true },
-            { task: "Task 16", import: "schooler", done: false },
-        ],
-        "2024-05-23": [
-            { task: "Task 17", import: "quizlet", done: false },
-            { task: "Task 18", import: "qldt", done: true },
-        ],
-        "2024-05-24": [
-            { task: "Task 19", import: "schooler", done: true },
-            { task: "Task 20", import: "quizlet", done: false },
-        ],
-        "2024-05-25": [
-            { task: "Task 21", import: "qldt", done: true },
-            { task: "Task 22", import: "schooler", done: false },
-        ],
-        "2024-05-26": [
-            { task: "Task 23", import: "quizlet", done: true },
-            { task: "Task 24", import: "qldt", done: false },
-        ],
-        "2024-05-27": [
-            { task: "Task 25", import: "schooler", done: true },
-            { task: "Task 26", import: "quizlet", done: false },
-        ],
-        "2024-05-28": [
-            { task: "Task 27", import: "qldt", done: true },
-            { task: "Task 28", import: "schooler", done: false },
-        ],
         "2024-05-29": [
-            { task: "Task 29", import: "quizlet", done: true },
-            { task: "Task 30", import: "qldt", done: false },
+            { task: "Học kỹ thuật phần mềm", import: "qldt", done: true },
+            { task: "Học tư tưởng HCM", import: "qldt", done: true },
         ],
         "2024-05-30": [
-            { task: "Task 31", import: "schooler", done: true },
-            { task: "Task 32", import: "quizlet", done: false },
+            { task: "Học Nhật Ngành", import: "schooler", done: true },
         ],
         "2024-05-31": [
-            { task: "Task 33", import: "qldt", done: true },
-            { task: "Task 34", import: "schooler", done: false },
+            { task: "Học AI", import: "qldt", done: true },
+            { task: "Học Nhật 5", import: "schooler", done: true },
+            { task: "Học UIUX", import: "qldt", done: false },
         ],
     });
 
@@ -227,14 +194,14 @@ const Dashboard = () => {
         setTempPercentage(currentPercentage);
     };
 
-    const selectedDateString = moment.utc(date).format("YYYY-MM-DD");
+    const selectedDateString = moment.utc(date).add(1,'day').format("YYYY-MM-DD");
 
     const selectedTasks = tasks[selectedDateString] || [];
     const selectedImportTasks = tasksImport[selectedDateString] || [];
 
     const tileClassName = ({ date, view }) => {
         if (view === "month") {
-            const dateString = moment.utc(date).format("YYYY-MM-DD");
+            const dateString = moment.utc(date).add(1,'day').format("YYYY-MM-DD");
             const dayTasks = tasks[dateString] || [];
             const importTasks = tasksImport[dateString] || [];
 
@@ -265,11 +232,33 @@ const Dashboard = () => {
         return null;
     };
 
+    // const handleShowStatus = () => {
+
+    //     setLoading(true);
+    //     setTimeout(() => {
+    //         setLoading(false);
+    //     }, 2000);
+    // };
     const handleShowStatus = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
+        // Find the task index first to ensure it exists before setting loading state
+        const taskIndex = tasksImport["2024-05-31"].findIndex(
+            task => task.task === "Học UIUX"
+        );
+
+        if (taskIndex !== -1) {
+            setLoading(true);
+            setTimeout(() => {
+                // Clone the previous state
+                const newTasksImport = { ...tasksImport };
+
+                // Update the specific task's done status
+                newTasksImport["2024-05-31"][taskIndex].done = true;
+
+                // Update the state
+                setTasksImport(newTasksImport);
+                setLoading(false);
+            }, 2000);
+        }
     };
 
     const ref1 = useRef(null);
@@ -338,7 +327,7 @@ const Dashboard = () => {
                                         <div
                                             style={{
                                                 ...divStyle,
-                                                backgroundImage: `url(${slideImage.url})`,
+                                                backgroundImage: (`url(${slideImage.url}`),
                                             }}
                                         >
                                             <h2 className="slide-name">
