@@ -116,20 +116,22 @@ function KpiDetail() {
                             <h2 className="kpi-detail-criterion-title">Criterions list</h2>
                         </Row>
                         <Row style={{ padding: "12px 40px 12px 16px" }}>
-                            <Col span={6} className="kpi-detail-table-name">Name of criterion</Col>
-                            <Col span={6} className="kpi-detail-table-name">Current</Col>
-                            <Col span={6} className="kpi-detail-table-name">Goal</Col>
-                            <Col span={6} className="kpi-detail-table-name">Unit</Col>
+                            <Col span={5} className="kpi-detail-table-name">Name of criterion</Col>
+                            <Col span={5} className="kpi-detail-table-name">Current</Col>
+                            <Col span={5} className="kpi-detail-table-name">Goal</Col>
+                            <Col span={5} className="kpi-detail-table-name">Unit</Col>
+                            <Col span={4} className="kpi-detail-table-name">Weight</Col>
                         </Row>
                         <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
                             {state.target.map((item, index) => (
                                 <Panel
                                     header={
                                         <Row>
-                                            <Col span={6}>{item.name}</Col>
-                                            <Col span={6}>{item.current}</Col>
-                                            <Col span={6}>{item.goal}</Col>
-                                            <Col span={6}>{item.unit}</Col>
+                                            <Col span={5}>{item.name}</Col>
+                                            <Col span={5}>{item.current}</Col>
+                                            <Col span={5}>{item.goal}</Col>
+                                            <Col span={5}>{item.unit}</Col>
+                                            <Col span={4}>{item.weight}</Col>
                                         </Row>
                                     }
                                     key={index + 1}
