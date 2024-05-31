@@ -104,8 +104,8 @@ function Header(props) {
               <Space>
                 <Avatar size={40} />
                 {screen.sm && <div className="info">
-                  <div className="info__name">Chu Đình Hiển</div>
-                  <div className="info__role">Sinh viên</div>
+                  <div className="info__name">Vũ Thị Hương Giang</div>
+                  <div className="info__role">Lecturer</div>
                 </div>}
                 <DownOutlined />
               </Space>
