@@ -20,18 +20,6 @@ export const item = [
     url: url + '/manage-kpi'
   },
   {
-    key: '3',
-    icon: <UploadOutlined />,
-    label: 'Tracking',
-    url: url + '/tracking'
-  },
-  {
-    key: '5',
-    icon: <CalendarOutlined />,
-    label: 'Calendar',
-    url: url + '/calendar'
-  },
-  {
     key: '4',
     icon: <SettingFilled />,
     label: 'Setting',

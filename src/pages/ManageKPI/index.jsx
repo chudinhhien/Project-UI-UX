@@ -80,17 +80,17 @@ const ManageKPI = () => {
     const [items, setItems] = useState([
         {
             key: "1",
-            label: "Tất cả",
+            label: "All",
             children: <TableCustom />,
         },
         {
             key: "2",
-            label: "Hoàn thành",
+            label: "Completed",
             children: "Content of Tab Pane 2",
         },
         {
             key: "3",
-            label: "Chưa hoàn thành",
+            label: "No Completed",
             children: "Content of Tab Pane 3",
         },
     ]);
@@ -198,7 +198,7 @@ const ManageKPI = () => {
                         >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <PlusCircleOutlined style={{ marginRight: '5px' }} />
-                                <div>Add KPI</div>
+                                <div>Add KPI template</div>
                             </div>
                         </Button>
                     </Col>
@@ -210,7 +210,7 @@ const ManageKPI = () => {
                                 <Link to={`/manage-kpi/${item.id}`} state={item}>
                                     <h2 className="kpi-item-title">{item.name}</h2>
                                 </Link>
-                                <p className="kpi-item-target">{item.quantity} mục tiêu</p>
+                                <p className="kpi-item-target">{item.quantity} KPIs</p>
                             </div>
                             <hr />
                             <div className="kpi-item-bottom">

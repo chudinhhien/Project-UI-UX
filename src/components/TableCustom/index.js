@@ -27,7 +27,7 @@ function TableCustom() {
       className: 'ant-table-cell-deadline', // Add className for targeting in CSS
     },
     {
-      title: 'Ưu tiên',
+      title: 'priority',
       dataIndex: 'prioritize',
       className: 'ant-table-cell-prioritize', // Add className for targeting in CSS
     },
@@ -48,7 +48,7 @@ function TableCustom() {
       name: 'Học từ vựng N2',
       progress: <Progress percent={100} size="small" />,
       deadline: '01/06/2024',
-      prioritize: 'Trung bình',
+      prioritize: 'Medium',
       description: 'This is the detailed description of the task Học từ vựng N2.',
     },
     {
@@ -56,7 +56,7 @@ function TableCustom() {
       name: 'Task 2',
       progress: <Progress percent={50} size="small" />,
       deadline: '10/07/2024',
-      prioritize: 'Cao',
+      prioritize: 'High',
       description: 'This is the detailed description of Task 2.',
     },
   ];
