@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
-import { Progress, Row, Col, Button, InputNumber, Tour } from "antd";
+import { Progress, Row, Col, Button, InputNumber, Tour, Spin } from "antd";
 import Calendar from "react-calendar";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import moment from "moment";
 import all_imgs from "../../assets/img/all_img";
+import all_icons from "./../../assets/icon/all_icon";
 
 import {
     Chart as ChartJS,
@@ -74,22 +75,22 @@ const slideImages = [
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 1",
         title: "Học tập",
-        currentKPI:"70",
-        lastKPI: "60"
+        currentKPI: "70",
+        lastKPI: "60",
     },
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 2",
         title: "Sinh hoạt",
-        currentKPI:"60",
-        lastKPI: "50"
+        currentKPI: "60",
+        lastKPI: "50",
     },
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 3",
         title: "Nghiên cứu",
-        currentKPI:"75",
-        lastKPI: "70"
+        currentKPI: "75",
+        lastKPI: "70",
     },
 ];
 
@@ -130,36 +131,80 @@ const Dashboard = () => {
     const open = useSelector((state) => state.helpReducer);
     const [date, setDate] = useState(new Date());
     const [editingTaskIndex, setEditingTaskIndex] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const [tasks, setTasks] = useState({
         "2024-05-20": [
-            { "task": "Task 1", "current": 50, "desire": 80 },
-            { "task": "Task 2", "current": 30, "desire": 60 }
-          ],
-          "2024-05-21": [
-            { "task": "Task 3", "current": 80, "desire": 90 },
-            { "task": "Task 4", "current": 20, "desire": 40 }
-          ],
-          "2024-05-22": [
-            { "task": "Task 5", "current": 10, "desire": 30 },
-            { "task": "Task 6", "current": 40, "desire": 70 }
-          ],
-          "2024-05-23": [
-            { "task": "Task 7", "current": 25, "desire": 50 },
-            { "task": "Task 8", "current": 60, "desire": 80 },
-            { "task": "Task 7", "current": 25, "desire": 50 },
-            { "task": "Task 8", "current": 60, "desire": 80 },
-            { "task": "Task 7", "current": 25, "desire": 50 },
-            { "task": "Task 8", "current": 60, "desire": 80 },
-            { "task": "Task 7", "current": 25, "desire": 50 },
-            { "task": "Task 8", "current": 60, "desire": 80 },
-            { "task": "Task 7", "current": 25, "desire": 50 },
-            { "task": "Task 8", "current": 60, "desire": 80 },
-          ],
-          "2024-05-24": [
-            { "task": "Task 9", "current": 75, "desire": 90 },
-            { "task": "Task 10", "current": 50, "desire": 80 }
-          ]
+            { task: "Task 1", current: 50, desire: 80 },
+            { task: "Task 2", current: 30, desire: 60 },
+        ],
+        "2024-05-21": [
+            { task: "Task 3", current: 80, desire: 90 },
+            { task: "Task 4", current: 20, desire: 40 },
+        ],
+        "2024-05-22": [
+            { task: "Task 5", current: 10, desire: 30 },
+            { task: "Task 6", current: 40, desire: 70 },
+        ],
+        "2024-05-23": [
+            { task: "Task 7", current: 25, desire: 50 },
+            { task: "Task 8", current: 60, desire: 80 },
+        ],
+        "2024-05-24": [
+            { task: "Task 9", current: 75, desire: 90 },
+            { task: "Task 10", current: 50, desire: 80 },
+        ],
+    });
+
+    const [tasksImport, setTasksImport] = useState({
+        "2024-05-20": [
+            { task: "Task 11", import: "schooler", done: true },
+            { task: "Task 12", import: "quizlet", done: false },
+        ],
+        "2024-05-21": [
+            { task: "Task 13", import: "qldt", done: true },
+            { task: "Task 14", import: "qldt", done: true },
+        ],
+        "2024-05-22": [
+            { task: "Task 15", import: "quizlet", done: true },
+            { task: "Task 16", import: "schooler", done: false },
+        ],
+        "2024-05-23": [
+            { task: "Task 17", import: "quizlet", done: false },
+            { task: "Task 18", import: "qldt", done: true },
+        ],
+        "2024-05-24": [
+            { task: "Task 19", import: "schooler", done: true },
+            { task: "Task 20", import: "quizlet", done: false },
+        ],
+        "2024-05-25": [
+            { task: "Task 21", import: "qldt", done: true },
+            { task: "Task 22", import: "schooler", done: false },
+        ],
+        "2024-05-26": [
+            { task: "Task 23", import: "quizlet", done: true },
+            { task: "Task 24", import: "qldt", done: false },
+        ],
+        "2024-05-27": [
+            { task: "Task 25", import: "schooler", done: true },
+            { task: "Task 26", import: "quizlet", done: false },
+        ],
+        "2024-05-28": [
+            { task: "Task 27", import: "qldt", done: true },
+            { task: "Task 28", import: "schooler", done: false },
+        ],
+        "2024-05-29": [
+            { task: "Task 29", import: "quizlet", done: true },
+            { task: "Task 30", import: "qldt", done: false },
+        ],
+        "2024-05-30": [
+            { task: "Task 31", import: "schooler", done: true },
+            { task: "Task 32", import: "quizlet", done: false },
+        ],
+        "2024-05-31": [
+            { task: "Task 33", import: "qldt", done: true },
+            { task: "Task 34", import: "schooler", done: false },
+        ],
     });
 
     const [tempPercentage, setTempPercentage] = useState(null);
@@ -185,28 +230,47 @@ const Dashboard = () => {
     const selectedDateString = moment.utc(date).format("YYYY-MM-DD");
 
     const selectedTasks = tasks[selectedDateString] || [];
+    const selectedImportTasks = tasksImport[selectedDateString] || [];
 
     const tileClassName = ({ date, view }) => {
         if (view === "month") {
             const dateString = moment.utc(date).format("YYYY-MM-DD");
             const dayTasks = tasks[dateString] || [];
+            const importTasks = tasksImport[dateString] || [];
+
+            // Combine both tasks and importTasks
+            const allTasks = [...dayTasks, ...importTasks];
+
             const currentDate = new Date();
             const isPastDate =
                 date < currentDate &&
                 date.toDateString() !== currentDate.toDateString();
-    
-            const allTasksCompleted = dayTasks.every((task) => task.current >= task.desire);
-    
+
+            const allTasksCompleted = allTasks.every((task) => {
+                if ("current" in task && "desire" in task) {
+                    // For tasks with current and desire properties
+                    return task.current >= task.desire;
+                }
+                // For imported tasks with done property
+                return task.done;
+            });
+
             if (isPastDate && !allTasksCompleted) {
                 return "react-calendar__tile--hasIncompletePrevTasks";
             }
-            if (!isPastDate && dayTasks.length > 0 && !allTasksCompleted) {
+            if (!isPastDate && allTasks.length > 0 && !allTasksCompleted) {
                 return "react-calendar__tile--hasTasks";
             }
         }
         return null;
     };
-    
+
+    const handleShowStatus = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    };
 
     const ref1 = useRef(null);
     const ref2 = useRef(null);
@@ -284,9 +348,12 @@ const Dashboard = () => {
                                                 <Progress
                                                     type="circle"
                                                     strokeColor="#6664f2"
-                                                    percent={slideImage.currentKPI}
+                                                    percent={
+                                                        slideImage.currentKPI
+                                                    }
                                                     success={{
-                                                        percent: slideImage.lastKPI,
+                                                        percent:
+                                                            slideImage.lastKPI,
                                                         strokeColor: "#1713f2",
                                                     }}
                                                     strokeWidth={12}
@@ -315,8 +382,12 @@ const Dashboard = () => {
                                                     <span>INFO: </span>
                                                     <p>
                                                         Tăng{" "}
-                                                        <strong>{slideImage.currentKPI - slideImage.lastKPI}%</strong> so
-                                                        với tháng trước
+                                                        <strong>
+                                                            {slideImage.currentKPI -
+                                                                slideImage.lastKPI}
+                                                            %
+                                                        </strong>{" "}
+                                                        so với tháng trước
                                                     </p>
                                                     <p></p>
                                                 </div>
@@ -340,68 +411,146 @@ const Dashboard = () => {
                     </Row>
                     <Row style={{ width: "100%" }}>
                         <div className="dashboard-daytask">
-                            <h3>
-                                Recent tasks for {selectedDateString}
-                            </h3>
+                            <div className="dashboard-daytask-title">
+                                <h3>Recent tasks for {selectedDateString}</h3>
+                                <button onClick={handleShowStatus}>
+                                    <img
+                                        src={all_icons.load}
+                                        alt="load-icon"
+                                        className="load-icon"
+                                    />
+                                </button>
+                            </div>
                             <div className="dashboard-list">
-                                {selectedTasks.length === 0 ? (
+                                {selectedTasks.length === 0 &&
+                                selectedImportTasks.length === 0 ? (
                                     <p>No tasks for this day.</p>
                                 ) : (
-                                    selectedTasks.map((task, index) => (
-                                        <div
-                                            key={index}
-                                            className={`dashboard-task ${
-                                                task.current >= task.desire
-                                                    ? "completed"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <div className="task-info">
-                                                <span className="task-info-name">{task.task}</span>
-                                                <span>
-                                                <InputNumber
-                                                    className={`custom-input-number ${
-                                                        editingTaskIndex !== index ? "non-editable" : "editable"
-                                                    }`}
-                                                    min={0}
-                                                    max={100}
-                                                    value={
-                                                        editingTaskIndex === index
-                                                            ? tempPercentage
-                                                            : task.current
-                                                    }
-                                                    disabled={editingTaskIndex !== index}
-                                                    onChange={handleTaskChange}
-                                                />/&nbsp;&nbsp;&nbsp;&nbsp;{task.desire}
-                                                </span>
+                                    <>
+                                        {selectedTasks.map((task, index) => (
+                                            <div
+                                                key={index}
+                                                className={`dashboard-task ${
+                                                    task.current >= task.desire
+                                                        ? "completed"
+                                                        : ""
+                                                }`}
+                                            >
+                                                <div className="task-info">
+                                                    <span className="task-info-name">
+                                                        {task.task}
+                                                    </span>
+                                                    <span>
+                                                        <InputNumber
+                                                            className={`custom-input-number ${
+                                                                editingTaskIndex !==
+                                                                index
+                                                                    ? "non-editable"
+                                                                    : "editable"
+                                                            }`}
+                                                            min={0}
+                                                            max={100}
+                                                            value={
+                                                                editingTaskIndex ===
+                                                                index
+                                                                    ? tempPercentage
+                                                                    : task.current
+                                                            }
+                                                            disabled={
+                                                                editingTaskIndex !==
+                                                                index
+                                                            }
+                                                            onChange={
+                                                                handleTaskChange
+                                                            }
+                                                        />
+                                                        /&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {task.desire}
+                                                    </span>
+                                                </div>
+                                                {editingTaskIndex === index ? (
+                                                    <Button
+                                                        type="primary"
+                                                        onClick={() =>
+                                                            handleSaveTask(
+                                                                selectedDateString,
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Save
+                                                    </Button>
+                                                ) : (
+                                                    <Button
+                                                        type="default"
+                                                        onClick={() =>
+                                                            handleEditTask(
+                                                                index,
+                                                                task.current
+                                                            )
+                                                        }
+                                                    >
+                                                        Update
+                                                    </Button>
+                                                )}
                                             </div>
-                                            {editingTaskIndex === index ? (
-                                                <Button
-                                                    type="primary"
-                                                    onClick={() =>
-                                                        handleSaveTask(
-                                                            selectedDateString,
-                                                            index
-                                                        )
-                                                    }
+                                        ))}
+                                        {selectedImportTasks.map(
+                                            (importTask, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={`dashboard-task ${
+                                                        importTask.done
+                                                            ? "completed"
+                                                            : ""
+                                                    }`}
                                                 >
-                                                    Save
-                                                </Button>
-                                            ) : (
-                                                <Button
-                                                    type="default"
-                                                    onClick={() =>
-                                                        handleEditTask(
-                                                            index,
-                                                            task.current
-                                                        )
-                                                    }
-                                                >
-                                                    Update
-                                                </Button>
-                                            )}
-                                        </div>
-                                    ))
+                                                    <div className="task-info">
+                                                        <span className="task-info-name">
+                                                            {importTask.task}
+                                                        </span>
+                                                        <span className="span-import">
+                                                            &nbsp;&nbsp;&nbsp;Import:&nbsp;&nbsp;
+                                                        </span>
+                                                        {importTask.import ===
+                                                        "schooler" ? (
+                                                            <img
+                                                                src={
+                                                                    all_icons.schooler
+                                                                }
+                                                                alt="task-info-img"
+                                                            />
+                                                        ) : importTask.import ===
+                                                          "quizlet" ? (
+                                                            <img
+                                                                src={
+                                                                    all_icons.quizlet
+                                                                }
+                                                                alt="task-info-img"
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={
+                                                                    all_icons.qldt
+                                                                }
+                                                                alt="task-info-img"
+                                                            />
+                                                        )}
+                                                        {/* <img src={all_icons} alt="task-info-img" /> */}
+                                                    </div>
+                                                    {loading ? (
+                                                        <Spin />
+                                                    ) : (
+                                                        <span>
+                                                            {importTask.done
+                                                                ? "Completed"
+                                                                : "Not completed"}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )
+                                        )}
+                                    </>
                                 )}
                             </div>
                         </div>

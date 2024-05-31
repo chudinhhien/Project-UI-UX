@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Upload, Button, Row, Col, Table } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
+import { useSelector } from 'react-redux';
 
 const columns = [
   {
@@ -16,20 +17,42 @@ const columns = [
   },
 ]
 
-const ModalContent = ({ form, handleAddTarget, targets }) => {
+const ModalContent = ({ form }) => {
+  const sampleKpi = useSelector(state => state.modal);
+  const initialTargets = sampleKpi && sampleKpi.target ? sampleKpi.target : []; // Kiểm tra xem sampleKpi và sampleKpi.target có tồn tại không
+  const [targets, setTargets] = useState(initialTargets);
+
+  const handleAddTarget = () => {
+    const nameTarget = form.getFieldValue("nameTarget");
+    const unit = form.getFieldValue("unit");
+    const newTarget = { name: nameTarget, unit: unit };
+    setTargets([...targets, newTarget]);
+    form.setFieldsValue({ nameTarget: "", unit: "" });
+  };
+
+  useEffect(() => {
+    if (sampleKpi) {
+      form.setFieldsValue(sampleKpi);
+      setTargets(sampleKpi.target || []);
+    }
+  }, [sampleKpi, form]);
+
+  useEffect(() => {
+    form.setFieldsValue({ target: targets });
+  }, [targets, form]);
+
   return (
-    <Form layout='vertical' form={form}>
+    <Form layout='vertical' form={form} initialValues={sampleKpi}>
+      <Form.Item name="id" hidden>
+        <Input />
+      </Form.Item>
       <Row gutter={[20, 10]}>
-        <Col xs={24} sm={12}>
+        <Col xs={24}>
           <Form.Item name="name" label="KPI Name:" style={{ marginBottom: 0 }}>
             <Input placeholder="Enter KPI name" />
           </Form.Item>
         </Col>
-        <Col xs={24} sm={12}>
-          <Form.Item name="thumbnail" label="Link avatar:" style={{ marginBottom: 0 }}>
-            <Input placeholder="Enter link to avatar" />
-          </Form.Item>
-        </Col>
+
         <Col xs={24}>
           <Form.Item name="description" label="Description:" style={{ marginBottom: 0 }}>
             <TextArea placeholder="Enter description" />
@@ -57,10 +80,12 @@ const ModalContent = ({ form, handleAddTarget, targets }) => {
       </Row>
       <Row justify="end" gutter={[20, 20]}>
         <Col>
-          <Button type='primary' onClick={handleAddTarget} style={{ marginBottom: '20px' }}>Add Target</Button>
+          <Button onClick={handleAddTarget} style={{ marginBottom: '20px',backgroundColor: '#1814f2',color: '#ffff' }}>Add Target</Button>
         </Col>
       </Row>
-      <Table columns={columns} dataSource={targets} />
+      <Form.Item name="target">
+        <Table columns={columns} dataSource={targets} />
+      </Form.Item>
     </Form>
   );
 };
