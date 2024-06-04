@@ -161,16 +161,16 @@ const Dashboard = () => {
 
     const [tasksImport, setTasksImport] = useState({
         "2024-05-29": [
-            { task: "Dạy kỹ thuật phần mềm", import: "qldt", done: true },
-            { task: "Dạy tư tưởng HCM", import: "qldt", done: true },
+            { task: "Học kỹ thuật phần mềm", import: "qldt", done: true },
+            { task: "Học tư tưởng HCM", import: "qldt", done: true },
         ],
         "2024-05-30": [
-            { task: "Dạy Nhật Ngành", import: "schooler", done: true },
+            { task: "Học Nhật Ngành", import: "schooler", done: true },
         ],
         "2024-05-31": [
-            { task: "Dạy AI", import: "qldt", done: true },
+            { task: "Học AI", import: "qldt", done: true },
             { task: "Học Nhật 5", import: "schooler", done: true },
-            { task: "Dạy UIUX", import: "qldt", done: false },
+            { task: "Học UIUX", import: "qldt", done: false },
         ],
     });
 

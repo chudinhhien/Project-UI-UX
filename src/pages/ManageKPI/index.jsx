@@ -26,7 +26,10 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
-import TableCustom from "../../components/TableCustom";
+import TableCustomOne from "../../components/TableCustomOne";
+import TableCustomTwo from "../../components/TableCustomTwo";
+import TableCustomThree from "../../components/TableCustomThree";
+import TableCustomFour from "../../components/TableCustomFour";
 import { Link } from "react-router-dom";
 import { deleteKpiById, getKpi, getKpis, postKpis, updateKpi } from '../../services/kpiService';
 import { closeModal, openModal } from '../../actions/Modal';
@@ -81,17 +84,22 @@ const ManageKPI = () => {
         {
             key: "1",
             label: "All",
-            children: <TableCustom />,
+            children: <TableCustomOne />,
         },
         {
             key: "2",
-            label: "Completed",
-            children: "Content of Tab Pane 2",
+            label: "Upcoming",
+            children: <TableCustomTwo />,
         },
         {
             key: "3",
+            label: "Completed",
+            children: <TableCustomThree />,
+        },
+        {
+            key: "4",
             label: "No Completed",
-            children: "Content of Tab Pane 3",
+            children: <TableCustomFour />,
         },
     ]);
     const sensor = useSensor(PointerSensor, {

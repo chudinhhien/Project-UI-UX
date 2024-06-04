@@ -1,0 +1,18 @@
+.expand-icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ant-table-row-expand-icon-cell {
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .ant-table-cell-deadline,
+    .ant-table-cell-prioritize {
+      display: none;
+    }
+  }
+  
