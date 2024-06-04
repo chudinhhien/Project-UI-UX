@@ -1,10 +1,21 @@
-const API_DOMAIN = "https://api-kpi-tracker.vercel.app/";
+const API_DOMAIN = "http://localhost:3001/";
 
 export const get = async (path) => {
-  const response = await fetch(API_DOMAIN+path);
-  const result = await response.json();
-  return result;
-}
+  try {
+      const response = await fetch(API_DOMAIN + path);
+
+      if (!response.ok) {
+          const errorText = await response.text(); // Read response as text in case of an error
+          throw new Error(`Error ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error("Fetch error:", error);
+      throw error; // Rethrow the error to be handled by the calling function
+  }
+};
 
 export const post = async (path,options) => {
   const response = await fetch(API_DOMAIN + path , {

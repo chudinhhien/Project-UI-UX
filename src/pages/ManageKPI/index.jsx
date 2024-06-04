@@ -62,6 +62,7 @@ const ManageKPI = () => {
     const fetchData = async () => {
         try {
             const data1 = await getKpis();
+            console.log("Fetched KPIs: ", data1);
             setData(data1);
         } catch (error) {
             console.error("Error fetching KPIs:", error);
@@ -72,7 +73,7 @@ const ManageKPI = () => {
     }, [])
     const deleteKpi = async (id) => {
         await deleteKpiById(id);
-        fetchData();
+        await fetchData();
         showMessage("success","Delete Successful!")
     };
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -148,12 +149,12 @@ const ManageKPI = () => {
                         } else {
                             await postKpis(newKpiTypeData);
                         }
-                        fetchData();
+                        await fetchData();
                     } catch (error) {
                         console.error("Error fetching KPIs:", error);
                     }
                 }
-                addKpi();
+                await addKpi();
                 setIsOpenModal(false);
                 showMessage("success", "KPI added successfully!");
             }
