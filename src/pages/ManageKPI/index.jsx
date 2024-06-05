@@ -17,7 +17,7 @@ import {
 } from "antd";
 import ModalComponent from "../../components/ModalComponent";
 import { DndContext, PointerSensor, useSensor } from "@dnd-kit/core";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     arrayMove,
     horizontalListSortingStrategy,
@@ -33,6 +33,7 @@ import TableCustomFour from "../../components/TableCustomFour";
 import { Link } from "react-router-dom";
 import { deleteKpiById, getKpi, getKpis, postKpis, updateKpi } from '../../services/kpiService';
 import { closeModal, openModal } from '../../actions/Modal';
+import { closeModalTarget, openKPI } from '../../actions/Targets';
 
 const DraggableTabNode = ({ className, ...props }) => {
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -59,6 +60,7 @@ const DraggableTabNode = ({ className, ...props }) => {
 const ManageKPI = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const targets = useSelector(state => state.target);
     const fetchData = async () => {
         try {
             const data1 = await getKpis();
@@ -79,7 +81,6 @@ const ManageKPI = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
-    const [targets, setTargets] = useState([]);
 
     const [items, setItems] = useState([
         {
@@ -136,7 +137,7 @@ const ManageKPI = () => {
                 name: formData.name,
                 description: formData.description,
                 percentage: 0,
-                target: formData.target,
+                target: targets,
             };
             if (formData.name === "" || !formData.name) {
                 setIsOpenModal(false);
@@ -155,11 +156,11 @@ const ManageKPI = () => {
                     }
                 }
                 await addKpi();
+                form.resetFields();
+                dispatch(closeModalTarget());
                 setIsOpenModal(false);
                 showMessage("success", "KPI added successfully!");
             }
-            form.resetFields();
-            setTargets([]);
         } catch (error) {
             console.log(error.message);
             showMessage("error", "Failed to add KPI. Please try again.");
@@ -168,6 +169,7 @@ const ManageKPI = () => {
 
     const handleCancel = () => {
         form.resetFields();
+        dispatch(closeModalTarget())
         setIsOpenModal(false);
         dispatch(closeModal());
     };
@@ -177,6 +179,8 @@ const ManageKPI = () => {
     const updateSampleKpi = async (id) => {
         if(id === null) form.resetFields();
         const sampleKpi1 = id && await getKpi(id);
+        if(id === null) dispatch(openKPI(null));
+        else dispatch(openKPI(sampleKpi1.target));
         dispatch(openModal(sampleKpi1));
         setIsOpenModal(true);
     }
@@ -281,7 +285,6 @@ const ManageKPI = () => {
                     handleOk={handleOk}
                     handleCancel={handleCancel}
                     form={form}
-                    targets={targets}
                 />
             </div>
         </div>

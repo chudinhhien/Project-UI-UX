@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Upload, Button, Row, Col, Table } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
-import { useSelector } from 'react-redux';
+import { addTarget } from '../../actions/Targets';
 
 const columns = [
   {
@@ -15,31 +16,26 @@ const columns = [
     dataIndex: 'unit',
     key: 'unit',
   },
-]
+];
 
 const ModalContent = ({ form }) => {
+  const dispatch = useDispatch();
   const sampleKpi = useSelector(state => state.modal);
-  const initialTargets = sampleKpi && sampleKpi.target ? sampleKpi.target : []; // Kiểm tra xem sampleKpi và sampleKpi.target có tồn tại không
-  const [targets, setTargets] = useState(initialTargets);
+  const targets = useSelector(state => state.target);
 
   const handleAddTarget = () => {
-    const nameTarget = form.getFieldValue("nameTarget");
-    const unit = form.getFieldValue("unit");
-    const newTarget = { name: nameTarget, unit: unit };
-    setTargets([...targets, newTarget]);
-    form.setFieldsValue({ nameTarget: "", unit: "" });
+    form.validateFields(['nameTarget', 'unit']).then(values => {
+      const newTarget = { name: values.nameTarget, unit: values.unit };
+      dispatch(addTarget(newTarget));
+      form.resetFields(['nameTarget', 'unit']);
+    });
   };
 
   useEffect(() => {
     if (sampleKpi) {
       form.setFieldsValue(sampleKpi);
-      setTargets(sampleKpi.target || []);
     }
   }, [sampleKpi, form]);
-
-  useEffect(() => {
-    form.setFieldsValue({ target: targets });
-  }, [targets, form]);
 
   return (
     <Form layout='vertical' form={form} initialValues={sampleKpi}>
@@ -63,12 +59,12 @@ const ModalContent = ({ form }) => {
       <span className='form-row-title'>Add target</span>
       <Row gutter={[20, 10]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="nameTarget" label="Name target:" style={{ marginBottom: 0 }}>
+          <Form.Item name="nameTarget" label="Name target:" style={{ marginBottom: 0 }} rules={[{ required: true, message: 'Please enter target name' }]}>
             <Input placeholder="Enter target name" />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="unit" label="Unit:" style={{ marginBottom: 0 }}>
+          <Form.Item name="unit" label="Unit:" style={{ marginBottom: 0 }} rules={[{ required: true, message: 'Please enter unit' }]}>
             <Input placeholder="Enter unit" />
           </Form.Item>
         </Col>
@@ -80,12 +76,10 @@ const ModalContent = ({ form }) => {
       </Row>
       <Row justify="end" gutter={[20, 20]}>
         <Col>
-          <Button onClick={handleAddTarget} style={{ marginBottom: '20px',backgroundColor: '#1814f2',color: '#ffff' }}>Add Target</Button>
+          <Button onClick={handleAddTarget} style={{ marginBottom: '20px', backgroundColor: '#1814f2', color: '#ffff' }}>Add Target</Button>
         </Col>
       </Row>
-      <Form.Item name="target">
-        <Table columns={columns} dataSource={targets} />
-      </Form.Item>
+      <Table columns={columns} dataSource={targets} rowKey="name" />
     </Form>
   );
 };

@@ -5,13 +5,15 @@ import helpReducer from './help';
 import helpSider from './helpSider';
 import sider from './sider';
 import modal from './modal';
+import target from './target'
 
 // Kết hợp các reducers lại
 const rootReducer = combineReducers({
   helpReducer,
   helpSider,
   sider,
-  modal
+  modal,
+  target
 });
 
 // Cấu hình middleware và Redux DevTools

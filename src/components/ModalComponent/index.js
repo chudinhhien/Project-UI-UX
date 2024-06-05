@@ -4,14 +4,13 @@ import { Modal, Button } from 'antd';
 import ModalContent from '../ModalContent';
 import { useSelector } from 'react-redux';
 
-const ModalComponent = ({ isOpenModal, handleOk, handleCancel, form }) => {
+const ModalComponent = ({ isOpenModal, handleOk, handleCancel ,form}) => {
   const sampleKpi = useSelector(state => state.modal);
   
   return (
     <Modal
       title={ sampleKpi ? "Update" : "Add"}
       visible={isOpenModal}
-      onOk={handleOk}
       onCancel={handleCancel}
       // width={600}
       style={{ top: 0 }}
