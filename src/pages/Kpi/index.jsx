@@ -77,7 +77,7 @@ function Kpi() {
             target: resetTarget
         });
     };
-    
+
     const handleDeleteKpi = (id) => {
         notification.success({ message: "KPI deleted successfully!" });
     }
@@ -135,13 +135,13 @@ function Kpi() {
                 footer={null}
             >
                 <Form layout='vertical' onFinish={handleModalSubmit} form={form}>
-                    <Row gutter={20}>
-                        <Col sm={12} xs={24}>
+                    <Row gutter={[20, 20]}> {/* Thêm khoảng cách giữa các hàng */}
+                        <Col sm={12} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.Item label="Name" name="name" form={form}>
                                 <Input />
                             </Form.Item>
                         </Col>
-                        <Col sm={12} xs={24}>
+                        <Col sm={12} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.Item label="Priority" name="priority">
                                 <Select options={[
                                     {
@@ -159,29 +159,28 @@ function Kpi() {
                                 ]} />
                             </Form.Item>
                         </Col>
-                        <Col sm={12} >
+                        <Col sm={12} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.Item label="Start" name="start">
                                 <DatePicker style={{ width: '100%' }} />
                             </Form.Item>
                         </Col>
-                        <Col sm={12}>
+                        <Col sm={12} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.Item label="End" name="end">
                                 <DatePicker style={{ width: '100%' }} />
                             </Form.Item>
                         </Col>
-                        <Col sm={24}>
+                        <Col sm={24} xs={24}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.Item label="Description" name="description">
                                 <TextArea />
                             </Form.Item>
                         </Col>
-                        <Col sm={24}>
-
+                        <Col sm={24} xs={24}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                             <Form.List name="target">
                                 {(fields, { add, remove }) => (
                                     <>
                                         {fields.map((field, index) => (
-                                            <Row key={field.key} gutter={20}>
-                                                <Col sm={10}>
+                                            <Row key={field.key} gutter={[20, 20]}> {/* Thêm khoảng cách giữa các cột */}
+                                                <Col sm={10} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                                                     <Form.Item
                                                         {...field}
                                                         label="Name target"
@@ -192,7 +191,7 @@ function Kpi() {
                                                         <Input disabled style={{ color: 'black' }} />
                                                     </Form.Item>
                                                 </Col>
-                                                <Col sm={5}>
+                                                <Col sm={5} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                                                     <Form.Item
                                                         {...field}
                                                         label="Goal"
@@ -203,7 +202,7 @@ function Kpi() {
                                                         <Input type="number" />
                                                     </Form.Item>
                                                 </Col>
-                                                <Col sm={5}>
+                                                <Col sm={5} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                                                     <Form.Item
                                                         {...field}
                                                         label="Weight"
@@ -214,7 +213,7 @@ function Kpi() {
                                                         <Input type="number" />
                                                     </Form.Item>
                                                 </Col>
-                                                <Col sm={4}>
+                                                <Col sm={4} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}
                                                     <Form.Item
                                                         {...field}
                                                         label="Follow"
@@ -231,9 +230,6 @@ function Kpi() {
                                 )}
                             </Form.List>
                         </Col>
-
-
-
                     </Row>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
@@ -242,6 +238,7 @@ function Kpi() {
                     </Form.Item>
                 </Form>
             </Modal>
+
         </>
     );
 }
