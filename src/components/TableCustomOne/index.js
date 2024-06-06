@@ -403,11 +403,20 @@ function TableCustomOne() {
                             max-width: 150px;
                         }
                         .expand-icon {
-                            margin-right: 10px;
+                            // margin-right: 10px;
+                            display: inline-block;
+                            width: 30px;
                         }
                         .ant-table-cell {
                             padding-right: 0px !important;
                             width: 100%;
+                        }
+                        .ant-table-cell-row-hover {
+                            padding-right: 0px !important;
+                            width: 100%;
+                            .expand-icon {
+                                padding: 0;
+                            }
                         }
                         .ant-table-cell-deadline,
                         .ant-table-cell-prioritize {
