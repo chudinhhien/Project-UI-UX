@@ -9,7 +9,7 @@ const ModalComponent = ({ isOpenModal, handleOk, handleCancel ,form}) => {
   
   return (
     <Modal
-      title={ sampleKpi ? "Update" : "Add"}
+      title={ sampleKpi ? "Update KPI Template" : "Add KPI Template"}
       visible={isOpenModal}
       onCancel={handleCancel}
       // width={600}

@@ -1,4 +1,4 @@
-const API_DOMAIN = "http://localhost:3001/";
+const API_DOMAIN = "https://api-kpi-tracker.vercel.app/";
 
 export const get = async (path) => {
   try {

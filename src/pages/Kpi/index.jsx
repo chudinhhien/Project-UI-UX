@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import {
+    EditOutlined,
+    DeleteOutlined
+} from '@ant-design/icons'
+import React, { lazy, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
     PlusCircleOutlined,
@@ -12,7 +16,13 @@ import {
     Input,
     Button,
     notification,
+    DatePicker,
+    Col,
+    Row,
+    Select,
 } from "antd";
+import all_icons from '../../assets/icon/all_icon';
+import TextArea from 'antd/es/input/TextArea';
 
 function Kpi() {
     const location = useLocation();
@@ -22,6 +32,18 @@ function Kpi() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentKpi, setCurrentKpi] = useState(null);
     const [form] = Form.useForm();
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
     const breadcrumbStyle = {
         marginBottom: "5px",
@@ -48,6 +70,25 @@ function Kpi() {
         notification.success({ message: "KPI updated successfully!" });
     };
 
+   const options = [
+    {
+        label: "NaN",
+        value: null
+    },
+    {
+        label: <img src={all_icons.qldt} style={{height: '15px',width: '15px',objectFit: 'contain'}}/>,
+        value: 'qldt'
+    },
+    {
+        label: <img src={all_icons.quizlet} style={{height: '15px',width: '15px',objectFit: 'contain'}}/>,
+        value: 'quizlet'
+    },
+    {
+        label: <img src={all_icons.schooler} style={{height: '15px',width: '15px',objectFit: 'contain'}}/>,
+        value: 'schooler'
+    },
+   ]
+
     return (
         <>
             <div className="custom-container">
@@ -61,9 +102,9 @@ function Kpi() {
                     </Breadcrumb>
                     <Button
                         type="primary"
-                        // onClick={() => updateSampleKpi(null)}
+                    // onClick={() => updateSampleKpi(null)}
                     >
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        <div style={{ display: "flex", alignItems: "center" }} onClick={() => showModal()}>
                             <PlusCircleOutlined
                                 style={{ marginRight: "5px" }}
                             />
@@ -105,16 +146,73 @@ function Kpi() {
                                         className="item-kpi-btn"
                                         onClick={() => showUpdateModal(item)}
                                     >
-                                        Cập nhật
+                                        <EditOutlined />
                                     </button>
                                     <button className="item-kpi-btn btn-remove">
-                                        Xóa
+                                        <DeleteOutlined />
                                     </button>
                                 </div>
                             </div>
                         </div>
                     ))}
             </div>
+            <Modal title="ADD KPI" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Form layout='vertical'>
+                    <Row gutter={20}>
+                        <Col sm={24}>
+                            <Form.Item label="Name">
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                        <Col sm={12}>
+                            <Form.Item label="Start">
+                                <DatePicker style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Col>
+                        <Col sm={12}>
+                            <Form.Item label="End">
+                                <DatePicker style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Col>
+                        <Col sm={24}>
+                            <Form.Item label="Description">
+                                <TextArea />
+                            </Form.Item>
+                        </Col>
+                        <Col sm={24}>
+                            <h1>Add target</h1>
+                        </Col>
+
+                        {state.target.map((item, index) => (
+                            <Col key={index} sm={24}>
+                                <Row gutter={20}>
+                                    <Col sm={10}>
+                                        <Form.Item label="Name">
+                                            <Input value={item.name} disabled style={{color: 'black'}}/>
+                                        </Form.Item>
+                                    </Col>
+                                    <Col sm={5}>
+                                        <Form.Item label="Goal">
+                                            <Input type='number' />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col sm={5}>
+                                        <Form.Item label="Weight">
+                                            <Input type='number' />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col sm={4}>
+                                        <Form.Item label="Follow">
+                                            <Select options = {options}/>
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        ))}
+
+                    </Row>
+                </Form>
+            </Modal>
             <Modal
                 title="Update KPI"
                 visible={isModalVisible}
