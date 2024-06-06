@@ -17,3 +17,10 @@ export const openKPI = (targets) => {
     value: targets
   }
 }
+
+export const REMOVE_TARGET = 'REMOVE_TARGET';
+
+export const removeTarget = (name) => ({
+  type: REMOVE_TARGET,
+  payload: name
+});

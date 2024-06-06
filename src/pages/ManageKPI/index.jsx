@@ -11,7 +11,6 @@ import {
     Form,
     Row,
     message,
-    Flex,
     Progress,
     Popconfirm,
 } from "antd";
@@ -54,9 +53,6 @@ const DraggableTabNode = ({ className, ...props }) => {
     });
 };
 
-
-
-
 const ManageKPI = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
@@ -70,14 +66,22 @@ const ManageKPI = () => {
             console.error("Error fetching KPIs:", error);
         }
     }
+
     useEffect(() => {
         fetchData();
     }, [])
+
     const deleteKpi = async (id) => {
-        await deleteKpiById(id);
-        await fetchData();
-        showMessage("success","Delete Successful!")
+        try {
+            await deleteKpiById(id);
+            await fetchData();
+            showMessage("success", "Delete Successful!");
+        } catch (error) {
+            console.error("Error deleting KPI:", error);
+            showMessage("error", "Delete failed. Please try again.");
+        }
     };
+
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
@@ -104,11 +108,13 @@ const ManageKPI = () => {
             children: <TableCustomFour />,
         },
     ]);
+
     const sensor = useSensor(PointerSensor, {
         activationConstraint: {
             distance: 10,
         },
     });
+
     const onDragEnd = ({ active, over }) => {
         if (active.id !== over?.id) {
             setItems((prev) => {
@@ -126,12 +132,16 @@ const ManageKPI = () => {
         });
     };
 
-
     const handleOk = async () => {
         try {
             const formData = form.getFieldsValue();
             console.log(formData);
-
+    
+            if (!formData.name || formData.name.trim() === "") {
+                showMessage("error", "Failed to add KPI. Name is required.");
+                return;
+            }
+    
             const newKpiTypeData = {
                 id: formData.id,
                 name: formData.name,
@@ -139,76 +149,64 @@ const ManageKPI = () => {
                 percentage: 0,
                 target: targets,
             };
-            if (formData.name === "" || !formData.name) {
-                setIsOpenModal(false);
-                showMessage("error", "Failed to add KPI. Please try again.");
-            } else {
-                const addKpi = async () => {
-                    try {
-                        if (newKpiTypeData.id) {
-                            await updateKpi(newKpiTypeData);
-                        } else {
-                            await postKpis(newKpiTypeData);
-                        }
-                        await fetchData();
-                    } catch (error) {
-                        console.error("Error fetching KPIs:", error);
-                    }
+    
+            try {
+                if (newKpiTypeData.id) {
+                    await updateKpi(newKpiTypeData);
+                } else {
+                    await postKpis(newKpiTypeData);
                 }
-                await addKpi();
+                await fetchData();
                 form.resetFields();
                 dispatch(closeModalTarget());
                 setIsOpenModal(false);
                 showMessage("success", "KPI added successfully!");
+            } catch (error) {
+                console.error("Error adding KPI:", error);
+                showMessage("error", "Failed to add KPI. Please try again.");
             }
         } catch (error) {
-            console.log(error.message);
+            console.error("Error:", error);
             showMessage("error", "Failed to add KPI. Please try again.");
         }
     };
+    
 
     const handleCancel = () => {
         form.resetFields();
-        dispatch(closeModalTarget())
+        dispatch(closeModalTarget());
         setIsOpenModal(false);
         dispatch(closeModal());
     };
 
-
-
     const updateSampleKpi = async (id) => {
-        if(id === null) form.resetFields();
-        const sampleKpi1 = id && await getKpi(id);
-        if(id === null) dispatch(openKPI(null));
-        else dispatch(openKPI(sampleKpi1.target));
-        dispatch(openModal(sampleKpi1));
+        if (id === null) {
+            form.resetFields();
+            dispatch(openKPI(null));
+        } else {
+            const sampleKpi1 = await getKpi(id);
+            console.log(sampleKpi1);
+            dispatch(openKPI(sampleKpi1.target));
+            dispatch(openModal(sampleKpi1));
+        }
         setIsOpenModal(true);
     }
+
     return (
         <div className="manage-kpi">
             {contextHolder}
-            <div
-                className="custom-container"
-                style={{ backgroundColor: "#F5F6FA" }}
-            >
+            <div className="custom-container" style={{ backgroundColor: "#F5F6FA" }}>
                 <Row>
                     <h1>Manage KPI</h1>
                 </Row>
-                <Row
-                    justify="space-between"
-                    align="middle"
-                    style={{ marginTop: "5px", marginBottom: "10px" }}
-                >
+                <Row justify="space-between" align="middle" style={{ marginTop: "5px", marginBottom: "10px" }}>
                     <Col>
                         <Breadcrumb>
                             <Breadcrumb.Item>Manage KPI</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col>
-                        <Button
-                            type="primary"
-                            onClick={() => updateSampleKpi(null)}
-                        >
+                        <Button type="primary" onClick={() => updateSampleKpi(null)}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <PlusCircleOutlined style={{ marginRight: '5px' }} />
                                 <div>Add KPI template</div>
@@ -227,20 +225,12 @@ const ManageKPI = () => {
                             </div>
                             <hr />
                             <div className="kpi-item-bottom">
-                                <Flex
-                                    vertical
-                                    gap="small"
-                                    style={{
-                                        width: "100%",
-                                    }}
-                                >
-                                    <Progress
-                                        percent={item.percentage}
-                                        size="small"
-                                        status="active"
-                                        strokeColor={item.percentage >= 90 ? "#14F396" : item.percentage > 50 ? "#1814f3" : "#f31414"}
-                                    />
-                                </Flex>
+                                <Progress
+                                    percent={item.percentage}
+                                    size="small"
+                                    status="active"
+                                    strokeColor={item.percentage >= 90 ? "#14F396" : item.percentage > 50 ? "#1814f3" : "#f31414"}
+                                />
                                 <div className="kpi-item-act">
                                     <Popconfirm
                                         title="Are you sure to delete this KPI?"
@@ -279,7 +269,6 @@ const ManageKPI = () => {
                         </DndContext>
                     )}
                 />
-
                 <ModalComponent
                     isOpenModal={isOpenModal}
                     handleOk={handleOk}

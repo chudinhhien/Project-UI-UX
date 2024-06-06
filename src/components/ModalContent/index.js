@@ -1,25 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Upload, Button, Row, Col, Table } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Form, Input, Upload, Button, Row, Col, Table, Popconfirm } from 'antd';
+import { UploadOutlined,DeleteOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
-import { addTarget } from '../../actions/Targets';
+import { addTarget, removeTarget } from '../../actions/Targets';
 
-const columns = [
-  {
-    title: 'Name target',
-    dataIndex: 'name',
-    key: 'name'
-  },
-  {
-    title: 'Unit',
-    dataIndex: 'unit',
-    key: 'unit',
-  },
-];
 
 const ModalContent = ({ form }) => {
-  const dispatch = useDispatch();
+  
+  const dispatch = useDispatch(); // Đảm bảo bạn đã khai báo biến dispatch từ useDispatch
   const sampleKpi = useSelector(state => state.modal);
   const targets = useSelector(state => state.target);
 
@@ -31,6 +20,32 @@ const ModalContent = ({ form }) => {
     });
   };
 
+  const columns = [
+    {
+      title: 'Name target',
+      dataIndex: 'name',
+      key: 'name'
+    },
+    {
+      title: 'Unit',
+      dataIndex: 'unit',
+      key: 'unit',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Popconfirm
+          title="Are you sure to delete this target?"
+          onConfirm={() => dispatch(removeTarget(record.name))}
+        >
+          <Button type="link" icon={<DeleteOutlined style={{ color: 'red' }} />} />
+        </Popconfirm>
+      ),
+    }
+  ];
+
+  
   useEffect(() => {
     if (sampleKpi) {
       form.setFieldsValue(sampleKpi);
