@@ -9,7 +9,7 @@ function Security() {
         </Col>
         <Col sm={24} style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ marginRight: '20px' }}>
-            <Switch defaultChecked />
+            <Switch defaultChecked style={{background: '#1814F3'}}/>
           </div>
           <div>
             <h3 style={{ fontSize: '13px' }}>Enable or disable two factor authentication</h3>
