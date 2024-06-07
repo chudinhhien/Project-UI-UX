@@ -188,7 +188,7 @@ function Kpi() {
                                                         fieldKey={[field.fieldKey, 'name']}
                                                         initialValue={state.target[index].name}
                                                     >
-                                                        <Input disabled style={{ color: 'black' }} />
+                                                        <Input style={{ color: 'black' }} />
                                                     </Form.Item>
                                                 </Col>
                                                 <Col sm={5} xs={12}> {/* Chỉnh lại độ rộng cho màn hình nhỏ */}

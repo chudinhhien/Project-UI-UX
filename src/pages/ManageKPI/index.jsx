@@ -229,7 +229,7 @@ const ManageKPI = () => {
                                     percent={item.percentage}
                                     size="small"
                                     status="active"
-                                    strokeColor={item.percentage >= 90 ? "#14F396" : item.percentage > 50 ? "#1814f3" : "#f31414"}
+                                    strokeColor={item.percentage >= 100 ? "#52c41a" : "#F31414"}
                                 />
                                 <div className="kpi-item-act">
                                     <Popconfirm
