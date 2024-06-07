@@ -9,6 +9,8 @@ import moment from "moment";
 import all_imgs from "../../assets/img/all_img";
 import all_icons from "./../../assets/icon/all_icon";
 
+import './Dashboard.scss'
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -264,6 +266,7 @@ const Dashboard = () => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);
+    const ref4 = useRef(null);
 
     const steps = [
         {
@@ -272,17 +275,42 @@ const Dashboard = () => {
             target: () => ref1.current,
         },
         {
-            title: "Save",
-            description: "Save your changes.",
+            title: "Biểu đồ tròn",
+            description: "Bạn có thể theo dõi tất cả các tiến độ của KPI.",
             target: () => ref2.current,
         },
         {
-            title: "Other Actions",
-            description: "Click to see other actions.",
+            title: "Lịch",
+            description: "Giúp bạn xem công việc hôm nay cũng như công việc của ngày hôm trước.",
             target: () => ref3.current,
         },
+        {
+            title: "Cập nhật nhiệm vụ",
+            description: "Giúp bạn cập nhật công việc 1 cách dễ dàng hơn nhờ vào những tổ chức , doanh nghiệp mà chúng tôi đã liên kết.",
+            cover: [
+                <img
+                    key="image1"
+                    alt="tour1.png"
+                    src={all_icons.qldt}
+                    style={{ width: 40, height: 60, objectFit: 'contain',marginRight: '15px' }}
+                />,
+                <img
+                    key="image2"
+                    alt="tour2.png"
+                    src={all_icons.quizlet}
+                    style={{ width: 40, height: 60, objectFit: 'contain',marginRight: '15px' }}
+                />,
+                <img
+                    key="image2"
+                    alt="tour2.png"
+                    src={all_icons.schooler}
+                    style={{ width: 40, height: 60, objectFit: 'contain',marginRight: '15px' }}
+                />
+            ],
+            target: () => ref4.current,
+        }
     ];
-
+    
     return (
         <div className="dashboard custom-container">
             <Row>
@@ -293,12 +321,12 @@ const Dashboard = () => {
                     <Row>
                         <div className="dashboard-hello">
                             <div>
-                                <p>Xin chào, Hiển!</p>
+                                <p>Hello, Ms. Giang!</p>
                                 <p>
-                                    Tuần này bạn đã tăng được{" "}
+                                    This week you've increased{" "}
                                     <strong>5%</strong> KPI
                                 </p>
-                                <p>Hãy tiếp tục cố gắng nào !!!</p>
+                                <p>Keep up the good work !!!</p>
                             </div>
                             <img src={all_imgs.hello} alt="" />
                         </div>
@@ -398,7 +426,7 @@ const Dashboard = () => {
                             />
                         </div>
                     </Row>
-                    <Row style={{ width: "100%" }}>
+                    <Row style={{ width: "100%" }} ref={ref4}>
                         <div className="dashboard-daytask">
                             <div className="dashboard-daytask-title">
                                 <h3>Recent tasks for {selectedDateString}</h3>
