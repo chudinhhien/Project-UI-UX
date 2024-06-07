@@ -1,9 +1,7 @@
 import {
-  UploadOutlined,
   HomeFilled,
-  VideoCameraOutlined,
   SettingFilled,
-  CalendarOutlined
+  LineChartOutlined
 } from '@ant-design/icons';
 const url = '';
 export const item = [
@@ -15,7 +13,7 @@ export const item = [
   },
   {
     key: '2',
-    icon: <VideoCameraOutlined />,
+    icon: <LineChartOutlined />,
     label: 'Manage KPI',
     url: url + '/manage-kpi'
   },
