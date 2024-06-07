@@ -135,7 +135,7 @@ const Dashboard = () => {
     const [editingTaskIndex, setEditingTaskIndex] = useState(null);
     const [loading, setLoading] = useState(false);
 
-   const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState({
         "2024-05-20": [
             { task: "Task 1", current: 50, desire: 80 },
             { task: "Task 2", current: 30, desire: 60 },
@@ -157,22 +157,24 @@ const Dashboard = () => {
             { task: "Task 10", current: 50, desire: 80 },
         ],
         "2024-05-31": [
-            { task: "Học từ vựng", current: 0, desire: 30 },
+            { task: "Tổ chức hội thảo khoa học tại Lab", current: 0, desire: 30 },
         ],
     });
 
     const [tasksImport, setTasksImport] = useState({
         "2024-05-29": [
-            { task: "Học kỹ thuật phần mềm", import: "qldt", done: true },
-            { task: "Học tư tưởng HCM", import: "qldt", done: true },
+            { task: "Giảng dạy môn Kỹ thuật phần mềm", import: "qldt", done: true },
         ],
-        "2024-05-30": [
-            { task: "Học Nhật Ngành", import: "schooler", done: true },
+        "2024-05-03": [
+            { task: "Tham gia hội nghị chuyên môn", import: "qldt", done: true },
         ],
-        "2024-05-31": [
-            { task: "Học AI", import: "qldt", done: true },
-            { task: "Học Nhật 5", import: "schooler", done: true },
-            { task: "Học UIUX", import: "qldt", done: false },
+        "2024-06-05": [
+            { task: "Giảng dạy môn Kỹ Thuật Phần Mềm", import: "qldt", done: true },
+            { task: "Giảng dạy môn UIUX", import: "qldt", done: false },
+        ],
+	    "2024-06-07": [
+            { task: "Tham gia hội thảo trực tuyến", import: "qldt", done: true },
+            { task: "Giảng dạy môn UIUX", import: "qldt", done: false },
         ],
     });
 
@@ -243,8 +245,8 @@ const Dashboard = () => {
     // };
     const handleShowStatus = () => {
         // Find the task index first to ensure it exists before setting loading state
-        const taskIndex = tasksImport["2024-05-31"].findIndex(
-            task => task.task === "Học UIUX"
+        const taskIndex = tasksImport["2024-06-07"].findIndex(
+            task => task.task === "Giảng dạy môn UIUX"
         );
 
         if (taskIndex !== -1) {
@@ -254,7 +256,7 @@ const Dashboard = () => {
                 const newTasksImport = { ...tasksImport };
 
                 // Update the specific task's done status
-                newTasksImport["2024-05-31"][taskIndex].done = true;
+                newTasksImport["2024-06-07"][taskIndex].done = true;
 
                 // Update the state
                 setTasksImport(newTasksImport);
