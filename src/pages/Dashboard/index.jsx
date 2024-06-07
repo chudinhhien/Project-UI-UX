@@ -52,7 +52,7 @@ const data = {
     labels,
     datasets: [
         {
-            label: "Học tập",
+            label: "Giảng dạy",
             data: [0, 10, 20, 40, 50, 60, 70],
             borderColor: "#1356f2",
             backgroundColor: "#1356f2",
@@ -76,7 +76,7 @@ const slideImages = [
     {
         url: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcR0NrOJEpfjkM0zxD-aO9b-bWqW3mhY57jPMg3aSbxTYO__R4jOvx8T2Oa7Fm9yxXOGg4B_ns3SZaZGCiBOPQw",
         caption: "Slide 1",
-        title: "Học tập",
+        title: "Giảng dạy",
         currentKPI: "70",
         lastKPI: "60",
     },

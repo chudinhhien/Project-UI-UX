@@ -77,7 +77,7 @@ function EditProfile() {
           )}
         </Col>
         <Col sm={19} xs={24}>
-          <Form layout="vertical">
+          <Form layout="vertical" style={{color: "#010c80"}}>
             <Row gutter={20}>
               <Col sm={12} xs={24}>
                 <Form.Item name="name" label="Your Name">

@@ -43,7 +43,7 @@ function Header(props) {
         <Link to="/setting" onClick={handlePersonalInfoClick}>
           <Space>
             <UserOutlined />
-            <div>Thông tin cá nhân</div>
+            <div>Personal Information</div>
           </Space>
         </Link>
       ),
@@ -57,7 +57,7 @@ function Header(props) {
         <a href="/">
           <Space>
             <PoweroffOutlined />
-            <div>Đăng xuất</div>
+            <div>Log out</div>
           </Space>
         </a>
       ),
