@@ -86,7 +86,7 @@ function EditProfile() {
               </Col>
               <Col sm={12} xs={24}>
                 <Form.Item name="userName" label="User Name">
-                  <Input />
+                  <Input value="Vũ Thị Hương Giang"/>
                 </Form.Item>
               </Col>
               <Col sm={12} xs={24}>
@@ -101,7 +101,7 @@ function EditProfile() {
               </Col>
               <Col sm={12} xs={24}>
                 <Form.Item name="dob" label="Date Of Birth">
-                  <DatePicker defaultValue={dayjs('18/03/2003', 'DD/MM/YYYY')} />
+                  <DatePicker defaultValue={dayjs('01/01/1999', 'DD/MM/YYYY')} style={{ width: '100%' }}/>
                 </Form.Item>
               </Col>
               <Col sm={12} xs={24}>
