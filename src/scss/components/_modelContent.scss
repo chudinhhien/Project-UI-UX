@@ -2,16 +2,16 @@
     .ant-modal {
         padding: 0;
     }
-    :where(.css-dev-only-do-not-override-1okl62o).ant-modal .ant-modal-title,
+    .ant-modal .ant-modal-title,
     .form-row-title {
         margin-bottom: 20px;
         font-size: 2.4rem;
-        color: #19191b;
+        color: #010c80;
         font-weight: 700;
         line-height: 154.167%;
     }
 
-    :where(.css-dev-only-do-not-override-1okl62o).ant-form-vertical
+    .ant-form-vertical
         .ant-form-item-label
         > label {
         font-size: 14px;
