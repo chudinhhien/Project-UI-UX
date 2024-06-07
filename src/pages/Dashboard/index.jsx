@@ -400,13 +400,13 @@ const Dashboard = () => {
                                                     </h3>
                                                     <span>INFO: </span>
                                                     <p>
-                                                        Tăng{" "}
+                                                        Increase by{" "}
                                                         <strong>
                                                             {slideImage.currentKPI -
                                                                 slideImage.lastKPI}
                                                             %
                                                         </strong>{" "}
-                                                        so với tháng trước
+                                                        compared to last month.
                                                     </p>
                                                     <p></p>
                                                 </div>
