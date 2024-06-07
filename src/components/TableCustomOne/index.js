@@ -57,10 +57,10 @@ function TableCustomOne() {
                     }
                     strokeColor={
                         record.status === "completed"
-                            ? "green"
+                            ? "#52c41a"
                             : record.status === "doing"
                             ? "blue"
-                            : "red"
+                            : "#F31414"
                     }
                     format={() => `${record.progressValue}%`}
                 />
