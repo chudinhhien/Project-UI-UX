@@ -115,7 +115,7 @@ function KpiDetail() {
                         <Row>
                             <h2 className="kpi-detail-criterion-title">Criterions list</h2>
                         </Row>
-                        <Row style={{ padding: "12px 40px 12px 16px" }}>
+                        <Row style={{ padding: "12px 40px 12px 16px" }} gutter={5}>
                             <Col span={5} className="kpi-detail-table-name">Name of criterion</Col>
                             <Col span={5} className="kpi-detail-table-name">Current</Col>
                             <Col span={5} className="kpi-detail-table-name">Goal</Col>
@@ -126,7 +126,7 @@ function KpiDetail() {
                             {state.target.map((item, index) => (
                                 <Panel
                                     header={
-                                        <Row>
+                                        <Row gutter={5}>
                                             <Col span={5}>{item.name}</Col>
                                             <Col span={5}>{item.current}</Col>
                                             <Col span={5}>{item.goal}</Col>
@@ -137,7 +137,7 @@ function KpiDetail() {
                                     key={index + 1}
                                 >
                                     <div>
-                                        <p>{item.details}</p>
+                                        <p>Last update at: 10:00 06/07/2024</p>
                                     </div>
                                 </Panel>
                             ))}

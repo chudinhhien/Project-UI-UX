@@ -92,3 +92,11 @@ h1.page-title {
         background-color: #1814f2 !important;
     }
 }
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-pagination .ant-pagination-item-active {
+    border-color: #1814f2;
+    transform: 0.2s ease;
+    a {
+        color: #1814f2;
+    }
+}
