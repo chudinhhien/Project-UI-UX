@@ -230,12 +230,15 @@ function Kpi() {
                                 )}
                             </Form.List>
                         </Col>
+                        <Col xs={24} sm={24}>
+                            <Row justify='end'>
+                                <Button type="primary" htmlType="submit" style={{ marginBottom: '20px', backgroundColor: '#1814f2', color: '#ffff' }}>
+                                    Save
+                                </Button>
+
+                            </Row>
+                        </Col>
                     </Row>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Save
-                        </Button>
-                    </Form.Item>
                 </Form>
             </Modal>
 
