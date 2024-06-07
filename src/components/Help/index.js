@@ -8,7 +8,7 @@ const Help = ({ startTour }) => {
   const dispatch = useDispatch();
   const menu = (
     <Menu onClick={(e) => handleMenuClick(e)}>
-      {/* <Menu.Item key="1" icon={<QuestionCircleOutlined />}>Chức năng chính của trang web?</Menu.Item> */}
+      <Menu.Item key="1" icon={<QuestionCircleOutlined />}>Main functions of the website?</Menu.Item>
       <Menu.Item key="2" icon={<QuestionCircleOutlined />}>What information is on the Dashboard?</Menu.Item>
       <Menu.Item key="3" icon={<QuestionCircleOutlined />}>
         Contact support
